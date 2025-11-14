@@ -3,7 +3,8 @@
 
 | ID     | Priority | Category                | Requirement                | Description                                                                             |
 |:-------|:---------|:------------------------|:---------------------------|:----------------------------------------------------------------------------------------|
-| FR-1   | High     | AI                      | Intelligent Agent          | The system must be a desktop-based application with an embedded intelligent agent.      |
+| FR-1   | High     | Core Functionality | User needs  | The system must be a desktop-based application|
+| FR-1.1 | High     | AI                      | AI Integration|The system must have an embedded intelligent agent|
 | FR-2   | High     | AI                      | Natural Language Interface | The agent must be able to understand user intent through natural language input.        |
 | FR-2.1 | High     | AI                      | Text Input                 | Users must be able to interact with the agent using text.                               |
 | FR-2.2 | Medium   | AI                      | Voice Input                | Users must be able to interact with the agent using voice commands.                     |
