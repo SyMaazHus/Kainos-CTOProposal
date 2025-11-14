@@ -9,15 +9,19 @@
 | FR-2.1 | High     | AI                      | Text Input                 | Users must be able to interact with the agent using text.                               |
 | FR-2.2 | Medium   | AI                      | Voice Input                | Users must be able to interact with the agent using voice commands.                     |
 | FR-3   | High     | AI & Core Functionality | Task Automation            | The agent must automate routine tasks.                                                  |
-| FR-3.1 | High     | AI & Task Automation    | File Organisation          | The agent shall automate file organisation.                                             |
-| FR-3.2 | High     | AI &Task Automation     | Meeting Management         | The agent shall automatically schedule meetings and provide meeting reminders.          |
-| FR-3.3 | Medium   | AI & Task Automation    | Note-Taking                | The agent shall automate note-taking.                                                   |
-| FR-4   | High     | AI & Core Functionality | Productivity Analytics     | The agent must provide personalised productivity insights based on user behaviour.      |
-| FR-4.1 | High     | Analytics               | Time Tracking              | The system shall track time spent on tasks.                                             |
-| FR-4.2 | High     | AI & Analytics          | User Feedback              | The system shall provide feedback to improve focus.                                     |
+| FR-3.1| Medium | Task Automation & Functionality| Task Automation Input| The user shall be able to specify different rules and triggers for the automated actions|
+| FR-3.2 | High     | AI & Task Automation    | File Organisation          | The agent shall automate file organisation.                                             |
+| FR-3.3 | High     | AI &Task Automation     | Meeting Management         | The agent shall automatically schedule meetings          |
+| FR-3.4 | Medium   | AI & Task Automation    | Note-Taking                | The agent shall automate note-taking.                                                   |
+| FR-3.3.1| High|AI &Meeting Management|Meeting Management| The agent shall provide meeting reminders based on calendar data|
+| FR-4 | High| Core Functionality | Privacy Preferences | The user shall be able to opt out from user behaviour analysis|
+| FR-4.1 | High | AI & Core Functionality | AI & Behaviour Analysis | The agent shall analyse user behaviour. |
+| FR-4.2 | High     | Analytics               | Time Tracking              | The agent shall track time spent on tasks.                                             |
+| FR-4.3   | High     | AI & Core Functionality | Productivity Analytics     | The agent must provide personalised productivity insights based on user behaviour.    |
+| FR-4.4 | High | AI & Analytics | User Interactions | The insights shall be offered in a timely state and unobtrusively.|
+| FR-4.5 | High     | AI & Analytics          | User Feedback              | The agent shall provide that feedback to improve focus and efficiency.                                     |
 | FR-5   | High     | Integration             | Desktop Integration        | The system must integrate with common desktop tools e.g., calendar, email, file system. |
 | FR-6   | High     | AI & Core Functionality | Context-Aware Suggestions  | The agent must learn from user activity to offer timely recommendations.                |
-| FR-7   | High     | Customisation           | Customisable Workflows     | Users must be able to define rules and triggers for automated actions.                  |
 ---
 
 ### Non-Functional Requirements
