@@ -1,0 +1,153 @@
+.chat1 {
+width: 100%;
+height: 1024px;
+position: relative;
+background-color: #f5faf9;
+overflow: hidden;
+text-align: left;
+font-size: 48px;
+color: #366184;
+font-family: Silkscreen;
+}
+.conversation {
+position: absolute;
+height: 100%;
+width: 100%;
+top: 0px;
+right: 0px;
+bottom: 0px;
+left: 0px;
+border-radius: 20px;
+background-color: rgba(245, 250, 249, 0.64);
+overflow: hidden;
+font-size: 16px;
+color: #f5faf9;
+font-family: Inter;
+}
+.reply {
+position: absolute;
+width: calc(100% - 1012px);
+right: 506px;
+bottom: 299px;
+left: 506px;
+border-radius: 30px;
+background-color: #477776;
+border: 1px solid #e0e0e0;
+box-sizing: border-box;
+height: 86px;
+display: flex;
+align-items: center;
+padding: 8px 16px;
+gap: 16px;
+cursor: pointer;
+}
+.label {
+flex: 1;
+position: relative;
+line-height: 24px;
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+}
+.mic-icon {
+height: 24px;
+width: 24px;
+position: relative;
+}
+.image-kainos-icon {
+position: absolute;
+top: -57px;
+left: 587px;
+border-radius: 7px;
+width: 267px;
+height: 267px;
+object-fit: cover;
+}
+.menu-heading {
+position: absolute;
+top: 331px;
+left: 784px;
+border-radius: 8px;
+width: 284px;
+height: 34px;
+display: flex;
+align-items: flex-start;
+padding: 8px 16px 4px;
+box-sizing: border-box;
+}
+.section-title-iphone {
+position: absolute;
+top: 310px;
+left: 189px;
+backdrop-filter: blur(4px);
+width: 306px;
+height: 77px;
+display: flex;
+align-items: center;
+padding: 4px 8px 10px;
+box-sizing: border-box;
+}
+.header {
+position: relative;
+letter-spacing: -0.08px;
+line-height: 15px;
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+mix-blend-mode: linear-burn;
+flex-shrink: 0;
+}
+.chat1-header {
+position: absolute;
+top: 338px;
+left: 197px;
+letter-spacing: -0.08px;
+line-height: 15px;
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+mix-blend-mode: linear-burn;
+}
+.chat1-mic-icon {
+position: absolute;
+top: 466px;
+left: 694px;
+width: 52px;
+height: 52px;
+}
+.circle {
+position: absolute;
+top: 455px;
+left: 683px;
+width: 74px;
+height: 74px;
+overflow: hidden;
+}
+.icon {
+position: absolute;
+height: 83.38%;
+width: 83.38%;
+top: 8.33%;
+right: 8.29%;
+bottom: 8.29%;
+left: 8.33%;
+max-width: 100%;
+overflow: hidden;
+max-height: 100%;
+}
+.chat1-circle {
+position: absolute;
+top: 455px;
+left: 683px;
+width: 74px;
+height: 74px;
+overflow: hidden;
+cursor: pointer;
+}
+
+/*might need to be global*/
+body {
+  	margin: 0;
+  	line-height: normal;
+}
+
