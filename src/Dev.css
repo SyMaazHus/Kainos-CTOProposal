@@ -1,0 +1,313 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+* {
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0px;
+  height: 100%;
+}
+/* a blue color as a generic focus style */
+button:focus-visible {
+  outline: 2px solid #4a90e2 !important;
+  outline: -webkit-focus-ring-color auto 5px !important;
+}
+a {
+  text-decoration: none;
+}
+
+.main-dashboard {
+  background-color: #86ab93;
+  overflow: hidden;
+  width: 100%;
+  min-width: 1680px;
+  min-height: 1050px;
+  position: relative;
+}
+
+.main-dashboard .rectangle-BG {
+  position: absolute;
+  top: 4px;
+  left: 70px;
+  width: 1680px;
+  height: 1050px;
+  background-color: #ffffff;
+  border-radius: 50px;
+}
+
+
+
+/* The floating buttons rectangle backgrounds */
+.main-dashboard .div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 207px;
+  height: 62px;
+  background-color: #86ab93;
+  border-radius: 23px;
+}
+
+/* The text of the middle floating suggestion */
+.main-dashboard .text-wrapper {
+  position: absolute;
+  top: 12px;
+  left: 5px;
+  width: 197px;
+  height: 37px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Play-Regular", Helvetica;
+  font-weight: 400;
+  color: #f5faf9;
+  font-size: 23px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 23px;
+}
+
+.main-dashboard .suggestion-2 {
+  left: 1469px;
+  position: absolute;
+  top: 403px;
+  width: 209px;
+  height: 62px;
+}
+
+/* The text of the third floating suggestion */
+.main-dashboard .text-wrapper-2 {
+  position: absolute;
+  top: 12px;
+  left: 31px;
+  width: 165px;
+  height: 37px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Play-Regular", Helvetica;
+  font-weight: 400;
+  color: #f5faf9;
+  font-size: 23px;
+  letter-spacing: 0;
+  line-height: 23px;
+}
+
+
+/* The upcoming tasks box uses the following CSS;
+        - Task Dashboard - This is going to be the background and have a grid system so that different tasks can be added when required
+
+
+/* Upcoming tasks background box */
+.main-dashboard .rectangle-3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 683px;
+  height: 454px;
+  background-color: #477776;
+  border-radius: 43px;
+}
+
+/* This is the text for the Upcoming tasks part of the */
+.main-dashboard .text-wrapper-4 {
+  position: absolute;
+  top: 15px;
+  left: 21px;
+  width: 270px;
+  height: 37px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Play-Regular", Helvetica;
+  font-weight: 400;
+  color: #80ea0f;
+  font-size: 32px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 32px;
+  white-space: nowrap;
+}
+
+/* This is the outline circle for the task item */
+.main-dashboard .rectangle-4 {
+  position: absolute;
+  top: 71px;
+  left: 35px;
+  width: 612px;
+  height: 84px;
+  background-color: #604d59;
+  border-radius: 35px;
+}
+
+/* This is the checklist dot for the first task but we need to make it so that it can */
+.main-dashboard .ellipse {
+  top: 88px;
+  position: absolute;
+  left: 580px;
+  width: 47px;
+  height: 47px;
+  background-color: #f5faf9;
+  border-radius: 23.5px;
+}
+
+/* Second background task block */
+.main-dashboard .rectangle-5 {
+  position: absolute;
+  top: 185px;
+  left: 35px;
+  width: 612px;
+  height: 84px;
+  background-color: #658b91;
+  border-radius: 35px;
+}
+
+/* Checkbox for second task block */
+.main-dashboard .ellipse-2 {
+  top: 204px;
+  position: absolute;
+  left: 580px;
+  width: 47px;
+  height: 47px;
+  background-color: #f5faf9;
+  border-radius: 23.5px;
+}
+
+/* Third background task block */
+.main-dashboard .rectangle-6 {
+  position: absolute;
+  top: 299px;
+  left: 35px;
+  width: 612px;
+  height: 84px;
+  background-color: #86ab93;
+  border-radius: 35px;
+}
+
+
+/* Checkbox for third task block */
+.main-dashboard .ellipse-3 {
+  top: 318px;
+  position: absolute;
+  left: 580px;
+  width: 47px;
+  height: 47px;
+  background-color: #f5faf9;
+  border-radius: 23.5px;
+}
+
+/* This is the date in the first task block - this should become generalised */
+.main-dashboard .text-wrapper-5 {
+  top: 98px;
+  left: 68px;
+  position: absolute;
+  height: 27px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Play-Regular", Helvetica;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 27px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 27px;
+  white-space: nowrap;
+}
+
+/* This is the text in the first task block - this should become generalised */
+.main-dashboard .text-wrapper-6 {
+  position: absolute;
+  top: 98px;
+  left: 188px;
+  height: 27px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Play-Regular", Helvetica;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 27px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 27px;
+  white-space: nowrap;
+}
+
+
+/* This is the text in the second task block - this should become generalised */
+.main-dashboard .text-wrapper-7 {
+  position: absolute;
+  top: 214px;
+  left: 187px;
+  height: 27px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Play-Regular", Helvetica;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 27px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 27px;
+  white-space: nowrap;
+}
+
+/* This is the text in the third task block - this should become generalised */
+.main-dashboard .text-wrapper-8 {
+  position: absolute;
+  top: 328px;
+  left: 187px;
+  height: 27px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Play-Regular", Helvetica;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 27px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 27px;
+  white-space: nowrap;
+}
+
+/* This is the date in the second task block - this should become generalised */
+.main-dashboard .text-wrapper-9 {
+  top: 214px;
+  left: 60px;
+  position: absolute;
+  height: 27px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Play-Regular", Helvetica;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 27px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 27px;
+  white-space: nowrap;
+}
+
+/* This is the date in the third task block - this should become generalised */
+.main-dashboard .text-wrapper-10 {
+  top: 328px;
+  left: 60px;
+  position: absolute;
+  height: 27px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Play-Regular", Helvetica;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 27px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 27px;
+  white-space: nowrap;
+}
