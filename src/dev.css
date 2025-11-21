@@ -40,12 +40,9 @@ a {
 
 /* The floating buttons rectangle backgrounds */
 .main-dashboard .div {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 207px;
   height: 62px;
-  background-color: #86ab93;
+  background-color: #d8b817;
   border-radius: 23px;
 }
 
@@ -97,10 +94,14 @@ a {
 
 /* The upcoming tasks box uses the following CSS;
         - Task Dashboard - This is going to be the background and have a grid system so that different tasks can be added when required
+        - Task Bubble - This is going to be the bubble of the tasks that can pop up on the dashboard
+        - Task Text - This is going to be the text of the task bubbles
 
 
 /* Upcoming tasks background box */
-.main-dashboard .rectangle-3 {
+.main-dashboard .MainTaskBox {
+  display: grid;
+
   position: absolute;
   top: 0;
   left: 0;
@@ -108,10 +109,20 @@ a {
   height: 454px;
   background-color: #477776;
   border-radius: 43px;
+  padding: 20px;
+  margin: 10px;
+  border-width: 1px;
+  border-color: #000;
+  color: #000;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 20px;
+    
 }
 
+
+
 /* This is the text for the Upcoming tasks part of the */
-.main-dashboard .text-wrapper-4 {
+.main-dashboard .TaskTitle {
   position: absolute;
   top: 15px;
   left: 21px;
@@ -131,26 +142,59 @@ a {
 }
 
 /* This is the outline circle for the task item */
-.main-dashboard .rectangle-4 {
-  position: absolute;
-  top: 71px;
-  left: 35px;
-  width: 612px;
-  height: 84px;
-  background-color: #604d59;
-  border-radius: 35px;
+
+.TaskItem{
+    display: grid;
+    background-color: #604d59;
+    border-radius: 35px;
+    grid-template-columns: 1fr 1fr 1fr;
+    /* This is the date in the first task block - this should become generalised */
+
+    .TaskBlockDate{
+      height: 27px;
+      font-family: "Play-Regular", Helvetica;
+      font-weight: 400;
+      color: #ffffff;
+      font-size: 17px;
+      text-align: center;
+      letter-spacing: 0;
+      line-height: 27px;
+      white-space: nowrap;
+
+    }
+
+  /* This is the text in the first task block - this should become generalised */
+    .TaskBlockText {
+      
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Play-Regular", Helvetica;
+      font-weight: 400;
+      color: #ffffff;
+      font-size: 27px;
+      text-align: center;
+      letter-spacing: 0;
+      line-height: 27px;
+      white-space: nowrap;
+    }
+  /* This is the checklist dot for the first task but we need to make it so that it can */
+    .TaskCheckdot {
+      align-items: center;
+      width: 17px;
+      height: 17px;
+      background-color: #f5faf9;
+      border-radius: 23.5px;
+    }
 }
 
-/* This is the checklist dot for the first task but we need to make it so that it can */
-.main-dashboard .ellipse {
-  top: 88px;
-  position: absolute;
-  left: 580px;
-  width: 47px;
-  height: 47px;
-  background-color: #f5faf9;
-  border-radius: 23.5px;
-}
+
+
+
+
+
+
+/* From here and below for the task box block we want to make them all individual and adaptable like a grid would be, not just independant blocks */
 
 /* Second background task block */
 .main-dashboard .rectangle-5 {
@@ -197,43 +241,6 @@ a {
   border-radius: 23.5px;
 }
 
-/* This is the date in the first task block - this should become generalised */
-.main-dashboard .text-wrapper-5 {
-  top: 98px;
-  left: 68px;
-  position: absolute;
-  height: 27px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: "Play-Regular", Helvetica;
-  font-weight: 400;
-  color: #ffffff;
-  font-size: 27px;
-  text-align: center;
-  letter-spacing: 0;
-  line-height: 27px;
-  white-space: nowrap;
-}
-
-/* This is the text in the first task block - this should become generalised */
-.main-dashboard .text-wrapper-6 {
-  position: absolute;
-  top: 98px;
-  left: 188px;
-  height: 27px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: "Play-Regular", Helvetica;
-  font-weight: 400;
-  color: #ffffff;
-  font-size: 27px;
-  text-align: center;
-  letter-spacing: 0;
-  line-height: 27px;
-  white-space: nowrap;
-}
 
 
 /* This is the text in the second task block - this should become generalised */
