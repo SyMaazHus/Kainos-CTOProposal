@@ -7,6 +7,7 @@ html,
 body {
   margin: 0px;
   height: 100%;
+  background-color: #86ab93;
 }
 /* a blue color as a generic focus style */
 button:focus-visible {
@@ -17,25 +18,58 @@ a {
   text-decoration: none;
 }
 
-.main-dashboard {
+/*This is the background and such*/
+.main-dashboard{
+  max-width: 1680px;
+  max-height: 1050px;
+
+  .bgs{
   background-color: #86ab93;
   overflow: hidden;
   width: 100%;
-  min-width: 1680px;
+  max-width: 1680px;
   min-height: 1050px;
   position: relative;
+  .sidebar{
+    width: 70px;
+    grid-template-rows: auto;
+    row-gap: 20px;
+  }
+  }
+  .bgw{
+    position: absolute;
+    top: 4px;
+    left: 70px;
+    width: 1610px;
+    height: 1050px;
+    background-color: #ffffff;
+    border-radius: 50px;
+    overflow: hidden;
+  }
+
 }
 
-.main-dashboard .rectangle-BG {
+/* This is going to be the sidebar with all the icons for returning and navigating around the home */
+.sideBar {
   position: absolute;
-  top: 4px;
-  left: 70px;
-  width: 1680px;
-  height: 1050px;
-  background-color: #ffffff;
-  border-radius: 50px;
+  display: block;
+  width: 15%;
+  height: 100%;
+  background-color: #86ab93 ;
+  float: left;
 }
 
+/* This is the main content container that will have all of the webpage content inside of it */
+.MainContent {
+  position: absolute;
+  width: 85%;
+  height: 100%;
+  max-height: 100vh;
+  background-color: #ffffff;
+  border-top-left-radius: 10%;
+  right: 0;
+  overflow-y: hidden;
+}
 
 
 /* The floating buttons rectangle backgrounds */
@@ -100,12 +134,15 @@ a {
 
 /* The location of this occuring needs to change but otherwise the CSS works at the moment */
 /* Upcoming tasks background box */
-.main-dashboard .MainTaskBox {
-  display: grid;
-
+.MainContent .MainTaskBox {
+  
+  /* Will be edited later to figure out the location of it */
   position: absolute;
   top: 0;
   left: 0;
+
+  /* These attributes are correct for the taskbox */
+  display: grid;
   width: 300px;
   height: 150px;
   background-color: #477776;
@@ -132,15 +169,13 @@ a {
     letter-spacing: 0;
     line-height: 32px;
     white-space: nowrap;
-}
+  }
     
 }
 
-
-
 /* This is the outline circle for the task item */
 
-.TaskItem{
+.MainTaskBox .TaskItem {
     display: grid;
     background-color: #604d59;
     border-radius: 35px;
@@ -192,135 +227,4 @@ a {
       color: #ffffff;
       white-space: nowrap;
     }
-}
-
-
-
-
-
-
-
-/* From here and below for the task box block we want to make them all individual and adaptable like a grid would be, not just independant blocks */
-
-/* Second background task block */
-.main-dashboard .rectangle-5 {
-  position: absolute;
-  top: 185px;
-  left: 35px;
-  width: 612px;
-  height: 84px;
-  background-color: #658b91;
-  border-radius: 35px;
-}
-
-/* Checkbox for second task block */
-.main-dashboard .ellipse-2 {
-  top: 204px;
-  position: absolute;
-  left: 580px;
-  width: 47px;
-  height: 47px;
-  background-color: #f5faf9;
-  border-radius: 23.5px;
-}
-
-/* Third background task block */
-.main-dashboard .rectangle-6 {
-  position: absolute;
-  top: 299px;
-  left: 35px;
-  width: 612px;
-  height: 84px;
-  background-color: #86ab93;
-  border-radius: 35px;
-}
-
-
-/* Checkbox for third task block */
-.main-dashboard .ellipse-3 {
-  top: 318px;
-  position: absolute;
-  left: 580px;
-  width: 47px;
-  height: 47px;
-  background-color: #f5faf9;
-  border-radius: 23.5px;
-}
-
-
-
-/* This is the text in the second task block - this should become generalised */
-.main-dashboard .text-wrapper-7 {
-  position: absolute;
-  top: 214px;
-  left: 187px;
-  height: 27px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: "Play-Regular", Helvetica;
-  font-weight: 400;
-  color: #ffffff;
-  font-size: 27px;
-  text-align: center;
-  letter-spacing: 0;
-  line-height: 27px;
-  white-space: nowrap;
-}
-
-/* This is the text in the third task block - this should become generalised */
-.main-dashboard .text-wrapper-8 {
-  position: absolute;
-  top: 328px;
-  left: 187px;
-  height: 27px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: "Play-Regular", Helvetica;
-  font-weight: 400;
-  color: #ffffff;
-  font-size: 27px;
-  text-align: center;
-  letter-spacing: 0;
-  line-height: 27px;
-  white-space: nowrap;
-}
-
-/* This is the date in the second task block - this should become generalised */
-.main-dashboard .text-wrapper-9 {
-  top: 214px;
-  left: 60px;
-  position: absolute;
-  height: 27px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: "Play-Regular", Helvetica;
-  font-weight: 400;
-  color: #ffffff;
-  font-size: 27px;
-  text-align: center;
-  letter-spacing: 0;
-  line-height: 27px;
-  white-space: nowrap;
-}
-
-/* This is the date in the third task block - this should become generalised */
-.main-dashboard .text-wrapper-10 {
-  top: 328px;
-  left: 60px;
-  position: absolute;
-  height: 27px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: "Play-Regular", Helvetica;
-  font-weight: 400;
-  color: #ffffff;
-  font-size: 27px;
-  text-align: center;
-  letter-spacing: 0;
-  line-height: 27px;
-  white-space: nowrap;
 }
