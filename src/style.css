@@ -1,0 +1,209 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.background {
+  display: flex;          
+  width: 100vw;           
+  height: 100vh;          
+  background: #86AB93;   
+}
+
+.spacer {
+  width: 6%;
+  min-width: 80px;     
+  display: flex;      
+  flex-direction: column; 
+  justify-content: flex-start; 
+  align-items: center;  
+  padding-top: 30px;  
+}
+
+.logo-text {
+  color: #FFF;
+  font-family: "Pixelify Sans", sans-serif;
+  font-size: 45px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  display: flex;       
+  gap: 10px;           
+}
+
+
+
+.rectangle {
+  flex: 1;
+  height: 100%;
+  border-radius: 100px 0 0 100px;
+  background: #F5FAF9;
+  position: relative;           /* 关键！所有子元素都以它为定位参考 */
+  overflow: hidden;
+}
+
+.menu-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: calc(100vh - 130px);
+  padding-top: 45px;        /* logo 下留大一点空 */
+  padding-bottom: 50px;
+}
+
+.menu-container > div:not(:first-child):not(:last-child) {
+  margin-bottom: 25px;      /* 中间图标间距 */
+}
+
+/* 最后一个自动沉底 */
+.menu-container > div:last-child {
+  margin-top: auto;
+}
+
+.menu-item svg {
+  width: 40px;
+  height: 40px;
+  color: white;  
+  margin-top: 100px;                  /* 继承颜色，方便统一改 */
+  transition: all 0.25s ease;
+}
+
+.kainos-logo-wrapper {
+  position: absolute;
+  top: 18%;                    /* 距离顶部 50% */
+  left: 50%;                   /* 距离左边 50% */
+  transform: translate(-50%, -50%);   /* 完美回拉自己的 50% */
+  width: 42vw;                  /* 用视口宽度比例，自动缩放 */
+  max-width: 620px;             /* 最大不超过 620px（你原来 580px 的升级版） */
+  min-width: 320px;             /* 手机上也不会太小 */
+  z-index: 1;
+  pointer-events: none;
+}
+
+.kainos-logo {
+  width: 100%;         /* 你可以改成 380px ~ 480px 之间随意调 */
+  height: auto;
+  filter: drop-shadow(0 10px 30px rgba(0,0,0,0.1));  /* 可选：加一点轻微阴影更高级 */
+}
+
+.top-right-icons {
+  position: absolute;
+  top: 26px;
+  right: 26px;
+  display: flex;
+  gap: 16px;           /* 铃铛和头像之间的完美间距 */
+  z-index: 10;
+}
+
+.icon-wrapper {
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.icon-wrapper:hover {
+  transform: translateY(-5px) scale(1.05);
+}
+
+.icon-wrapper svg {
+  width: 58px;
+  height: 58px;
+  color: #1D1B20;      /* 统一黑色实心 */
+  filter: drop-shadow(0 4px 12px rgba(29,27,32,0.15));
+}
+
+
+.three-pills {
+  position: absolute;
+  top: 28%;                     /* 紧贴 kainos 下面，可微调 42%~46% */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: clamp(20px, 3.5vw, 40px);   /* 间距也响应式 */
+  z-index: 2;
+}
+
+.pill {
+  width: clamp(200px, 22vw, 300px);   /* 207px → 300px 之间自动变化 */
+  height: clamp(60px, 8vw, 88px);
+  border-radius: clamp(20px, 4vw, 34px);
+  background: rgba(134, 171, 147, 0.55);
+  backdrop-filter: blur(6px);
+  transition: all 0.35s ease;
+}
+
+.deep-green-cards {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;                /* 所有卡片底部对齐 */
+  padding: 0 clamp(200px, 40vw, 270px);
+  gap: clamp(40px, 40vw, 60px);
+  pointer-events: none;
+}
+
+.green-card {
+  border-radius: clamp(36px, 5.5vw, 68px);
+  background: #477776;
+  box-shadow: 0 28px 70px rgba(71,119,118,0.44);
+  transition: all 0.45s ease;
+  pointer-events: auto;
+  flex-shrink: 0;
+}
+
+.green-card:hover {
+  transform: translateY(-14px);
+  box-shadow: 0 40px 90px rgba(71,119,118,0.6);
+}
+
+/* 四张卡统一离底距离（改这一行就全部一起动） */
+.green-card{
+  margin-bottom: clamp(300px, 7.5vw, 600px);
+}
+.card-right-group {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(50px, 7vw, 120px);
+  pointer-events: none;
+  /* margin-bottom 删掉！ */
+}
+/* 左边最大 */
+.card-left {
+  width:  clamp(1000px, 40vw, 1300px);
+  height: clamp(420px, 40vw, 800px);
+}
+
+/* 中间那张（和截图里差不多大小） */
+.card-middle {
+  width:  clamp(500px, 40vw, 800px);
+  height: clamp(420px, 40vw, 720px);
+}
+
+/* 右边上下两张 */
+.card-right-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;     /* 上下顶底对齐 */
+  
+  /* 关键：改这行！让右边 group 高度和左边大卡完全一致 */
+  height: clamp(420px, 50vw, 800px);   /* ← 最大 800px，和 .card-left 完全一样！ */
+  
+  margin-bottom: clamp(300px, 7.5vw, 600px);
+  gap: 0;
+  pointer-events: none;
+}
+
+.card-right,
+.card-right-top {
+  width:  clamp(500px, 40vw, 800px);
+  height: clamp(420px, 40vw, 720px);
+  flex: 1;
+  min-height: 160px;
+  pointer-events: auto;
+}
+
+.card-right-top {
+  flex: 0.8;    /* 上面卡稍矮，和你截图一模一样 */
+}
