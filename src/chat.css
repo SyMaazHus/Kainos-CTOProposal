@@ -1,153 +1,216 @@
-.chat1 {
-width: 100%;
-height: 1024px;
-position: relative;
-background-color: #f5faf9;
-overflow: hidden;
-text-align: left;
-font-size: 48px;
-color: #366184;
-font-family: Silkscreen;
+header{
+	background-color: #f5faf9;
+	width: 100%;
+	height: 80px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0 20px;
+	box-sizing: border-box;
+	
+
+}
+
+
+.image-kainos-icon {
+	border-radius: 7px;
+	width: 267px;
+	height: 250px;
+	object-fit:contain; 
+
+}
+
+.chat {
+	width: 100%;
+	min-height: 100vh;
+	position: relative;
+	background-color: #f5faf9;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-center;
+	overflow: hidden;
+	
+
+
 }
 .conversation {
-position: absolute;
-height: 100%;
-width: 100%;
-top: 0px;
-right: 0px;
-bottom: 0px;
-left: 0px;
-border-radius: 20px;
-background-color: rgba(245, 250, 249, 0.64);
-overflow: hidden;
-font-size: 16px;
-color: #f5faf9;
-font-family: Inter;
+	width: 100%;
+	max-width: 800px;
+	border-radius: 20px;
+	background-color: #f5faf9a3;
+	font-size: 16px;
+	color: #f5faf9;
+	font-family: Inter;
+	justify-content: center;
+	display: flex;
+	margin-bottom: 100px; 
+
+
 }
 .reply {
-position: absolute;
-width: calc(100% - 1012px);
-right: 506px;
-bottom: 299px;
-left: 506px;
-border-radius: 30px;
-background-color: #477776;
-border: 1px solid #e0e0e0;
-box-sizing: border-box;
-height: 86px;
-display: flex;
-align-items: center;
-padding: 8px 16px;
-gap: 16px;
-cursor: pointer;
+	position: relative;
+	width: 100%;
+	max-width: 75%;
+	border-radius: 30px;
+	background-color: #477776;
+	border: 1px solid #e0e0e0;
+	min-height: 60px; 
+	height: auto;
+
+	display: flex;
+	align-items: flex-end;
+	padding: 15px 16px;
+	box-sizing: border-box;
+	gap: 20px;
+
+	cursor: pointer;
+	margin-top: 30px;
+	cursor: text;
+	transition: box-shadow 0.2s;
+
+
 }
-.label {
-flex: 1;
-position: relative;
-line-height: 24px;
-overflow: hidden;
-text-overflow: ellipsis;
-white-space: nowrap;
+
+
+.reply:hover { 
+	box-shadow: 0 0 0 2px #2a9d8f;
 }
+
+.label { /* mostly deals with the textbox area. */
+	flex: 1;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	box-sizing: border-box;
+	background: transparent;
+
+	max-height: 200px;
+
+	padding: 0;
+
+	border: none;            
+    outline: none;          
+    resize: none;            
+
+
+    color: white;           
+	font-family: inherit;
+    font-size: inherit;
+	max-height: 200px;
+	overflow-y: hidden;
+	
+    line-height: 1.5;
+
+	transition: height 0.15s ease-out;
+
+}
+
+.label::placeholder {
+
+    color: rgba(255, 255, 255, 0.7);
+}
+
 .mic-icon {
-height: 24px;
-width: 24px;
-position: relative;
+	height: 24px;
+	width: 24px;
+	flex-shrink: 0; /* Prevents icon from squishing */
+	
 }
-.image-kainos-icon {
-position: absolute;
-top: -57px;
-left: 587px;
-border-radius: 7px;
-width: 267px;
-height: 267px;
-object-fit: cover;
-}
+
+
+
 .menu-heading {
-position: absolute;
-top: 331px;
-left: 784px;
-border-radius: 8px;
-width: 284px;
-height: 34px;
-display: flex;
-align-items: flex-start;
-padding: 8px 16px 4px;
-box-sizing: border-box;
+	width: auto;
+	height: auto;
+	display: flex;
+	justify-content: center;
+	padding: 8px 16px;
+
 }
-.section-title-iphone {
-position: absolute;
-top: 310px;
-left: 189px;
-backdrop-filter: blur(4px);
-width: 306px;
-height: 77px;
-display: flex;
-align-items: center;
-padding: 4px 8px 10px;
-box-sizing: border-box;
+
+.section-title {
+	width: 100%;
+    text-align: center;
 }
-.header {
-position: relative;
-letter-spacing: -0.08px;
-line-height: 15px;
-overflow: hidden;
-text-overflow: ellipsis;
-white-space: nowrap;
-mix-blend-mode: linear-burn;
-flex-shrink: 0;
+.custom-prompt {
+	font-size: 48px;
+    font-family: 'Silkscreen';
+    margin: 0;
+    text-align: center;
+    white-space: normal;
+    word-wrap: break-word;
+
+	background: linear-gradient(90deg, #366184 0%, #477776 50%, #2a9d8f 100%);
+	background-clip: text;
+	-webkit-background-clip: text;
+
+	-webkit-text-fill-color: transparent;
+    color: transparent;
+
+
 }
-.chat1-header {
-position: absolute;
-top: 338px;
-left: 197px;
-letter-spacing: -0.08px;
-line-height: 15px;
-overflow: hidden;
-text-overflow: ellipsis;
-white-space: nowrap;
-mix-blend-mode: linear-burn;
+
+.intro-block{
+	flex: 1;
+	display: flex;
+    flex-direction: column;
+	 
+	align-items: center; 
+	justify-content: center; 
+    
+ 
+    gap: 50px;
+
+
+
 }
-.chat1-mic-icon {
-position: absolute;
-top: 466px;
-left: 694px;
-width: 52px;
-height: 52px;
+.chat-header {
+	text-align: center;
+    letter-spacing: -0.08px;
+    mix-blend-mode: linear-burn;
+    margin-bottom: 20px;
+    color: #333; 
 }
-.circle {
-position: absolute;
-top: 455px;
-left: 683px;
-width: 74px;
-height: 74px;
-overflow: hidden;
+.chat-mic-icon {
+	position: relative;
+	
+	height: 50px;
+	width: 50px;
+	flex-shrink: 0; /* Prevents icon from squishing */
+	
+
 }
-.icon {
-position: absolute;
-height: 83.38%;
-width: 83.38%;
-top: 8.33%;
-right: 8.29%;
-bottom: 8.29%;
-left: 8.33%;
-max-width: 100%;
-overflow: hidden;
-max-height: 100%;
+
+.label::-webkit-scrollbar {
+    width: 6px; 
 }
-.chat1-circle {
-position: absolute;
-top: 455px;
-left: 683px;
-width: 74px;
-height: 74px;
-overflow: hidden;
-cursor: pointer;
+
+
+.label::-webkit-scrollbar-track {
+    background: transparent; 
+    margin: 10px 0; 
 }
+
+
+.label::-webkit-scrollbar-thumb {
+   
+       
+    background-color: rgba(255, 255, 255, 0.2); 
+    border-radius: 10px; 
+}
+
+
+.label::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.4); 
+}
+
 
 /*might need to be global*/
 body {
   	margin: 0;
   	line-height: normal;
+	box-sizing: border-box;
+	overflow: hidden; 
+
 }
 

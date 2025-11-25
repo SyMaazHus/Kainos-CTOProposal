@@ -18,7 +18,7 @@ function createWindow () {
   });
 
   
-  mainWindow.loadFile(path.join(__dirname, 'index.html'));
+  mainWindow.loadFile(path.join(__dirname, 'test.html'));
 }
 
 app.whenReady().then(() => {
