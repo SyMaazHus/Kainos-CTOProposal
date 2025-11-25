@@ -478,6 +478,8 @@ a {
 
 /* Bellow this we are not working on the tasks board */
 
+/* The following is the time spent boards */
+
 .main-dashboard .timespent-board {
   position: absolute;
   top: 611px;
@@ -663,6 +665,8 @@ a {
   line-height: 27px;
   white-space: nowrap;
 }
+
+/* Here ends the time spent board */
 
 .main-dashboard .WF-board {
   position: absolute;

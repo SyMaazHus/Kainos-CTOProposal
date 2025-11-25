@@ -6,12 +6,14 @@
     <link rel="stylesheet" href="dev.css" />
   </head>
   <body>
+<!-- Here is the sidebar with the links to other pages within it - We can implement react to get it working-->
     <div class="sideBar"></div>
+<!-- Here is the main content of the webpage-->
     <div class="MainContent">
 
  <!-- This is the Upcoming Task board and it can be added to with the JS based on the tasks in the database-->
       <div class="MainTaskBox">
-        <div id="TaskTitle">Upcoming Tasks</div>
+        <div id="Title">Upcoming Tasks</div>
         <div class="TaskItem">
             <div class="TaskBlockDate">8:00</div>
             <div class="TaskBlockText">Meet Juan</div>
@@ -26,6 +28,14 @@
             <div class="TaskBlockDate">15:00</div>
             <div class="TaskBlockText">sigma</div>
             <div class="TaskCheckdot"></div>
+        </div>
+      </div>
+<!-- This is the time spent box, with the insights image and the timed tags-->
+      <div class="TimeSpentBox">
+        <div id="Title">Time spent:</div>
+        <div class="TimedItem">
+            <div class="TimedTag">Worked on CSS:</div>
+            <div class="TimedTime">03:30:00</div>
         </div>
       </div>
 
