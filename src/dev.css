@@ -271,3 +271,93 @@ display: grid;
     }
 
 }
+
+.TimeSpentBox .TimedInsights {
+  background-color: #604d59;
+  border-radius: 35px;
+  grid-template-columns: 1fr 1fr;
+
+  #Title {
+    float: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Play-Regular", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 15px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 32px;
+    white-space: nowrap;
+  }
+
+  #img {
+    float: center;
+  }
+}
+
+
+/* The daily brief box will use the following CSS;
+        - Daily Brief Box - This is going to be the background and the container for the brief box, this is going to use a grid system to add the item widgets
+        - Daily Item - This is going to be a widget in the grid that will contain text for the item
+*/
+.MainContent .DailyBriefBox {
+  /* Will be edited later to figure out the location of it */
+  position: absolute;
+  bottom: 0;
+  right: 46%;
+
+  /* These attributes are correct for the taskbox */
+  display: grid;
+  width: 25%;
+  height: 75px;
+  background-color: #477776;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 10px;
+  border-width: 1px;
+  border-color: #000;
+  color: #000;
+  grid-template-rows: 1fr 1fr;
+  gap: 5px;
+  
+  /* This is the text for the Upcoming tasks part of the */
+  #Title {
+    float: right;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Play-Regular", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 32px;
+    white-space: nowrap;
+  }
+
+}
+
+.DailyBriefBox .DailyItem {
+    display: block;
+    background-color: #604d59;
+    border-radius: 35px;
+
+  /* The text with the data */
+    .DailyText {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Play-Regular", Helvetica;
+      font-weight: 400;
+      color: #ffffff;
+      font-size: 10px;
+      text-align: center;
+      letter-spacing: 0;
+      line-height: 20px;
+      white-space: nowrap;
+    }
+}
+
