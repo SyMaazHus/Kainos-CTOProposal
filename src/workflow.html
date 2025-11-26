@@ -10,109 +10,97 @@
   </head>
   <body>
     <div class="workflow-hub">
-      <!-- <img class="intersect" src="" alt="Background decoration"/>
-      <img class="image-kainos" src="" alt="Kainos logo" />
-      <img class="polygon-speechbubble" src="" alt="Speech bubble decoration" /> -->
-      <aside class="nav-bar" >
-        <div class="text-wrapper">Logo</div>
-          <nav>
-            <ul>
-              <li><button class="nav-button" aria-label="Chat"></button></li>
-              <li> <button class="nav-button" aria-label="Today"></button></li>
-            </ul>
-          </nav>
-      </aside>
-      
-
-      <main class="main-content">
-        <header class="header">
-        <h1 class="div">Workflow Hub</h1>
-        <div class="header-actions">
-          <button class="notifications-button" aria-label="Notifications">
-            <!-- <img class="notifications" src="img/notifications.svg" alt="" /> -->
-            <!-- <span class="badges" aria-label="3 notifications"> -->
-              <!-- <span class="badge-label">3</span> -->
-            <!-- </span> -->
-          </button>
-          <button class="account-button" aria-label="Account">
-            <!-- <img class="account-circle" src="img/account-circle.svg" alt="" /> -->
-          </button>
-        </div>
-      </header>
-
-        <section class="workflow-cards">
-          
-          <article class="component" role="article" aria-labelledby="task-1-title">
-            <div class="property-rectangle"> </div>
-            <header class="property-task">
-              <h2 class="text-wrapper-4" id="task-1-title">file organisation</h2>
-            </header>
-            <div class="property-rectangle-2">
-              
+        <aside class="nav">
+            <div class="nav-top">
+                <div class="logo">Logo</div>
+                <!-- imgs -->
             </div>
-            <div class="div-wrapper">
-              <p class="text-wrapper-5">task 1 description</p>
+            <nav class="nav-mid">
+                <ul>
+                    <!-- imgs -->
+                    <li><button class="nav-icon" aria-label="Calendar"></button></li>
+                    <li><button class="nav-icon" aria-label="Time/History"></button></li>
+                    <li><button class="nav-icon" aria-label="Favorites"></button></li>
+                    <li><button class="nav-icon" aria-label="Spark/Processing"></button></li>
+                </ul>
+            </nav>
+            <div class="nav-bottom">
+                <button class="nav-icon" aria-label="Settings"></button>
             </div>
-
-            <footer class="property-status">
-              <span class="text-wrapper-6">Status : Activate</span>
-            </footer>
-          </article>
-
-          <article class="component-2" role="article" aria-labelledby="task-2-title">
-            <div class="property-rectangle">
-              <div class="settings-2">
-                <img class="icon" src="img/icon-2.svg" alt="Task icon" />
-              </div>
-            </div>
-            <header class="property-task-2">
-              <h2 class="text-wrapper-7" id="task-2-title">meeting schedule</h2>
-            </header>
-            <div class="property-rectangle-2"></div>
-            <div class="property-ellipse" role="status" aria-label="Active status indicator"></div>
-            <div class="div-wrapper">
-              <p class="text-wrapper-5">task 2 description</p>
-            </div>
-            <footer class="property-status">
-              <span class="text-wrapper-6">Status : Activate</span>
-            </footer>
-          </article>
-
-          <article class="component-3" role="article" aria-labelledby="task-3-title">
-            <div class="property-rectangle">
-              <div class="settings-3">
-                <img class="icon" src="img/image.svg" alt="Task icon" />
-              </div>
-            </div>
-            <header class="property-task-3">
-              <h2 class="text-wrapper-8" id="task-3-title">Task 3</h2>
-            </header>
-            <div class="property-rectangle-2"></div>
-            <div class="property-ellipse-2" role="status" aria-label="Inactive status indicator"></div>
-            <div class="div-wrapper">
-              <p class="text-wrapper-5">task 3 description</p>
-            </div>
-            <footer class="property-status">
-              <span class="text-wrapper-9">Status : Inactivate</span>
-            </footer>
-          </article>
-        </section>
-
-        <aside class="metadata-section">
-          <p class="text-wrapper-2">Teams</p>
-          <p class="text-wrapper-3">2 Hours</p>
-          <img class="polygon-speechbubble" src="img/polygon-speechbubble.svg" alt="Decoration" />
         </aside>
-        <section class="new-workflow-section">
-          <button class="component-4" aria-label="Create new workflow">
-            <div class="property-rectangle-3"></div>
-            <span class="property-new">
-              <span class="text-wrapper-10">New workflow</span>
-            </span>
-            <img class="property-ellipse-3" src="img/property-1-ellipse-7.svg" alt="" />
-          </button>
-        </section>
-      </main>
+
+        <main class="main-content">
+            <header class="header">
+                <h1 class="page-title">Workflow Hub</h1>
+                <div class="header-right">
+                    <!-- imgs -->
+                    <img class="kainos-logo" src="" alt="kainos">
+                    <button class="header-icon" aria-label="Notifications"></button>
+                    <button class="header-icon" aria-label="User Account"></button>
+                </div>
+            </header>
+
+            <div class="workflow-cards">
+                <div class="workflow-card status-active">
+                    <div class="inner-box">
+                        <header class="card-header">
+                            <h2 class="card-title" id="file-org">file organisation</h2>
+                        </header>
+                        <div class="card-description-box">
+                            <p class="card-description">task 1 description</p>
+                        </div>
+                        <footer class="card-footer">
+                          <!-- imgs -->
+                            <button class="setting"></button>
+                            <span class="card-status">Status : Activate</span>
+                            <div class="status-color"></div>
+                        </footer>
+                    </div>
+                  </div>
+
+                <div class="workflow-card status-active">
+                    <div class="inner-box">
+                        <header class="card-header">
+                            <h2 class="card-title" id="meeting-schedule">meeting schedule</h2>
+                        </header>
+                        <div class="card-description-box">
+                            <p class="card-description">task 2 description</p>
+                        </div>
+                        <footer class="card-footer">
+                          <!-- imgs -->
+                            <button class="setting"></button>
+                            <span class="card-status">Status : Activate</span>
+                            <div class="status-color"></div>
+                        </footer>
+                    </div>
+                  </div>
+
+                <div class="workflow-card status-inactive">
+                    <div class="inner-box">
+                        <header class="card-header">
+                            <h2 class="card-title" id="task-3">Task 3</h2>
+                        </header>
+                        <div class="card-description-box">
+                            <p class="card-description">task 3 description</p>
+                        </div>
+                        <footer class="card-footer">
+                            <button class="setting" src=""></button> 
+                            <!-- imgs -->
+                            <span class="card-status">Status : Inactivate</span>
+                            <div class="status-color"></div>
+                        </footer>
+                    </div>
+                  </div>
+                  
+              </div>
+
+            <div class="new-workflow">
+                <button class="new-workflow-btn">
+                    <span class="plus">+</span>
+                    New workflow
+                </button>
+            </div>
+        </main>
     </div>
-  </body>
+</body>
 </html>
