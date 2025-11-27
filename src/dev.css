@@ -49,34 +49,14 @@ a {
 
 }
 
-/* This is going to be the sidebar with all the icons for returning and navigating around the home */
-.sideBar {
-  position: absolute;
-  display: grid;
-  width: 15%;
-  height: 100%;
-  background-color: #86ab93 ;
-  float: left;
-  grid-template-columns: 1fr;
 
-  #img {
-    width: 80%;
-    height: auto;
-    padding: 10px;
-    /* This will be presenting an image */
-  }
-  #img:hover{
-    width: auto;
-    height: auto;
-    padding: 15px;
-  }
-}
 
 /* This is the main content container that will have all of the webpage content inside of it */
 .MainContent {
   position: absolute;
   width: 85%;
-  height: 100%;
+  height: 90%;
+  top: 45px;
   max-height: 100vh;
   background-color: #ffffff;
   border-top-left-radius: 10%;
@@ -500,4 +480,63 @@ display: grid;
       line-height: 20px;
       white-space: nowrap;
     }
+}
+
+
+
+
+
+
+.menu-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: calc(100vh - 130px);
+  padding-top: 45px;       
+  padding-bottom: 50px;
+}
+
+.menu-container > div:not(:first-child):not(:last-child) {
+  margin-bottom: 40px;  
+}
+
+
+.menu-container > div:last-child {
+  margin-top: auto;
+}
+
+.menu-item svg {
+  width: 28px;
+  height: 28px;
+  color: white;           
+  margin-top: 40px;      
+  transition: all 0.25s ease;
+}
+
+
+.top-right-icons {
+  position: absolute;
+  top: 26px;
+  right: 26px;
+  display: flex;
+  gap: 16px;         
+  z-index: 10;
+}
+
+.icon-wrapper {
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.icon-wrapper:hover {
+  transform: translateY(-5px) scale(1.05);
+}
+
+.icon-wrapper svg {
+  width: 28px;
+  height: 28px;
+  color: #1D1B20;    
+  filter: drop-shadow(0 4px 12px rgba(29,27,32,0.15));
 }
