@@ -204,3 +204,79 @@ html, body {
 .card-right-top {
   flex: 0.8;   
 }
+
+.grey-overlay {
+  position: fixed ;
+  inset: 0 ;
+  background: rgba(0,0,0,0.5);
+  z-index: 9999;
+  pointer-events:none;
+
+  mask: radial-gradient(
+  circle 50px at var(--hole-x) var(--hole-y),
+  transparent 0,
+  transparent 50px,
+  black 100px
+  );
+}
+
+.grey-overlay1 {
+  position: fixed ;
+  inset: 0 ;
+  background: rgba(0,0,0,0.5);
+  z-index: 9999;
+  pointer-events:none;
+
+  mask: radial-gradient(
+  circle 100px at var(--hole-x) var(--hole-y),
+  transparent 0,
+  transparent 100px,
+  black 150px
+  );
+}
+
+.tutorial-tooltip {
+  position: fixed;
+  z-index: 999999; /* 高于蒙版 */
+  background: #ffffff;
+  padding: 16px 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  display: flex;   /* 默认隐藏 */
+  font-size: 14px;
+  max-width: 260px;
+
+    left: 200px;
+  top: 200px;
+}
+
+.tooltip-next {
+  background: #86AB93;
+  border: none;
+  padding: 6px 16px;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.tooltip-text {
+  line-height: 1.4;
+}
+
+.tutorial-tooltip1 {
+  position: fixed;
+  z-index: 999999;
+  background: #ffffff;
+  padding: 16px 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  display: none;   
+  gap: 12px;
+  align-items: center;
+  font-size: 14px;
+  max-width: 260px;
+}
