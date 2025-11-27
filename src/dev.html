@@ -7,9 +7,28 @@
   </head>
   <body>
 <!-- Here is the sidebar with the links to other pages within it - We can implement react to get it working-->
-    <div class="sideBar"></div>
+
+<!-- The sidebar code end would be here -->
+
 <!-- Here is the main content of the webpage-->
     <div class="MainContent">
+
+<!-- This is where the kainos logo will go, central in the main content div -->
+      <div class="KainosLogo"></div>
+
+
+<!-- This is where the floating suggestions will be found as designated in the figma design-->
+      <div class="FloatingSpace">
+        <div class ="SuggestionBubble">Suggestion one</div>
+      </div>
+
+<!-- This is where the chat box icon and linking button is going to be -->
+      <div class="ChatButton">
+        <a href="chat.html">
+          <!-- This image needs to be brought in-->
+            <img src="ChatIcon.png" alt="Chat Icon">
+        </a>
+      </div>
 
  <!-- This is the Upcoming Task board and it can be added to with the JS based on the tasks in the database-->
       <div class="MainTaskBox">
@@ -38,6 +57,14 @@
             <div class="TimedTime">03:30:00</div>
         </div>
       </div>
+<!-- This is the workflow box, with the information and links to the different workflows that have been developed-->
+      <div class="WorkflowBox">
+        <div id="Title">Current Workflows</div>
+        <div class="WorkflowItem">
+            <div class="WorkflowText">Workflow #1</div>
+        </div>
+      </div>
+
 <!-- This is the daily brief box, with the information about how many tasks are yet to complete or such -->
       <div class="DailyBriefBox">
         <div id="Title">Daily Tasks</div>

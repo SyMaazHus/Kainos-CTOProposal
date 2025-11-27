@@ -84,6 +84,74 @@ a {
   overflow-y: hidden;
 }
 
+/*This is for the Kainos logo on the main page */
+.MainContent .KainosLogo {
+  position: absolute;
+  top: 5%;
+  width: 10%;
+  height: 10%;
+  background-color: #4a90e2;
+
+  left: 0px;
+  right: 0px;
+  margin-inline: auto;
+}
+
+/*This is going to be the button and icon of the chat box which is an interactable item*/
+.MainContent .ChatButton {
+  position: absolute;
+  top: 48%;
+  width: 10%;
+  height: width;
+  background-color: #4a90e2;
+
+  left: 0px;
+  right: 0px;
+  margin-inline: auto;
+
+}
+
+/* the floating suggestion boxes uses the following CSS;
+        - Floating Space - This is going to be the area in the main content that can contain suggestions for ideas of work and be appended to
+        - Suggestion bubble - This is going to be one of the floating suggestions
+*/
+.MainContent .FloatingSpace {
+  width: 90%;
+  height: 20%;
+  float: center;
+  top: 25%;
+  left: 0px;
+  right: 0px;
+  margin-inline: auto;
+  position: absolute;
+
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
+.FloatingSpace .SuggestionBubble {
+  width: 20%;
+  height: 30%;
+  background-color: #604d59;
+  padding: 10px;
+
+  border-radius: 15%;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  font-family: "Play-Regular", Helvetica;
+  font-weight: 40;
+  color: #ffffff;
+  font-size: 10px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 27px;
+  white-space: nowrap;
+
+}
 
 
 /* The upcoming tasks box uses the following CSS;
@@ -97,14 +165,15 @@ a {
 .MainContent .MainTaskBox {
   
   /* Will be edited later to figure out the location of it */
+  left: 33%;
+  right: 33%;
   position: absolute;
-  bottom: 0;
-  right: 0;
+  top: 60%;
 
   /* These attributes are correct for the taskbox */
   display: grid;
-  width: 300px;
-  height: 150px;
+  width: 30%;
+  height: 35%;
   background-color: #477776;
   border-radius: 20px;
   padding: 10px;
@@ -196,13 +265,17 @@ a {
         - Tags spent - This is going to be a widget that uses a tagging system (something like this ) That has tracked how long the user has been working on a certain tag
 */
 .MainContent .TimeSpentBox {
-  position: absolute;
-  bottom: 0;
+  /*Location information */
   left: 0;
+  right: 66%;
+  position: absolute;
+  top: 60%;
+
+  /* All of the other details about the status of the div*/
 
   display: grid;
-  width: 25%;
-  height: 150px;
+  width: 30%;
+  height: 35%;
   background-color: #477776;
   border-radius: 10%;
   padding: 10px;
@@ -236,6 +309,8 @@ display: grid;
     background-color: #604d59;
     border-radius: 35px;
     grid-template-columns: 1fr 1fr;
+    max-height: 60%;
+
 
   /* The tag name that has been worked on */
     .TimedTag {
@@ -303,15 +378,16 @@ display: grid;
         - Daily Item - This is going to be a widget in the grid that will contain text for the item
 */
 .MainContent .DailyBriefBox {
-  /* Will be edited later to figure out the location of it */
+  /*Location information */
+  left: 66%;
+  right: 0;
   position: absolute;
-  bottom: 0;
-  right: 46%;
+  top: 60%;
 
   /* These attributes are correct for the taskbox */
   display: grid;
-  width: 25%;
-  height: 75px;
+  width: 30%;
+  height: 15%;
   background-color: #477776;
   border-radius: 20px;
   padding: 10px;
@@ -345,6 +421,7 @@ display: grid;
     background-color: #604d59;
     border-radius: 35px;
 
+
   /* The text with the data */
     .DailyText {
       display: flex;
@@ -361,3 +438,66 @@ display: grid;
     }
 }
 
+/* The workflows box will use the following CSS;
+        - Workflows Box - This is going to be the background and the main container for the workflows box, using a grid system to store all the other divs and widgets
+        - Workflow Item - This is going to be a widget in the grid that contains the text and the item
+*/
+.MainContent .WorkflowBox {
+  /*Location information */
+  left: 66%;
+  right: 0;
+  position: absolute;
+  top: 80%;
+
+  /* These attributes are correct for the taskbox */
+  display: grid;
+  width: 30%;
+  height: 15%;
+  background-color: #477776;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 10px;
+  border-width: 1px;
+  border-color: #000;
+  color: #000;
+  grid-template-rows: 1fr 1fr;
+  gap: 5px;
+  
+  /* This is the text for the Upcoming tasks part of the */
+  #Title {
+    float: right;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Play-Regular", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 32px;
+    white-space: nowrap;
+  }
+
+}
+
+.WorkflowBox .WorkflowItem {
+    display: block;
+    background-color: #604d59;
+    border-radius: 35px;
+
+  /* The text with the data */
+    .WorkflowText {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Play-Regular", Helvetica;
+      font-weight: 400;
+      color: #ffffff;
+      font-size: 10px;
+      text-align: center;
+      letter-spacing: 0;
+      line-height: 20px;
+      white-space: nowrap;
+    }
+}
