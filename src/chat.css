@@ -1,7 +1,7 @@
 header{
 	background-color: #f5faf9;
 	width: 100%;
-	height: 80px;
+	height: 100px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -14,8 +14,8 @@ header{
 
 .image-kainos-icon {
 	border-radius: 7px;
-	width: 267px;
-	height: 250px;
+	width: auto;
+	height: 100%;
 	object-fit:contain; 
 
 }
@@ -44,10 +44,15 @@ header{
 	font-family: Inter;
 	justify-content: center;
 	display: flex;
-	margin-bottom: 100px; 
+
+	flex-shrink: 0; /*allows it to not shrink*/
+	
+	padding-bottom: 30px; /*always keeps it off the bottom*/
+	margin-bottom:100px;
 
 
 }
+
 .reply {
 	position: relative;
 	width: 100%;
@@ -110,13 +115,6 @@ header{
     color: rgba(255, 255, 255, 0.7);
 }
 
-.mic-icon {
-	height: 24px;
-	width: 24px;
-	flex-shrink: 0; /* Prevents icon from squishing */
-	
-}
-
 
 
 .menu-heading {
@@ -128,26 +126,35 @@ header{
 
 }
 
-.section-title {
-	width: 100%;
-    text-align: center;
-}
+
 .custom-prompt {
-	font-size: 48px;
+	font-size: 60px;
     font-family: 'Silkscreen';
     margin: 0;
     text-align: center;
     white-space: normal;
     word-wrap: break-word;
 
-	background: linear-gradient(90deg, #366184 0%, #477776 50%, #2a9d8f 100%);
+	background: linear-gradient(90deg, #366184 0%, #477776 50%, #2a9d8f 100%,#366184 100%);
+	background-size: 200% auto;
+
 	background-clip: text;
 	-webkit-background-clip: text;
 
 	-webkit-text-fill-color: transparent;
     color: transparent;
 
+	animation: gradient-move 3s ease-in-out infinite alternate;
 
+
+}
+@keyframes gradient-move {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
 }
 
 .intro-block{
@@ -158,12 +165,94 @@ header{
 	align-items: center; 
 	justify-content: center; 
     
- 
+	
     gap: 50px;
 
+	transition: all 0.5s ease-in-out;
+    opacity: 1;
+    max-height: 1000px;
 
 
 }
+.spacer {
+    flex: 1; /* Pushes input up */
+    transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    max-height: 50vh;
+}
+
+
+.chat-history{
+	flex: 0;
+	display: flex;
+	flex-direction:column;
+	width: 75%;
+	max-width: 100%; 
+	gap: 15px;
+	padding: 20px 0; 
+	overflow-y: auto ;
+	align-self: center;
+	min-height: 0;
+	
+	transition: flex 0.5s ease-in-out;
+}
+
+.chat-history.active {
+    flex: 1; 
+}
+
+.chat.active .chat-history {
+    flex: 1; 
+    opacity: 1;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.chat.active .intro-block,
+.chat.active .spacer {
+    flex: 0;
+    max-height: 0;
+    opacity: 0;
+    padding: 0;
+    margin: 0;
+    overflow: hidden; 
+}
+
+
+.message {
+	width: fit-content; 
+
+    max-width: 100%;
+    padding: 12px 18px;
+    border-radius: 20px;
+    font-size: 16px;
+    line-height: 1.5;
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+} 
+
+.message.user{
+	align-self: flex-end;
+    background-color: #2a9d8f;
+    color: white;
+    border-bottom-right-radius: 4px;
+}
+
+.message.bot {
+    align-self: flex-start; 
+    background-color: #e5e5ea;
+    color: black;
+    border-bottom-left-radius: 4px; 
+}
+
+@keyframes popIn {
+    from { opacity: 0; transform: translateY(10px) scale(0.9); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+
+
+
+
+
 .chat-header {
 	text-align: center;
     letter-spacing: -0.08px;
@@ -171,15 +260,29 @@ header{
     margin-bottom: 20px;
     color: #333; 
 }
-.chat-mic-icon {
+.mic-icon {
 	position: relative;
 	
 	height: 50px;
 	width: 50px;
 	flex-shrink: 0; /* Prevents icon from squishing */
 	
+	cursor: pointer;
+
+	transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.2s ease;
 
 }
+
+.mic-icon:hover {
+	transform:scale(1.15);
+	filter : drop-shadow(0 0 6px rgba(255, 255, 255, 0.8));
+}
+
+.mic-icon:active{
+	transform: scale(0.95);
+	filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));
+}
+
 
 .label::-webkit-scrollbar {
     width: 6px; 
@@ -203,6 +306,64 @@ header{
 .label::-webkit-scrollbar-thumb:hover {
     background-color: rgba(255, 255, 255, 0.4); 
 }
+
+#sendBtn { 
+	width: 30px;
+    height: 30px;
+    border-radius: 50%;
+
+	background-color:#f5faf9 ;
+	color: #477776;
+	border: none;
+
+	display: flex;
+    align-items: center;
+    justify-content: center;
+
+	cursor : pointer;
+	flex-shrink: 0;
+	transition: all 0.5 ease;
+	box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#sendBtn:hover {
+    background-color: #ffffff;
+    transform: scale(1.1); 
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.6);
+}
+#sendBtn:active {
+    transform: scale(0.95); 
+}
+
+
+.chat-mic-icon { /*handles speak to chat */
+	font-size: 24px;  
+	flex-shrink: 0; /* Prevents icon from squishing */
+	color:#f5faf9 ;
+	margin-bottom: 0.5%;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+
+	cursor:pointer;
+	text-shadow: 0 2px 5px rgba(0,0,0,0.1);
+
+	transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), text-shadow 0.2s ease;
+	
+}
+
+.chat-mic-icon:hover {
+
+    transform: scale(1.1); 
+	color: #ffffff; /* Make it pure white on hover */
+	text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+}
+
+.chat-mic-icon:active {
+    transform: scale(0.95); 
+	/* color: #2a9d8f; could add color here to make mic icon pop. */ 
+}
+
 
 
 /*might need to be global*/
