@@ -73,8 +73,9 @@ body {
 }
 
 .kainos-logo {
-    width: 80px;
-    height: 20px;
+    width: 180px;
+    height: 120px;
+    margin: 0;
 }
 
 .header-icon {
@@ -143,7 +144,7 @@ body {
     border: none;
     width: 20px;
     height: 20px;
-    background-color: white; 
+    background: transparent;
     border-radius: 50%;
     cursor: pointer;
 }
