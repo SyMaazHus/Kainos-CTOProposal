@@ -38,7 +38,7 @@ body {
     border: none;
     width: 40px;
     height: 40px;
-    margin: 80px;
+    margin: 50px;
     cursor: pointer;
     border-radius: 5px;
     background: transparent;
@@ -61,10 +61,11 @@ body {
 
 .nav-mid {
     flex-grow: 1; 
+    height: 80%
 }
 
 .nav-bottom {
-    margin-top: 20px;
+    margin-top: 0px;
 }
 
 .main-content {
