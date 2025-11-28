@@ -70,7 +70,11 @@ a {
   top: 5%;
   width: 10%;
   height: 10%;
+<<<<<<< HEAD
   
+=======
+  background-color: #4a90e2;
+>>>>>>> 378d1421 (Added links)
 
   left: 0px;
   right: 0px;
@@ -539,4 +543,8 @@ display: grid;
   height: 28px;
   color: #1D1B20;    
   filter: drop-shadow(0 4px 12px rgba(29,27,32,0.15));
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 378d1421 (Added links)
