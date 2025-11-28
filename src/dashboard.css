@@ -1,94 +1,64 @@
-@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
-* {
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
-}
-html,
-body {
-  margin: 0px;
-  height: 100%;
-  background-color: #86ab93;
-}
-/* a blue color as a generic focus style */
-button:focus-visible {
-  outline: 2px solid #4a90e2 !important;
-  outline: -webkit-focus-ring-color auto 5px !important;
-}
-a {
-  text-decoration: none;
-}
 
-/*This is the background and such*/
-.main-dashboard{
-  max-width: 1680px;
-  max-height: 1050px;
-
-  .bgs{
-  background-color: #86ab93;
+.app-layout {
+  display: flex;
+  height: 100vh;
+  width: 100vh;
   overflow: hidden;
-  width: 100%;
-  max-width: 1680px;
-  min-height: 1050px;
-  position: relative;
-  .sidebar{
-    width: 70px;
-    grid-template-rows: auto;
-    row-gap: 20px;
-  }
-  }
-  .bgw{
-    position: absolute;
-    top: 4px;
-    left: 70px;
-    width: 1610px;
-    height: 1050px;
-    background-color: #ffffff;
-    border-radius: 50px;
-    overflow: hidden;
-  }
-
 }
-
-
 
 /* This is the main content container that will have all of the webpage content inside of it */
 .MainContent {
-  position: absolute;
-  width: 85%;
-  height: 90%;
-  top: 45px;
-  max-height: 100vh;
+  position: relative;
+  flex: 1;
+  flex-direction: column;
   background-color: #ffffff;
-  border-top-left-radius: 10%;
-  right: 0;
-  overflow-y: hidden;
+  border-top-left-radius: 15%;
 }
 
 /*This is for the Kainos logo on the main page */
-.MainContent .KainosLogo {
-  position: absolute;
-  top: 5%;
-  width: 10%;
-  height: 10%;
-  background-color: #4a90e2;
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+}
 
-  left: 0px;
-  right: 0px;
-  margin-inline: auto;
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.kainos-logo {
+    width: 180px;
+    height: 120px;
+    margin: 0;
+}
+
+.header-icon {
+    border: none;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    background-color: #a7d0b3; 
+    border-radius: 50%;
 }
 
 /*This is going to be the button and icon of the chat box which is an interactable item*/
 .MainContent .ChatButton {
-  position: absolute;
-  top: 48%;
+  position: relative;
   width: 10%;
   height: width;
-  background-color: #4a90e2;
 
   left: 0px;
   right: 0px;
   margin-inline: auto;
+  
 
+}
+
+.MainContent .WidgetContainer {
+  display: inline-flex;
 }
 
 /* the floating suggestion boxes uses the following CSS;
@@ -99,13 +69,14 @@ a {
   width: 90%;
   height: 20%;
   float: center;
-  top: 25%;
+
   left: 0px;
   right: 0px;
   margin-inline: auto;
-  position: absolute;
+  position: relative;
+  flex-grow: 1;
 
-  display: flex;
+  display: inline-flex;
   align-items: center;
   align-content: center;
   justify-content: center;
@@ -145,10 +116,8 @@ a {
 .MainContent .MainTaskBox {
   
   /* Will be edited later to figure out the location of it */
-  left: 33%;
-  right: 33%;
-  position: absolute;
-  top: 60%;
+  position: relative;
+
 
   /* These attributes are correct for the taskbox */
   display: grid;
@@ -246,10 +215,8 @@ a {
 */
 .MainContent .TimeSpentBox {
   /*Location information */
-  left: 0;
-  right: 66%;
-  position: absolute;
-  top: 60%;
+
+  position: relative;
 
   /* All of the other details about the status of the div*/
 
@@ -359,10 +326,9 @@ display: grid;
 */
 .MainContent .DailyBriefBox {
   /*Location information */
-  left: 66%;
-  right: 0;
-  position: absolute;
-  top: 60%;
+
+  position: relative;
+
 
   /* These attributes are correct for the taskbox */
   display: grid;
@@ -424,10 +390,9 @@ display: grid;
 */
 .MainContent .WorkflowBox {
   /*Location information */
-  left: 66%;
-  right: 0;
-  position: absolute;
-  top: 80%;
+  
+  position: relative;
+
 
   /* These attributes are correct for the taskbox */
   display: grid;
@@ -483,60 +448,61 @@ display: grid;
 }
 
 
+/* This should be the navigation bar */
 
-
-
-
-.menu-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  height: calc(100vh - 130px);
-  padding-top: 45px;       
-  padding-bottom: 50px;
+.nav {
+    width: 80px;
+    background-color: #a7d0b3; 
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   
+    
 }
 
-.menu-container > div:not(:first-child):not(:last-child) {
-  margin-bottom: 40px;  
+.logo {
+    font-weight: bold;
+    margin-bottom: 50px;
+    color: white; 
+}
+
+.nav-mid ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    margin-bottom: 40px;
+}
+
+.nav-icon{
+    border: none;
+    width: 40px;
+    height: 40px;
+    margin: 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    background: transparent;
+    fill:"#F5FAF9";
+    fill-opacity:"0.7";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-icon svg {
+    fill: white; 
+    fill-opacity: 0.7;
 }
 
 
-.menu-container > div:last-child {
-  margin-top: auto;
+.nav-icon:hover svg {
+    fill-opacity: 1;
 }
 
-.menu-item svg {
-  width: 28px;
-  height: 28px;
-  color: white;           
-  margin-top: 40px;      
-  transition: all 0.25s ease;
+.nav-mid {
+    flex-grow: 1; 
 }
 
-
-.top-right-icons {
-  position: absolute;
-  top: 26px;
-  right: 26px;
-  display: flex;
-  gap: 16px;         
-  z-index: 10;
-}
-
-.icon-wrapper {
-  position: relative;
-  cursor: pointer;
-  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.icon-wrapper:hover {
-  transform: translateY(-5px) scale(1.05);
-}
-
-.icon-wrapper svg {
-  width: 28px;
-  height: 28px;
-  color: #1D1B20;    
-  filter: drop-shadow(0 4px 12px rgba(29,27,32,0.15));
+.nav-bottom {
+    margin-top: 20px;
 }
