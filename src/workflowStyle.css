@@ -7,12 +7,12 @@ body {
 .app-layout {
     display: flex;
     height: 100vh;
-    background-color: white;
+    background-color: #86AB93; 
 }
 
 .nav {
     width: 80px;
-    background-color: #a7d0b3; 
+    background-color: #86AB93; 
     color: white;
     display: flex;
     flex-direction: column;
@@ -74,8 +74,7 @@ body {
     padding: 20px 40px;
     display: flex;
     flex-direction: column;
-    border-top-left-radius: 50px;
-    border-bottom-left-radius: 50px;
+    border-top-left-radius: 103px;
 }
 
 .header {
