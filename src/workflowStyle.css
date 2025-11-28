@@ -106,7 +106,7 @@ body {
     width: 30px;
     height: 30px;
     cursor: pointer;
-    background-color: #a7d0b3; 
+    background-color: none; 
     border-radius: 50%;
 }
 
