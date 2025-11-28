@@ -65,19 +65,14 @@ body{
 
 .MainContent .WidgetContainer {
   width: 100%;
-
   
   float: center;
   margin-inline: auto;
   position: relative;
   flex-grow: 1;
-  flex-wrap: wrap;
-  flex: 25%;
-  display: flex;
 
-
-  grid-auto-flow: dense;
-  align-items: flex-start; 
+  display: inline-flex;
+  align-items: center;
   align-content: center;
   justify-content: center;
 }
@@ -159,7 +154,9 @@ body{
 
   position: relative;
   flex: 1;
-  flex-direction: column;  
+
+  /* These attributes are correct for the taskbox */
+  display: grid;
   width: 30%;
 
   
@@ -268,7 +265,9 @@ body{
 
   position: relative;
   flex: 1;
-  flex-direction: column;  
+  /* All of the other details about the status of the div*/
+
+  display: grid;
   width: 30%;
 
   background-color: #477776;
@@ -392,7 +391,9 @@ body{
 
   position: relative;
   flex: 1;
-  flex-direction: column;  
+
+  /* These attributes are correct for the taskbox */
+  display: grid;
   width: 30%;
 
   background-color: #477776;
@@ -456,8 +457,8 @@ body{
         - Workflow Item - This is going to be a widget in the grid that contains the text and the item
 */
 .MainContent .WorkflowBox {
-  display: flexbox;
-
+  /*Location information */
+  flex: 1;
   position: relative;
   flex: 1;
   flex-direction: column;  
