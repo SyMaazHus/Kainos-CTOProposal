@@ -1,0 +1,221 @@
+body {
+    margin: 0;
+    background-color: #fff;
+    overflow: hidden; 
+}
+
+.workflow-hub {
+    display: flex;
+    height: 100vh;
+    background-color: white;
+}
+
+.nav {
+    width: 80px;
+    background-color: #a7d0b3; 
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    
+}
+
+.logo {
+    font-weight: bold;
+    margin-bottom: 50px;
+    color: white; 
+}
+
+.nav-mid ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    margin-bottom: 40px;
+}
+
+.nav-icon{
+    border: none;
+    width: 40px;
+    height: 40px;
+    margin: 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    background: transparent;
+    fill:"#F5FAF9";
+    fill-opacity:"0.7";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-icon svg {
+    fill: white; 
+    fill-opacity: 0.7;
+}
+
+
+.nav-icon:hover svg {
+    fill-opacity: 1;
+}
+
+.nav-mid {
+    flex-grow: 1; 
+}
+
+.nav-bottom {
+    margin-top: 20px;
+}
+
+.main-content {
+    flex-grow: 1;
+    background-color: #e8ede4; 
+    padding: 20px 40px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 50px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+.page-title {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: #4CAF50; 
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.kainos-logo {
+    width: 180px;
+    height: 120px;
+    margin: 0;
+}
+
+.header-icon {
+    border: none;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    background-color: #a7d0b3; 
+    border-radius: 50%;
+}
+
+.workflow-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    flex-grow: 1;
+    padding-bottom: 100px; 
+}
+
+.workflow-card {
+    border-radius: 12px;
+    padding: 5px;
+}
+
+.inner-box {
+    background-color: #477776; 
+    border-radius: 12px;
+    padding: 15px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-header {
+    margin-bottom: 10px;
+}
+
+.card-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: white;
+}
+
+.card-description-box {
+    background-color: #86ab93; 
+    border-radius: 8px;
+    padding: 10px;
+    flex-grow: 1;
+    margin-bottom: 10px;
+}
+
+.card-description {
+    color: #2c4a45;
+    font-size: 1em;
+    margin: 0;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.setting {
+    border: none;
+    width: 20px;
+    height: 20px;
+    background: transparent;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.card-status {
+    font-size: 1em;
+    margin-left: auto;
+}
+
+.status-color {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-left: 5px;
+}
+
+
+.status-active .status-color {
+    background-color: #a7d0b3; 
+}
+
+.status-inactive .status-color {
+    background-color: red; 
+}
+
+
+.new-workflow {
+    position: absolute;
+    bottom: 20px;
+    right: 40px;
+}
+
+.new-workflow-btn {
+    background-color: #fff;
+    border: 1px solid #86ab93; 
+    border-radius: 20px;
+    padding: 8px 15px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: bold;
+    color: #86ab93; 
+    cursor: pointer;
+}
+
+.plus {
+    font-size: 1.5em;
+    color: #86ab93; 
+}
+
+
