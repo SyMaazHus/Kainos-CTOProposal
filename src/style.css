@@ -3,14 +3,14 @@ html, body {
   margin: 0;
 }
 
-.background {
+.app-layout {
   display: flex;          
   width: 100vw;           
   height: 100vh;          
   background: #86AB93;   
 }
 
-.spacer {
+.nav {
   width: 6%;
   min-width: 80px;     
   display: flex;      
@@ -33,10 +33,10 @@ html, body {
 
 
 
-.rectangle {
+.main-content{
   flex: 1;
   height: 100%;
-  border-radius: 100px 0 0 100px;
+  border-radius: 100px 0 0 0px;
   background: #F5FAF9;
   position: relative;          
   overflow: hidden;
@@ -53,7 +53,7 @@ html, body {
 }
 
 .menu-container > div:not(:first-child):not(:last-child) {
-  margin-bottom: 40px;  
+  margin-bottom: 15px;  
 }
 
 
