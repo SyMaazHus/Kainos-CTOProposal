@@ -1,15 +1,22 @@
 
+body{
+  margin: 0;
+  overflow: hidden;
+  
+}
+
 .app-layout {
   display: flex;
   height: 100vh;
-  width: 100vh;
-  overflow: hidden;
+  background-color: #86AB93;
 }
 
 /* This is the main content container that will have all of the webpage content inside of it */
 .MainContent {
+  flex-grow: 1;
+  padding: 20px 40px;
+  display: flex;
   position: relative;
-  flex: 1;
   flex-direction: column;
   background-color: #ffffff;
   border-top-left-radius: 15%;
@@ -58,7 +65,17 @@
 }
 
 .MainContent .WidgetContainer {
+  width: 100%;
+  
+  float: center;
+  margin-inline: auto;
+  position: relative;
+  flex-grow: 1;
+
   display: inline-flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
 }
 
 /* the floating suggestion boxes uses the following CSS;
@@ -117,7 +134,7 @@
   
   /* Will be edited later to figure out the location of it */
   position: relative;
-
+  flex: 1;
 
   /* These attributes are correct for the taskbox */
   display: grid;
@@ -217,7 +234,7 @@
   /*Location information */
 
   position: relative;
-
+  flex: 1;
   /* All of the other details about the status of the div*/
 
   display: grid;
@@ -328,7 +345,7 @@ display: grid;
   /*Location information */
 
   position: relative;
-
+  flex: 1;
 
   /* These attributes are correct for the taskbox */
   display: grid;
@@ -390,7 +407,7 @@ display: grid;
 */
 .MainContent .WorkflowBox {
   /*Location information */
-  
+  flex: 1;
   position: relative;
 
 
