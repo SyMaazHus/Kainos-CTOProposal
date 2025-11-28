@@ -30,6 +30,8 @@ body {
 .nav-mid ul {
     padding: 0;
     margin: 0;
+    list-style: none;
+    margin-bottom: 40px;
 }
 
 .nav-icon{
@@ -42,6 +44,27 @@ body {
     background: transparent;
     fill:"#F5FAF9";
     fill-opacity:"0.7";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-icon svg {
+    fill: white; 
+    fill-opacity: 0.7;
+}
+
+
+.nav-icon:hover svg {
+    fill-opacity: 1;
+}
+
+.nav-mid {
+    flex-grow: 1; 
+}
+
+.nav-bottom {
+    margin-top: 20px;
 }
 
 .main-content {
