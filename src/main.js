@@ -36,6 +36,20 @@ function startPythonServer() {
     // });
 }
 
+function startPythonServer() {
+    const scriptPath = path.join(__dirname, 'server.py');
+    console.log("Starting Python server at:", scriptPath);
+    pythonProcess = spawn('python', [scriptPath]); //Creates the process from getting server.py file (like running py on terminal)
+
+    pythonProcess.stdout.on('data', (data) => {
+        console.log(`[Python]: ${data}`);
+    });
+
+    // pythonProcess.stderr.on('data', (data) => {
+    //     console.error(`[Python Error]: ${data}`);
+    // });
+}
+
 app.whenReady().then(() => {
   startPythonServer();
   createWindow();
