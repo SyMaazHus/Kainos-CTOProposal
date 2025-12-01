@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="globals.css" />
     <link rel="stylesheet" href="styleguide.css" />
     <link rel="stylesheet" href="workflowStyle.css" />
+    <script src="workflowhub.js" defer type="module"></script>
   </head>
   <body>
     <main class="app-layout">
@@ -163,10 +164,30 @@
               </div>
 
             <div class="new-workflow">
-                <button class="new-workflow-btn">
+                <button class="new-workflow-btn" id="add-button">
                     <span class="plus">+</span>
                     New workflow
                 </button>
+            </div>
+            <div class="pop-up" id="new-card-wrapper">
+                <div class="new-card">
+                    <span class="close-button" id="close-button">&times;</span>
+                    <h2 class="card-title">Create new workflow</h2>
+                    <form class="new-workflow-form" id="new-form">
+                        <div class="input-section">
+                            <label for="task-name">Task name</label>
+                            <input type="text" id="task-name" required>
+                        </div>
+                        <div class="input-section">
+                            <label for="task-description">Task description</label>
+                           <textarea id="task-description" required></textarea>
+                        </div>
+                        <div class="new-card-button">
+                            <button type="submit" class="submit-button">Add workflow</button>
+                        </div>
+                    </form>
+                </div>
+
             </div>
         </div>
     </main>
