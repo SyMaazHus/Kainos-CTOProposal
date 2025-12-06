@@ -2,7 +2,7 @@ const Tasks = ["Work on CW1", "Send an email to boss", "Reply to Mark", "Finish 
 const TaskTag = ["CSS","Emails","General","Coding","Backend"]; // These are examples of possible task tags for the "time spent box"
 const TaskTime = [0.23,1.5,5.00,0.30,0.23]; // These are examples of times that would have been spent on those tags
 const SuggestionExmp = ["Update Language", "Opt in for the analysis AI", "Chat to __ for help"]
-
+const ColourCollections = ["#366184","#658b91","#86ab93"]
 
 
 function ExampleStartup() {
@@ -11,8 +11,6 @@ function ExampleStartup() {
     const BriefWidget = document.getElementById("DailyBriefBox");
     const TaskWidget = document.getElementById("TaskBox");
     const SuggestionArea = document.getElementById("FloatingSpace");
-
-    console.log(TaskWidget,"This is the task widget");
 
     // If there is nothing there you have to make a empty
 
@@ -36,7 +34,10 @@ function ExampleStartup() {
         taskItem.append(task);
         taskItem.append(check);
 
+        taskItem.style.backgroundColor = ColourCollections[Math.floor(Math.random() * 3)];
+
         TaskWidget.appendChild(taskItem);
+
     }
     
     addToGeneral2(TaskWidget,"TaskItem","TaskBlockDate","25/12","TaskBlockText","Deliver Presents");
@@ -74,10 +75,11 @@ function addToGeneral2(ContainerName, WidgetName, DivName, DivContent, DivName2,
         item2.id = DivName2;
         item2.innerHTML= DivContent2;
 
-        
-
         Widget.append(item1);
         Widget.append(item2);
+
+        Widget.style.backgroundColor = ColourCollections[Math.floor(Math.random() * 3)];
+
 
         ContainerName.appendChild(Widget);
 }
@@ -92,6 +94,9 @@ function addToGeneral1(ContainerName,WidgetName,DivName,DivContent){
     item1.innerHTML = DivContent;
 
     Widget.append(item1);
+
+    Widget.style.backgroundColor = ColourCollections[Math.floor(Math.random() * 3)];
+
     ContainerName.appendChild(Widget);
 
 
@@ -112,6 +117,9 @@ function addToTimeTask(TimeWidget, Tag,Time){
 
     timeItem.append(timedTag);
     timeItem.append(timeTime);
+
+    timeItem.style.backgroundColor = ColourCollections[Math.floor(Math.random() * 3)];
+
     TimeWidget.appendChild(timeItem);
 }
 
