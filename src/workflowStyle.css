@@ -149,13 +149,12 @@ body {
     padding: 10px;
     flex-grow: 1;
     margin-bottom: 10px;
+
+    font-size: 1em;
+    color: #2c4a45;
+    resize: none;
 }
 
-.card-description {
-    color: #2c4a45;
-    font-size: 1em;
-    margin: 0;
-}
 
 .card-footer {
     display: flex;
