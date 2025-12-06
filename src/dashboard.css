@@ -24,16 +24,20 @@ body{
 
 /*This is for the Kainos logo on the main page */
 .header {
-    display: flex;
+    display: inline-flex;
     justify-content: space-between;
     align-items: center;
     padding-bottom: 20px;
+    margin-inline: auto;
+
 }
 
 .header-right {
-    display: flex;
-    align-items: center;
+    display: inline-flex;
+    align-items: right;
+    float: right;
     gap: 15px;
+    right: 0;
 }
 
 .kainos-logo {
@@ -53,27 +57,27 @@ body{
 
 /*This is going to be the button and icon of the chat box which is an interactable item*/
 .MainContent .ChatButton {
-  position: relative;
-  width: 10%;
-  height: width;
-
-  left: 0px;
-  right: 0px;
-  margin-inline: auto;
-  
-
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  scale: calc(70%);
 }
 
 .MainContent .WidgetContainer {
   width: 100%;
+
   
   float: center;
   margin-inline: auto;
   position: relative;
   flex-grow: 1;
+  flex-wrap: wrap;
+  flex: 25%;
+  display: flex;
 
-  display: inline-flex;
-  align-items: center;
+
+  grid-auto-flow: dense;
+  align-items: flex-start; 
   align-content: center;
   justify-content: center;
 }
@@ -84,8 +88,9 @@ body{
 */
 .MainContent .FloatingSpace {
   width: 90%;
-  height: 20%;
+  height: 0;
   float: center;
+
 
   left: 0px;
   right: 0px;
@@ -93,31 +98,48 @@ body{
   position: relative;
   flex-grow: 1;
 
+
   display: inline-flex;
   align-items: center;
   align-content: center;
   justify-content: center;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  display: flex;
 }
 
 .FloatingSpace .SuggestionBubble {
-  width: 20%;
-  height: 30%;
+  /* Shaping of the box */
+  width: auto;
+  max-width: 20%;
+  height: auto;
+  min-height: 30%;
   background-color: #604d59;
-  padding: 10px;
+  margin: 10px;
+  border-radius: 35px;
+  padding: 5px;
 
-  border-radius: 15%;
+
   display: flex;
   align-items: center;
   align-content: center;
   justify-content: center;
+  flex-direction: column;
+  flex: 0 0 auto;
+
+
+  /*Text detailing */
+  overflow-wrap: break-word; /* modern */
+  word-wrap: break-word;     /* fallback */
+  white-space: normal; 
+
   font-family: "Play-Regular", Helvetica;
   font-weight: 40;
   color: #ffffff;
   font-size: 10px;
   text-align: center;
   letter-spacing: 0;
-  line-height: 27px;
-  white-space: nowrap;
+  line-height: auto;
 
 }
 
@@ -130,54 +152,56 @@ body{
 
 /* The location of this occuring needs to change but otherwise the CSS works at the moment */
 /* Upcoming tasks background box */
-.MainContent .MainTaskBox {
-  
-  /* Will be edited later to figure out the location of it */
+
+
+.MainContent .TaskBox {
+  display: flexbox;
+
   position: relative;
   flex: 1;
-
-  /* These attributes are correct for the taskbox */
-  display: grid;
+  flex-direction: column;  
   width: 30%;
-  height: 35%;
+
+  
+
   background-color: #477776;
-  border-radius: 20px;
+  border-radius: 35px;
   padding: 10px;
   margin: 10px;
   border-width: 1px;
   border-color: #000;
   color: #000;
-  grid-template-rows: 1fr 1fr;
-  gap: 5px;
-  
-  /* This is the text for the Upcoming tasks part of the */
-  #Title {
-    float: right;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: "Play-Regular", Helvetica;
-    font-weight: 400;
-    color: #ffffff;
-    font-size: 20px;
-    text-align: center;
-    letter-spacing: 0;
-    line-height: 32px;
-    white-space: nowrap;
-  }
-    
-}
 
+
+  #Title {
+    display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Play-Regular", Helvetica;
+      font-weight: 400;
+      color: #ffffff;
+      font-size: 20px;
+      text-align: center;
+      letter-spacing: 0;
+      line-height: 27px;
+      white-space: nowrap;
+  }
+
+}
 /* This is the outline circle for the task item */
 
-.MainTaskBox .TaskItem {
+.TaskBox #TaskItem {
     display: grid;
+    overflow: hidden;
+    height: auto;
+    margin: 5px;
     background-color: #604d59;
     border-radius: 35px;
     grid-template-columns: 1fr 1fr 1fr;
+    flex-direction: column !important;
     /* This is the date in the first task block - this should become generalised */
 
-    .TaskBlockDate{
+    #TaskBlockDate{
       display: flex;
       align-items: center;
       justify-content: center;
@@ -193,7 +217,8 @@ body{
     }
 
   /* This is the text in the first task block - this should become generalised */
-    .TaskBlockText {
+    #TaskBlockText {
+      height: auto;
       
       display: flex;
       align-items: center;
@@ -204,23 +229,31 @@ body{
       font-size: 10px;
       text-align: center;
       letter-spacing: 0;
-      line-height: 27px;
-      white-space: nowrap;
+
+      line-height: auto;
+
+      /*Text detailing */
+      overflow-wrap: break-word; /* modern */
+      word-wrap: break-word;     /* fallback */
+      white-space: normal; 
     }
 
 
   /* This is the checklist dot for the first task but we need to make it so that it can */
-    .TaskCheckdot {
+    #TaskCheckdot {
       display: flex;
       width: 17px;
       height: 17px;
-      background-color: #f5faf9;
+      background-color: #ffffff;
       border-radius: 23.5px;
+      right: 0;
+      float: right;
+    }
 
-      align-items: right;
-      justify-content: right;
-      color: #ffffff;
-      white-space: nowrap;
+    .button #TaskCheckdot{
+      display:block;
+      
+      border-radius: 50%;
     }
 }
 
@@ -231,53 +264,55 @@ body{
         - Tags spent - This is going to be a widget that uses a tagging system (something like this ) That has tracked how long the user has been working on a certain tag
 */
 .MainContent .TimeSpentBox {
-  /*Location information */
+  display: flexbox;
 
   position: relative;
   flex: 1;
-  /* All of the other details about the status of the div*/
-
-  display: grid;
+  flex-direction: column;  
   width: 30%;
-  height: 35%;
+
   background-color: #477776;
-  border-radius: 10%;
+  border-radius: 35px;
   padding: 10px;
   margin: 10px;
   border-width: 1px;
   border-color: #000;
   color: #000;
-  grid-template-rows: 1fr 1fr;
-  gap: 5px;
+
 
   #Title {
-    float: center;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: "Play-Regular", Helvetica;
-    font-weight: 400;
-    color: #ffffff;
-    font-size: 20px;
-    text-align: center;
-    letter-spacing: 0;
-    line-height: 32px;
-    white-space: nowrap;
+      align-items: center;
+      justify-content: center;
+      font-family: "Play-Regular", Helvetica;
+      font-weight: 400;
+      color: #ffffff;
+      font-size: 20px;
+      text-align: center;
+      letter-spacing: 0;
+      line-height: 27px;
+      white-space: nowrap;
   }
 
 }
 
 /* The time spent text for that section */
-.TimeSpentBox .TimedItem {
-display: grid;
+.TimeSpentBox #TimedItem {
+
+    display: grid;
+    overflow: hidden;
+    height: auto;
+    min-height: 20px;
+    margin: 5px;
     background-color: #604d59;
     border-radius: 35px;
     grid-template-columns: 1fr 1fr;
-    max-height: 60%;
+    flex-direction: column !important;
 
 
   /* The tag name that has been worked on */
-    .TimedTag {
+    #TimedTag {
+      height: auto;
       
       display: flex;
       align-items: center;
@@ -288,24 +323,35 @@ display: grid;
       font-size: 10px;
       text-align: center;
       letter-spacing: 0;
-      line-height: 20px;
-      white-space: nowrap;
+      
+      line-height: auto;
+
+      /*Text detailing */
+      overflow-wrap: break-word; /* modern */
+      word-wrap: break-word;     /* fallback */
+      white-space: normal; 
     }
 
     /* The time worked on the tag */
 
-    .TimedTime{
+    #TimedTime{
+      
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: "Play-Regular", Helvetica;
-      font-weight: 40;
+      font-weight: 400;
       color: #ffffff;
       font-size: 10px;
       text-align: center;
       letter-spacing: 0;
-      line-height: 20px;
-      white-space: nowrap;
+      
+      line-height: auto;
+
+      /*Text detailing */
+      overflow-wrap: break-word; /* modern */
+      word-wrap: break-word;     /* fallback */
+      white-space: normal; 
 
     }
 
@@ -342,39 +388,35 @@ display: grid;
         - Daily Item - This is going to be a widget in the grid that will contain text for the item
 */
 .MainContent .DailyBriefBox {
-  /*Location information */
+  display: flexbox;
 
   position: relative;
   flex: 1;
-
-  /* These attributes are correct for the taskbox */
-  display: grid;
+  flex-direction: column;  
   width: 30%;
-  height: 15%;
+
   background-color: #477776;
-  border-radius: 20px;
+  border-radius: 35px;
   padding: 10px;
   margin: 10px;
   border-width: 1px;
   border-color: #000;
   color: #000;
-  grid-template-rows: 1fr 1fr;
-  gap: 5px;
-  
+
+
   /* This is the text for the Upcoming tasks part of the */
   #Title {
-    float: right;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: "Play-Regular", Helvetica;
-    font-weight: 400;
-    color: #ffffff;
-    font-size: 20px;
-    text-align: center;
-    letter-spacing: 0;
-    line-height: 32px;
-    white-space: nowrap;
+      align-items: center;
+      justify-content: center;
+      font-family: "Play-Regular", Helvetica;
+      font-weight: 400;
+      color: #ffffff;
+      font-size: 20px;
+      text-align: center;
+      letter-spacing: 0;
+      line-height: 27px;
+      white-space: nowrap;
   }
 
 }
@@ -383,10 +425,13 @@ display: grid;
     display: block;
     background-color: #604d59;
     border-radius: 35px;
+    min-height: 20px;
 
 
   /* The text with the data */
     .DailyText {
+      height: auto;
+      
       display: flex;
       align-items: center;
       justify-content: center;
@@ -396,8 +441,13 @@ display: grid;
       font-size: 10px;
       text-align: center;
       letter-spacing: 0;
-      line-height: 20px;
-      white-space: nowrap;
+      
+      line-height: auto;
+
+      /*Text detailing */
+      overflow-wrap: break-word; /* modern */
+      word-wrap: break-word;     /* fallback */
+      white-space: normal; 
     }
 }
 
@@ -406,50 +456,49 @@ display: grid;
         - Workflow Item - This is going to be a widget in the grid that contains the text and the item
 */
 .MainContent .WorkflowBox {
-  /*Location information */
-  flex: 1;
+  display: flexbox;
+
   position: relative;
-
-
-  /* These attributes are correct for the taskbox */
-  display: grid;
+  flex: 1;
+  flex-direction: column;  
   width: 30%;
-  height: 15%;
+
   background-color: #477776;
-  border-radius: 20px;
+  border-radius: 35px;
   padding: 10px;
   margin: 10px;
   border-width: 1px;
   border-color: #000;
   color: #000;
-  grid-template-rows: 1fr 1fr;
-  gap: 5px;
-  
+
+
   /* This is the text for the Upcoming tasks part of the */
   #Title {
-    float: right;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: "Play-Regular", Helvetica;
-    font-weight: 400;
-    color: #ffffff;
-    font-size: 20px;
-    text-align: center;
-    letter-spacing: 0;
-    line-height: 32px;
-    white-space: nowrap;
+      align-items: center;
+      justify-content: center;
+      font-family: "Play-Regular", Helvetica;
+      font-weight: 400;
+      color: #ffffff;
+      font-size: 20px;
+      text-align: center;
+      letter-spacing: 0;
+      line-height: 27px;
+      white-space: nowrap;
   }
 
 }
 
-.WorkflowBox .WorkflowItem {
+.WorkflowBox #WorkflowItem {
     display: block;
     background-color: #604d59;
     border-radius: 35px;
+    min-height: 20px;
+    height:auto;
 
   /* The text with the data */
-    .WorkflowText {
+    
+    #WorkflowText{
       display: flex;
       align-items: center;
       justify-content: center;
@@ -459,8 +508,13 @@ display: grid;
       font-size: 10px;
       text-align: center;
       letter-spacing: 0;
-      line-height: 20px;
-      white-space: nowrap;
+      
+      line-height: center;
+
+      /*Text detailing */
+      overflow-wrap: break-word; /* modern */
+      word-wrap: break-word;     /* fallback */
+      white-space: normal; 
     }
 }
 
@@ -469,12 +523,11 @@ display: grid;
 
 .nav {
     width: 80px;
-    background-color: #a7d0b3; 
+    background-color: #86AB93; 
     color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
-   
     
 }
 
