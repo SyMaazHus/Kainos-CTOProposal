@@ -1,17 +1,17 @@
 
-const newCardBut = document.getElementById('add-button');
-const newCard = document.getElementById('new-card-form');
-const closeBut = document.getElementById('close-button');
-const newForm = document.getElementById('new-form');
-const submitNew = document.getElementById('submit-new');
-const form = document.getElementById('new-form');
+const newCardBut = document.getElementById('addButton');
+const newCard = document.getElementById('newCardForm');
+const closeBut = document.getElementById('closeBtn');
+const newForm = document.getElementById('newForm');
+const submitNew = document.getElementById('submitNew');
+const form = document.getElementById('newForm');
 const mainWrapper = document.querySelector('.workflow-cards');
 const cardWrapper = document.getElementById('workflow-card');
 const delBut = document.querySelectorAll('.delete-clicked');
-const delBlock = document.getElementById('delete-confirmation');
-const fillName = document.getElementById('fill-task-name');
-const delCancel = document.getElementById('cancel-delete');
-const delCon = document.getElementById('confirm-delete');
+const delBlock = document.getElementById('deleteBlock');
+const fillName = document.getElementById('fillTaskName');
+const delCancel = document.getElementById('deleteCancel');
+const delCon = document.getElementById('deleteConfirm');
 let delCard;
 
 function closeDelete(box){
@@ -74,8 +74,8 @@ mainWrapper.addEventListener('click',function(event){
 
 form.addEventListener('submit',function(event){
     event.preventDefault();
-    const taskName = document.getElementById('task-name').value;
-    const taskJob = document.getElementById('task-description').value;
+    const taskName = document.getElementById('taskName').value;
+    const taskJob = document.getElementById('taskDescription').value;
 
     const newWork = document.createElement('div');
     newWork.className = 'workflow-card status-active';
@@ -90,9 +90,7 @@ form.addEventListener('submit',function(event){
     newTitle.textContent = taskName;
     const newSetting = document.createElement('button');
     newSetting.className = 'delete-clicked';
-    newSetting.textContent ='X';
-    
-    newSetting.innerHTML =   `<button class="delete-clicked">X</button>`;
+    newSetting.textContent = 'X';
     newHead.appendChild(newTitle);
     newHead.appendChild(newSetting);
 
