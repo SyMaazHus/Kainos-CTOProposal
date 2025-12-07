@@ -76,35 +76,32 @@ form.addEventListener('submit',function(event){
     event.preventDefault();
     const taskName = document.getElementById('taskName').value;
     const taskJob = document.getElementById('taskDescription').value;
-
     const newWork = document.createElement('div');
     newWork.className = 'workflow-card status-active';
-
     const newWrap = document.createElement('div');
     newWrap.className = 'inner-box';
-
     const newHead = document.createElement('header');
     newHead.className = 'card-header';
     const newTitle = document.createElement('h2');
     newTitle.className = 'card-title';
     newTitle.textContent = taskName;
-    const newSetting = document.createElement('button');
-    newSetting.className = 'delete-clicked';
-    newSetting.textContent = 'X';
+    const newDeleteBtn = document.createElement('button');
+    newDeleteBtn.className = 'delete-clicked';
+    newDeleteBtn.textContent = 'X';
+    newDeleteBtn.onclick = function(){
+        delCard = newDeleteBtn.closest('.workflow-card');
+        fillName.innerText = taskName ;
+        delBlock.style.display = 'block';
+    }
     newHead.appendChild(newTitle);
-    newHead.appendChild(newSetting);
+    newHead.appendChild(newDeleteBtn);
 
     const newTextArea = document.createElement('textarea');
     newTextArea.className = 'card-description-box';
     newTextArea.disabled = true;
     newTextArea.value = taskJob;
-
     const newFooter = document.createElement('footer');
     newFooter.className = 'card-footer';
-    
-
-
-
     const newStatus = document.createElement('span');
     newStatus.className = 'card-status';
     newStatus.textContent = 'Status : Activate'
@@ -114,13 +111,10 @@ form.addEventListener('submit',function(event){
 
     newFooter.appendChild(newStatus);
     newFooter.appendChild(statusBut);
-
     newWrap.appendChild(newHead);
     newWrap.appendChild(newTextArea);
     newWrap.appendChild(newFooter);
-
     newWork.appendChild(newWrap);
-
     mainWrapper.appendChild(newWork)
     close();
 });
