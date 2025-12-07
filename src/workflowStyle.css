@@ -69,6 +69,7 @@ body {
     padding: 20px 40px;
     border-top-left-radius: 103px;
     background-color: #e8ede4; 
+    
 }
 
 .header {
@@ -111,6 +112,7 @@ body {
     flex-grow: 1;
     gap: 30px;
     padding-bottom: 100px; 
+    overflow: auto;
 }
 
 .workflow-card {
