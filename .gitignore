@@ -34,3 +34,10 @@ logs/
 # Cache
 .cache/
 electron-builder.yml
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
