@@ -228,7 +228,9 @@ body {
     backdrop-filter: blur(5px); 
     overflow: auto; 
 }
-
+.new-card h2{
+    color: #86ab93; 
+}
 .delete-question {  
     width: 300px;
     margin: 15% auto; 
