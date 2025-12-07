@@ -134,6 +134,9 @@ body {
 }
 
 .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
     margin-bottom: 10px;
 }
 
@@ -158,23 +161,25 @@ body {
 
 .card-footer {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     color: white;
 }
 
-.setting {
+.delete-clicked {
     border: none;
     width: 20px;
     height: 20px;
     background: transparent;
     border-radius: 50%;
     cursor: pointer;
+    padding: 0;
+    font-weight: bold;
+    font-size: 1em;
 }
 
 .card-status {
     font-size: 1em;
-    margin-left: auto;
 }
 
 .status-color {
@@ -230,6 +235,41 @@ body {
     overflow: auto; 
     background-color: rgba(0, 0, 0, 0.2); 
     backdrop-filter: blur(5px); 
+}
+
+.delete-question {
+    background-color: #e8ede4; 
+    margin: 15% auto; 
+    padding: 20px;
+    border: 1px solid #86AB93;
+    width: 300px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.button-label {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.cancel-button {
+    background-color: transparent;
+    border: 1px solid #86AB93;
+    color: #1D1B20;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.delete-button {
+    background-color: #d9534f;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .new-card {
