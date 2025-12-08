@@ -18,7 +18,7 @@ function createWindow () {
     }
   });
 
-  mainWindow.loadFile(path.join(__dirname, 'workflow.html'));
+  mainWindow.loadFile(path.join(__dirname, 'dashboard.html'));
 }
 
 app.whenReady().then(() => {
