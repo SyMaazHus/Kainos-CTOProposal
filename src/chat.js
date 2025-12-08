@@ -1,3 +1,4 @@
+// Author: Basil Biji Chirathilattu 
 var replyContainer = document.getElementById("replyContainer");
 var chatInput = document.getElementById("chatInput");
 var replyContainer = document.getElementById("replyContainer");
@@ -65,10 +66,11 @@ function send(){
     // reset height 
     chatInput.value = "";
     chatInput.style.height = "auto"
-
+    const loadingBubble = waitForMessage(); 
 
     setTimeout(() => {
-        // this needs to be replaced with the AI logic. 
+        if(loadingBubble)loadingBubble.remove(); // removes the bubble 
+        // this needs to be replaced with the AI logic.
         const botReplies = [
             "That doesn't sound that productive",
             "Well Done!",
@@ -95,6 +97,25 @@ function send(){
     
 
 
+}
+
+function waitForMessage(){
+    const div = document.createElement("div");
+
+    div.classList.add("message","bot");
+    //creates the three dots 
+    div.innerHTML = `
+        <div class="typing-indicator">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    `;
+
+    chatHistory.appendChild(div);
+    chatHistory.scrollTop = chatHistory.scrollHeight; //ensures that the scrollHeight is maintained 
+
+    return div; 
 }
 
  
