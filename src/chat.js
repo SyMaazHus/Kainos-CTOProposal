@@ -8,6 +8,10 @@ const introBlock = document.getElementById("introBlock");
 const chatHistory = document.getElementById("chatHistory");
 const chatContainer = document.getElementById("chatContainer");
 
+let groqHistory = [
+    {role: "system", content: "Hello AI."}
+]
+
 replyContainer.addEventListener("click", function (e) {
 
     chatInput.focus(); 
@@ -66,12 +70,14 @@ async function send(){
     chatInput.value = "";
     chatInput.style.height = "auto"
 
+    groqHistory.push({role: "user", content: text});
+
     try {
         //talk to Python (port 5000)
         const response = await fetch('http://127.0.0.1:5000/chat', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message: text })
+            body: JSON.stringify({ messages: groqHistory })
         });
 
         const data = await response.json();
@@ -87,20 +93,6 @@ async function send(){
         addChatBubble("Could not connect to AI server.", 'bot');
         console.error(error);
     }
-
-    // setTimeout(() => {
-    //     // this needs to be replaced with the AI logic. 
-    //     const botReplies = [
-    //         "That doesn't sound that productive",
-    //         "Well Done!",
-    //         "For. sure.",
-    //         "Would you like to search for that?"
-    //     ];
-    //     const randomReply = botReplies[Math.floor(Math.random() * botReplies.length)];
-        
-    //     addChatBubble(randomReply, 'bot');
-    // }, 1500); 
-
 
     //function to add the message onto screen 
 

@@ -19,27 +19,17 @@ client = Groq(api_key=api_key)
 @app.route('/chat', methods=['POST'])
 def chat():
     data = request.json
-    user_input = data.get('message')
-    
-    if not user_input:
-        return jsonify({"error": "No input provided"}), 400
-
-    print(f"Received: {user_input}") #Print to console for debugging
+    user_input = data.get('messages')
 
     try:
         chat_completion = client.chat.completions.create(
-            messages=[
-                {
-                    "role": "user",
-                    "content": user_input,
-                }
-            ],
+            messages=user_input,
             model="llama-3.3-70b-versatile",
         )
         
         reply = chat_completion.choices[0].message.content
         return jsonify({"reply": reply})
-
+    
     except Exception as e:
         print(f"Error: {e}")
         return jsonify({"error": str(e)}), 500
