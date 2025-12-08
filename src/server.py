@@ -30,9 +30,8 @@ def chat():
         reply = chat_completion.choices[0].message.content
         return jsonify({"reply": reply})
     
-    except Exception as e:
-        print(f"Error: {e}")
-        return jsonify({"error": str(e)}), 500
+    except Exception:
+        return jsonify({"error": "Something went wrong."}), 500
 
 if __name__ == '__main__':
     # Flush stdout so we see prints in Electron console immediately
