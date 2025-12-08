@@ -4,9 +4,9 @@
 
 ## Table of content
 
-- [About](#About)
-- [Project member](#Project-member)
-- [Install & Setup](#Install-and-Setup)
+- [About](#about)
+- [Project member](#project-member)
+- [Install & Setup](#install-and-setup!!)
 
 ---
 
