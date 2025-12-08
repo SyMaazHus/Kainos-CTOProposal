@@ -6,7 +6,7 @@
 
 - [About](#about)
 - [Project member](#project-member)
-- [Install & Setup](#install-and-setup!!)
+- [Install & Setup](#install-and-setup)
 
 ---
 
