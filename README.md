@@ -5,18 +5,18 @@
 ## Table of content
 
 - [About](#about)
-- [Project member](#project-member)
-- [Install & Setup](#install-and-setup)
+- [Project member](#team)
+- [Install & Setup](#install)
 
 ---
 
-## About
+## <a id="about"></a>📋 About
 
 Kainos CTO Project Proposal
 
 ---
 
-## Project member  
+## <a id="team"></a>👥 Project member
 
 | Name                   | Email                   |
 |------------------------|-------------------------|
@@ -33,7 +33,7 @@ Kainos CTO Project Proposal
 
 --- 
 
-## Install and Setup!!
+## <a id="install"></a>🛠️ Install & Setup !!
 
 1. Install nodeJS from the website or through the terminal!
     [[https://nodejs.org/en/download]]
@@ -56,4 +56,7 @@ Kainos CTO Project Proposal
     ```
 
 6. Try `npm start` again and it should run!
+    ```
+    npm start
+    ```
     
