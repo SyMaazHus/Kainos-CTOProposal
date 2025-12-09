@@ -9,6 +9,10 @@ const introBlock = document.getElementById("introBlock");
 const chatHistory = document.getElementById("chatHistory");
 const chatContainer = document.getElementById("chatContainer");
 
+let groqHistory = [
+    {role: "system", content: "Hello AI."}
+]
+
 replyContainer.addEventListener("click", function (e) {
 
     chatInput.focus(); 
@@ -52,7 +56,7 @@ chatInput.addEventListener("keydown", (e) => {
     }
 }); //logic for shift+enter making a new line. 
 
-function send(){
+async function send(){
     const text = chatInput.value.trim();
 
     if(!text){
@@ -66,22 +70,30 @@ function send(){
     // reset height 
     chatInput.value = "";
     chatInput.style.height = "auto"
-    const loadingBubble = waitForMessage(); 
 
-    setTimeout(() => {
-        if(loadingBubble)loadingBubble.remove(); // removes the bubble 
-        // this needs to be replaced with the AI logic.
-        const botReplies = [
-            "That doesn't sound that productive",
-            "Well Done!",
-            "For. sure.",
-            "Would you like to search for that?"
-        ];
-        const randomReply = botReplies[Math.floor(Math.random() * botReplies.length)];
+    groqHistory.push({role: "user", content: text});
+
+    try {
+        //talk to Python (port 5000)
+        const response = await fetch('http://127.0.0.1:5000/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ messages: groqHistory })
+        });
+
+        const data = await response.json();
         
-        addChatBubble(randomReply, 'bot');
-    }, 1500); 
+        if (data.reply) {
+            addChatBubble(data.reply, 'bot');
+        } else {
+            addChatBubble("Error: " + data.error, 'bot');
+        }
 
+    } catch (error) {
+        document.getElementById(loadingId)?.remove();
+        addChatBubble("Could not connect to AI server.", 'bot');
+        console.error(error);
+    }
 
     //function to add the message onto screen 
 
