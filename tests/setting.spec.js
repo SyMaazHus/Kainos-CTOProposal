@@ -2,11 +2,11 @@
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('http://127.0.0.1:5500/src/setting.html');
+  await page.goto('http://127.0.0.1:3000/src/setting.html');
 });
 
 test('has title', async ({ page }) => {
-  await page.goto('http://127.0.0.1:5500/src/setting.html');
+  await page.goto('http://127.0.0.1:3000/src/setting.html');
 
   // Expect a title "to contain" a substring.
   await expect(page).toHaveTitle(/Setting/);
