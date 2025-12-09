@@ -11,3 +11,11 @@ test('has title', async ({ page }) => {
   await expect(page).toHaveTitle(/Workflow Hub/);
 });
 
+test('add workflow', async ({ page }) => {
+  await page.goto(webURL);
+  
+  await page.getByRole('button', { name: 'New workflow' }).click();
+  await page.locator('#taskName').fill('new task');
+  await page.locator('#taskDescription').fill('new task description');
+  await page.getByRole('button', { name: 'New workflow' }).click();
+});
