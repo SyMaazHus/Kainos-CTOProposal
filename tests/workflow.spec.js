@@ -13,9 +13,13 @@ test('has title', async ({ page }) => {
 
 test('add workflow', async ({ page }) => {
   await page.goto(webURL);
-  
+  //test if workflow5 is added
   await page.getByRole('button', { name: 'New workflow' }).click();
   await page.locator('#taskName').fill('new task');
   await page.locator('#taskDescription').fill('new task description');
-  await page.getByRole('button', { name: 'New workflow' }).click();
+  await page.getByRole('button', { name: 'Add workflow' }).click();
+
+  await expect(page.locator(".workflow-card")).toHaveCount(5)
 });
+
+
