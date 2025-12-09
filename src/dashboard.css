@@ -18,26 +18,28 @@ body{
   display: flex;
   position: relative;
   flex-direction: column;
-  background-color: #ffffff;
+  background-color: #e8ede4;
   border-top-left-radius: 15%;
 }
 
 /*This is for the Kainos logo on the main page */
 .header {
-    display: inline-flex;
+    display: flex;
     justify-content: space-between;
     align-items: center;
     padding-bottom: 20px;
-    margin-inline: auto;
+}
 
+.page-title {
+    color: #4CAF50; 
+    font-size: 1.5em;
+    font-weight: 600;
 }
 
 .header-right {
-    display: inline-flex;
-    align-items: right;
-    float: right;
+    display: flex;
+    align-items: center;
     gap: 15px;
-    right: 0;
 }
 
 .kainos-logo {
@@ -47,12 +49,12 @@ body{
 }
 
 .header-icon {
-    border: none;
     width: 30px;
     height: 30px;
-    cursor: pointer;
-    background-color: #a7d0b3; 
+    border: none;
     border-radius: 50%;
+    background-color: none; 
+    cursor: pointer;
 }
 
 /*This is going to be the button and icon of the chat box which is an interactable item*/
@@ -529,6 +531,7 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 20px 0;
     
 }
 
@@ -549,7 +552,7 @@ body{
     border: none;
     width: 40px;
     height: 40px;
-    margin: 15px;
+    margin: 50px;
     cursor: pointer;
     border-radius: 5px;
     background: transparent;
@@ -572,8 +575,9 @@ body{
 
 .nav-mid {
     flex-grow: 1; 
+    height: 80%
 }
 
 .nav-bottom {
-    margin-top: 20px;
+    margin-top: 0px;
 }
