@@ -72,6 +72,8 @@ async function send(){
     chatInput.style.height = "auto"
 
     groqHistory.push({role: "user", content: text});
+    const loadingBubble = waitForMessage(); 
+
 
     try {
         //talk to Python (port 5000)
@@ -82,8 +84,11 @@ async function send(){
         });
 
         const data = await response.json();
-        
+
+
         if (data.reply) {
+            if(loadingBubble)loadingBubble.remove(); // removes the bubble 
+
             addChatBubble(data.reply, 'bot');
         } else {
             addChatBubble("Error: " + data.error, 'bot');

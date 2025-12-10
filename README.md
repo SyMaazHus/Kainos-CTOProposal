@@ -55,8 +55,17 @@ Kainos CTO Project Proposal
     npm install electron --save-dev
     ```
 
-6. Try `npm start` again and it should run!
+6. Type `pip install flask groq python-dotenv flask-cors` in the VScode terminal
+    ```
+    pip install flask groq python-dotenv flask-cors
+    ```
+
+7. create a file called `.env` and write in following 
+    ```
+    GROQ_API_KEY="REMOVED"
+    ```
+
+8. Try `npm start` again and it should run!
     ```
     npm start
     ```
-    
