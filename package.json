@@ -21,7 +21,7 @@
   "devDependencies": {
     "@playwright/test": "^1.57.0",
     "@types/node": "^24.10.1",
-    "electron": "^39.2.4",
+    "electron": "^39.2.6",
     "electron-reloader": "^1.2.3"
   }
 }
