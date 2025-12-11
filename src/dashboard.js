@@ -14,7 +14,7 @@ function ExampleStartup() {
 
     // If there is nothing there you have to make a empty
 
-    for (var i = 0; i < 5; i++) {
+    for (var i = 0; i < 3; i++) {
 
         var taskItem = document.createElement('div');
         taskItem.id = "TaskItem";
