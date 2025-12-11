@@ -34,7 +34,11 @@
 |TC3-03 |Verify email editing |1.fill "abc@example.com" into email label |info-input:```abc@example.com```   |info-input name display "abc@example.com"|
 |TC3-04 |Toggle notification |1.Locate and click the slider |N/A   |The notification toggle is set be checked state|
 
+## Tutorial page
 
+|Test ID|Desciption        |Steps            |Test data  |Expected result|
+|-------|------------------|-----------------|-----------|---------------|
+|TC4-01 |Verify next button |1.Verify "tooltip" is visible<br>2.Locate and click next button |N/A   |Tutorial tups still visible and new tip appear|
 
 
 ## WorkflowHub page
