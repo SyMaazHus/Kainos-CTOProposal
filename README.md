@@ -9,14 +9,16 @@
 - [Install & Setup](#install)
 
 ---
+<a id="about"></a>
 
-## <a id="about"></a>📋 About
+## 📋 About
 
 Kainos CTO Project Proposal
 
 ---
+<a id="team"></a>
 
-## <a id="team"></a>👥 Project member
+## 👥 Project member
 
 | Name                   | Email                   |
 |------------------------|-------------------------|
@@ -32,8 +34,9 @@ Kainos CTO Project Proposal
 
 
 --- 
+<a id="install"></a>
 
-## <a id="install"></a>🛠️ Install & Setup !!
+## 🛠️ Install & Setup !!
 
 1. Install nodeJS from the website or through the terminal!
     [[https://nodejs.org/en/download]]
