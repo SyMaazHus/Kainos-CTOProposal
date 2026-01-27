@@ -10,14 +10,12 @@
 
 ---
 <a id="about"></a>
-
 ## 📋 About
 
 Kainos CTO Project Proposal
 
 ---
 <a id="team"></a>
-
 ## 👥 Project member
 
 | Name                   | Email                   |
