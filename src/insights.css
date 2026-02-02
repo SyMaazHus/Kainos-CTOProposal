@@ -1,61 +1,178 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+/* This is the stuff from her HTML file that may have to be changed*/
+    /* * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    } */
 
-body {
+
+
+    /* wraps sidebar + main card */
+    /* .app-shell {
+      display: flex;
+      align-items: stretch;
+      width: 980px;
+      height: 560px;
+    } */
+
+    /* .sidebar,
+    .main-container {
+      height: 100%;
+    }
+
+    /* LEFT SIDEBAR 
+    .sidebar {
+      width: 72px;
+      background: #4E7B68;            /* green 
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 0;
+      gap: 24px;
+      border-radius: 16px 0 0 16px;
+    }
+
+    .sidebar img {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+      cursor: pointer;
+    } */
+
+    /* MAIN CARD */
+    .main-container {
+      background: #F7FBF8;            /* light dashboard bg */
+      padding: 24px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      border-radius: 0 16px 16px 0;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      width: 100%;
+    }
+
+    .top-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    } */
+
+    /* .logo {
+      height: 28px;
+      object-fit: contain;
+    } */
+
+    .app-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #2F3E46;
+    }
+
+    .user-greeting {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: #4A5860;
+    }
+
+    .user-greeting img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: contain;
+    }
+
+    /* WIDGET GRID
+    .widgets-grid {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 2fr 1.5fr;
+      grid-template-rows: repeat(2, 1fr);
+      gap: 16px;
+    } */
+
+    .widget {
+      background: #FFFFFF;
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    /* use your Rectangle images as chart backgrounds */
+    .chart1 { background-image: url("assets/Rectangle 42.png"); }
+    .chart2 { background-image: url("assets/Rectangle 82.png"); }
+    .chart3 { background-image: url("assets/Rectangle 83.png"); }
+    .chart4 { background-image: url("assets/Rectangle 84.png"); }
+
+
+
+/* body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background-color: #1E1E1E;      /* dark outer background */
+  background-color: #1E1E1E;      /* dark outer background 
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+} */
+
+body {
+    margin: 0;
+    background-color: #fff;
+    overflow: hidden; 
 }
+
 .app-layout {
     display: flex;
-    width: 1100px;
-    height: 620px;
+    height: 100vh;
     background-color: #86AB93; 
 }
 
 .nav {
-    width: 80px;
-    background-color: #86AB93; 
-    color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 80px;
     padding: 20px 0;
-    
+    color: white;
+    background-color: #86AB93; 
 }
 
 .logo {
-    font-weight: bold;
     margin-bottom: 50px;
     color: white; 
+    font-weight: bold;
 }
 
 .nav-mid ul {
+    list-style: none;
     padding: 0;
     margin: 0;
-    list-style: none;
     margin-bottom: 40px;
 }
 
 .nav-icon{
-    border: none;
-    width: 40px;
-    height: 40px;
-    margin: 50px;
-    cursor: pointer;
-    border-radius: 5px;
-    background: transparent;
-    fill:"#F5FAF9";
-    fill-opacity:"0.7";
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 40px;
+    height: 40px;
+    margin: 50px;
+    border: none;
+    border-radius: 5px;
+    background: transparent;
+    fill: white;
+    fill-opacity: 0.7;
+    cursor: pointer;
 }
 
 .nav-icon svg {
@@ -63,14 +180,9 @@ body {
     fill-opacity: 0.7;
 }
 
-
-.nav-icon:hover svg {
-    fill-opacity: 1;
-}
-
 .nav-mid {
     flex-grow: 1; 
-    height: 80%
+    height: 80%;
 }
 
 .nav-bottom {
@@ -83,9 +195,45 @@ body {
     padding: 20px 40px;
     display: flex;
     flex-direction: column;
-    border-top-left-radius: 60px;
-    border-bottom-left-radius: 60px;
+    border-top-left-radius: 103px;
+
 }
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+.page-title {
+    color: #4CAF50; 
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.kainos-logo {
+    width: 180px;
+    height: 120px;
+    margin: 0;
+}
+
+.header-icon {
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 50%;
+    background-color: none; 
+    cursor: pointer;
+}
+
+/* This is the original code for the layout of the screen - i am not going to touch this, i am just making the headding consistant with the other work */
 
 /* ✅ New overall layout under the header */
 .insights-body{
