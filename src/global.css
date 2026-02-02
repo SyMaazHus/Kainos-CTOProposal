@@ -70,9 +70,15 @@ body {
     margin-top: 0px;
 }
 
+.nav-top {
+    margin-top: 0px;
+
+}
+
 /* This main content includes all of the area of which the whole of the application will be inlcuded 
     - This should contain everything in the HTML
 */
+
 .main-content {
     display: flex;
     flex-direction: column;
