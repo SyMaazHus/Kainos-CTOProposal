@@ -34,6 +34,7 @@ body {
     font-weight: bold;
 }
 
+
 .nav-mid ul {
     list-style: none;
     padding: 0;
@@ -70,10 +71,6 @@ body {
     margin-top: 0px;
 }
 
-.nav-top {
-    margin-top: 0px;
-
-}
 
 /* This main content includes all of the area of which the whole of the application will be inlcuded 
     - This should contain everything in the HTML
