@@ -35,6 +35,11 @@ body {
     font-weight: bold;
 }
 
+.nav-mid {
+    flex-grow: 1; 
+    height: 80%;
+}
+
 
 .nav-mid ul {
     list-style: none;
@@ -49,7 +54,13 @@ body {
     align-items: center;
     width: 40px;
     height: 40px;
-    margin: 50px;
+    /* margin: 50px; */
+    
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    margin-left: 50px;
+    margin-right: 50px;
+
     border: none;
     border-radius: 5px;
     background: transparent;
@@ -63,13 +74,11 @@ body {
     fill-opacity: 0.7;
 }
 
-.nav-mid {
-    flex-grow: 1; 
-    height: 80%;
-}
+
 
 .nav-bottom {
     margin-top: 0px;
+    bottom: 0px;
 }
 
 
