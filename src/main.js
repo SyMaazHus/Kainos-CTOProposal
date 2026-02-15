@@ -1,9 +1,22 @@
 // src/main.js
 
-const { app, BrowserWindow } = require('electron');
-const path = require('path'); 
-const { spawn } = require('child_process');
+// const { app, BrowserWindow } = require('electron');
+// const path = require('path'); 
+// const { spawn } = require('child_process');
 
+import {app,BrowserWindow} from 'electron';
+import path from 'node:path';
+import {spawn} from 'node:child_process';
+
+import AppDatabase from './db.js';
+import workflowHandler from './ipcHandler.js'
+import { fileURLToPath } from 'node:url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+let db;
+let pythonProcess;
 try {
   require('electron-reloader')(module);
 } catch (_) {}
@@ -31,26 +44,15 @@ function startPythonServer() {
         console.log(`[Python]: ${data}`);
     });
 
-    // pythonProcess.stderr.on('data', (data) => {
-    //     console.error(`[Python Error]: ${data}`);
-    // });
-}
-
-function startPythonServer() {
-    const scriptPath = path.join(__dirname, 'server.py');
-    console.log("Starting Python server at:", scriptPath);
-    pythonProcess = spawn('python', [scriptPath]); //Creates the process from getting server.py file (like running py on terminal)
-
-    pythonProcess.stdout.on('data', (data) => {
-        console.log(`[Python]: ${data}`);
+    pythonProcess.stderr.on('data', (data) => {
+        console.error(`[Python Error]: ${data}`);
     });
-
-    // pythonProcess.stderr.on('data', (data) => {
-    //     console.error(`[Python Error]: ${data}`);
-    // });
 }
+
 
 app.whenReady().then(() => {
+  db = new AppDatabase;
+  workflowHandler(db);
   startPythonServer();
   createWindow();
 
@@ -67,5 +69,6 @@ app.on('will-quit', () => {
 });
 
 app.on('window-all-closed', function () {
+  db.close();
   if (process.platform !== 'darwin') app.quit();
 });
