@@ -16,11 +16,24 @@ class AppDatabase {
         const stmt = this.db.prepare('SELECT * FROM workflow');
         return stmt.all();
     }
-    addTask(){
-        const stmt = this.db.pre
+    addTask(title,description){
+        const stmt = this.db.prepare('INSERT INTO workflow (title,des) VALUES (?)');
+        const info = stmt.run(title,description);
+        return{
+            jobID: info.lastInsertRowid,
+            title: title,
+            des: description,
+            status: 1,
+            userID: 1 //need refactor to assign userID
+        }
     }
-    deletetask(){
-
+    deleteTask(jobID){
+        const stmt = this.db.prepare('DELETE FROM workflow WHERE jobID = ?');
+        const info = stmt.run(jobID);
+        return info.changes > 0;
+    }
+    switchStatus(jobID){
+        
     }
     close(){
         this.db.close();
