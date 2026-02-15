@@ -9,7 +9,7 @@ import path from 'node:path';
 import {spawn} from 'node:child_process';
 
 import AppDatabase from './db.js';
-import workflowHandler from './ipcHandler.js'
+import workflowHandler from './ipcHandler.js';
 import { fileURLToPath } from 'node:url';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -27,8 +27,10 @@ function createWindow () {
     width: 800,
     height: 600,
     webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false,
+      preload: path.join(__dirname,'preloader.js'),
+      nodeIntegration: false,
+      contextIsolation: true,
+      sandbox: false
     }
   });
 
