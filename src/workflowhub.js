@@ -14,8 +14,9 @@ const delCancel = document.getElementById('deleteCancel');
 const delCon = document.getElementById('deleteConfirm');
 let delCard;
 
+
 const renderWork = async () => {
-    const tasks = await window.apiWF.getallWorkflow();
+    const tasks = await window.apiWF.getAllWorkflow();
 
     tasks.forEach(task =>{
         const newWork = document.createElement('div');
