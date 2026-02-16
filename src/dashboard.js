@@ -2,7 +2,20 @@ const Tasks = ["Work on CW1", "Send an email to boss", "Reply to Mark", "Finish 
 const TaskTag = ["CSS","Emails","General","Coding","Backend"]; // These are examples of possible task tags for the "time spent box"
 const TaskTime = [0.23,1.5,5.00,0.30,0.23]; // These are examples of times that would have been spent on those tags
 const SuggestionExmp = ["Update Language", "Opt in for the analysis AI", "Chat to __ for help"]
+
+// These are the document constants
 const ColourCollections = ["#366184","#658b91","#86ab93"]
+const TimeSpentWidget = document.getElementById("TimeSpentBox");
+const WorkflowWidget = document.getElementById("WorkflowBox");
+const BriefWidget = document.getElementById("DailyBriefBox");
+const TaskWidget = document.getElementById("TaskBox");
+const SuggestionArea = document.getElementById("FloatingSpace");
+
+// Initial loader and startup function that accesses the local database
+const renderWork = async () => {
+    const tasks = await window.apiWF.getAllDashboard();
+
+}
 
 
 function ExampleStartup() {
