@@ -1,6 +1,7 @@
 from datetime import timedelta
 from dateparser.search import search_dates
-from .graph_calendar import get_graph_token, create_event
+from .graph_calendar import create_event
+from authenticator.graph_api_token import get_graph_token
 
 def create_meeting_from_text(user_input: str):
     """
