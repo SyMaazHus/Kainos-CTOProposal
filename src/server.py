@@ -5,7 +5,6 @@ from flask_cors import CORS
 from groq import Groq
 from dotenv import load_dotenv
 from ai_calendar.groq_handler import create_meeting_from_text
-from ai_email.groq_email_handler import read_mail
 
 #Load API Key from .env
 load_dotenv()
@@ -29,24 +28,10 @@ def chat():
     else:
         user_input_text = user_input[-1]['content']
         messages = user_input
-    
-    # Can modify as we progress
-    messages.insert(0, {
-        "role": "system",
-        "content": (
-            "SYSTEM SETTING: You are an intelligent AI assistant. "
-            "You have access to the user's Microsoft Outlook and Calendar. "
-            "If you see 'SYSTEM DATA' or email content in the chat history, "
-            "you have permission to read, analyze, and answer questions about it. "
-            "Never say you cannot access data if it is present in the chat history."
-        )
-    })
 
     meeting_reply = create_meeting_from_text(user_input_text)
     if meeting_reply:
         return jsonify({"reply": meeting_reply})
-    
-    read_mail(user_input_text, messages)
 
     try:
         chat_completion = client.chat.completions.create(
