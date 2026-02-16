@@ -23,5 +23,8 @@
     "@types/node": "^24.10.1",
     "electron": "^39.7.0",
     "electron-reloader": "^1.2.3"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.6.2"
   }
 }
