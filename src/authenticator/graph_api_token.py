@@ -7,8 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 CLIENT_ID = os.getenv("CLIENT_ID")
-# Keep updating SCOPE to add the API features
-SCOPE = ["Calendars.ReadWrite", "Mail.Read"] 
+SCOPE = ["Calendars.ReadWrite"]
 
 # personal account
 app = PublicClientApplication(
