@@ -71,26 +71,33 @@ const renderWork = async () => {
 }
 renderWork();
 
+// function changing task status
 async function changeStatus(jobID,isActive){
     const newStatus = isActive ? 0 : 1;
     await window.apiWF.switchStatus(jobID,newStatus);
     renderWork();
 }
+// function close pop up box
 function closeDelete(box){
     box.style.display = 'none';
 }
+// function close pop up delete box
 delCancel.onclick = function(){
     closeDelete(delBlock);
     }
+//function to remove task
 delCon.onclick = async function(){
     await window.apiWF.deleteTask(delId);
     delCard.remove();
     closeDelete(delBlock);
     }
 
+//display pop-up box
 newCardBut.onclick = function(){
     newCard.style.display = 'block';
 }
+
+//close new workflow form and reset form
 function close(){
     newCard.style.display = 'none';
     newForm.reset();
@@ -98,6 +105,7 @@ function close(){
 
 closeBut.onclick=close;
 
+//close pop-up box if mouse clicked outside box
 window.onclick = function(event){
     if(event.target==newCard){
         close();
@@ -117,7 +125,7 @@ window.onclick = function(event){
 //     }
 // });
 
-
+//form for recieve new task information
 form.addEventListener('submit',async function(event){
     event.preventDefault();
     const taskName = document.getElementById('taskName').value;
