@@ -17,8 +17,8 @@ class AppDatabase {
         return stmt.all();
     }
     addTask(title,description){
-        const stmt = this.db.prepare('INSERT INTO workflow (title,des) VALUES (?)');
-        const info = stmt.run(title,description);
+        const stmt = this.db.prepare('INSERT INTO workflow (title,des,status,userID) VALUES (?,?,?,?)');
+        const info = stmt.run(title,description,1,1);
         return{
             jobID: info.lastInsertRowid,
             title: title,
@@ -32,8 +32,10 @@ class AppDatabase {
         const info = stmt.run(jobID);
         return info.changes > 0;
     }
-    switchStatus(jobID){
-        
+    switchStatus(jobID,status){
+        const stmt = this.db.prepare('UPDATE workflow SET status = ? WHERE jobID = ?');
+        const info = stmt.run(status,jobID);
+        return info.changes > 0;
     }
     close(){
         this.db.close();

@@ -9,4 +9,7 @@ export default function workflowHandler(db){
     ipcMain.handle('workflow:deleteTask',(_,jobID)=>{
         return db.deleteTask(jobID);
     })
+    ipcMain.handle('workflow:switchStatus',(_,jobID,status)=>{
+        return db.switchStatus(jobID,status);
+    })
 }
