@@ -90,6 +90,7 @@ async function send(){
             if(loadingBubble)loadingBubble.remove(); // removes the bubble 
 
             addChatBubble(data.reply, 'bot');
+            groqHistory.push({ role: "assistant", content: data.reply });
         } else {
             addChatBubble("Error: " + data.error, 'bot');
         }
