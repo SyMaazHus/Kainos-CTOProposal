@@ -8,6 +8,10 @@ package-lock.json
 yarn.lock
 pnpm-lock.yaml
 
+# python
+__pycache__/
+*.pyc
+
 # Folder
 instance/
 
@@ -50,3 +54,5 @@ node_modules/
 /playwright/.auth/
 
 /instance
+
+
