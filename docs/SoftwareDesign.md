@@ -12,7 +12,6 @@ Run your organiser
 let user choose whether organise it in local files or Upload back to OneDrive  
 
 ### description
-This is a code for users to login to their Microsoft account and allow the api to list the files in their OneDrive. The code will then download the files from OneDrive, organise them and let user choose the option to save the sorted files locally or reupload them back to OneDrive.
-
+This Python program uses MSAL to let a user sign in to their Microsoft account, obtains an access token for Microsoft Graph, lists files from the user’s OneDrive, downloads those files locally, and provides helper functions to create folders, upload files, or move files back in OneDrive. In simple terms, it acts as a bridge between OneDrive and your computer: it authenticates the user, talks to Microsoft Graph to fetch cloud files, saves them locally (where your organizer can run), and optionally uploads or reorganizes them back in OneDrive afterward.
 
 
