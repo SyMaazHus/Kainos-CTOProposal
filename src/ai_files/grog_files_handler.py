@@ -1,39 +1,26 @@
 import os
-import requests 
+import requests
 import msal
 from msal import PublicClientApplication 
 from dotenv import load_dotenv
 import json 
+from authenticator.graph_api_token import get_graph_token
 
-load_dotenv()
+CLIENT_ID = "YOUR_CLIENT_ID"
 
-CLIENT_ID = os.getenv("CLIENT_ID")
+AUTHORITY = "https://login.microsoftonline.com/common"
+
 SCOPE = ["User.Read","Files.Read","Files.ReadWrite"]
 
-# User log in 
+GRAPH_BASE = "https://graph.microsoft.com/v1.0/me"
+GRAPH_FILES = "https://graph.microsoft.com/v1.0/me/drive/root/children"
+
 app = PublicClientApplication(
-    client_id = CLIENT_ID,
-    authority="https://login.microsoftonline.com/common"
+    client_id= CLIENT_ID,
+    authority= AUTHORITY
 )
 
 
-
-def get_graph_token():
-    """
-    get token for log in.
-    """
-    accounts = app.get_accounts()
-    if accounts:
-        result = app.acquire_token_silent(SCOPE, account=accounts[0])
-        if result and "access_token" in result:
-            return result["access_token"]
-
-    # open the browser for authentication
-    result = app.acquire_token_interactive(scopes=SCOPE)
-    if "access_token" in result:
-        return result["access_token"]
-    else:
-        raise ValueError(f"Failed to get token: {result.get('error_description')}")
 
 # List OneDrive files
 def list_files(token, folder_id=None):
@@ -74,7 +61,7 @@ def move_file(token, file_id, new_parent_id):
 
 # Main flow
 if __name__ == "__main__":
-    token = login()
+    token = get_graph_token()
     
     # List files
     files = list_files(token)

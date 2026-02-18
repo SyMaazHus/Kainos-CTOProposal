@@ -20,19 +20,40 @@ body {
 
 .nav {
     display: flex;
+    max-height: 100vh;
+    height: 100vh;
     flex-direction: column;
     align-items: center;
     width: 80px;
-    padding: 20px 0;
+
     color: white;
     background-color: #86AB93; 
 }
 
+.nav-top{
+    height: 5%;
+}
+
 .logo {
-    margin-bottom: 50px;
+    padding: 20px;
+    float: center;
     color: white; 
     font-weight: bold;
+    @media screen and (height: 550px){
+        margin-bottom: 15px;
+    }
 }
+
+
+
+.nav-mid {
+    flex-grow: 1; 
+    height: 80%;
+    @media screen and (height: 550px){
+        height: 300px;
+    }
+}
+
 
 .nav-mid ul {
     list-style: none;
@@ -47,7 +68,13 @@ body {
     align-items: center;
     width: 40px;
     height: 40px;
-    margin: 50px;
+    /* margin: 50px; */
+    
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    margin-left: 50px;
+    margin-right: 50px;
+
     border: none;
     border-radius: 5px;
     background: transparent;
@@ -61,18 +88,20 @@ body {
     fill-opacity: 0.7;
 }
 
-.nav-mid {
-    flex-grow: 1; 
-    height: 80%;
-}
+
 
 .nav-bottom {
+    flex-grow: 1;
+    max-height: 15%;
     margin-top: 0px;
+    bottom: 5px;
 }
+
 
 /* This main content includes all of the area of which the whole of the application will be inlcuded 
     - This should contain everything in the HTML
 */
+
 .main-content {
     display: flex;
     flex-direction: column;
