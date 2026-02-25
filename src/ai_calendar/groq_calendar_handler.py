@@ -5,11 +5,9 @@ from authenticator.graph_api_token import get_graph_token
 
 def create_meeting_from_text(user_input: str):
     """
-    decode natural language if contain schedule and meeting then do the following steps
+    Assume intent already verified as create_meeting.
+    Only extract and execute.
     """
-    text = user_input.lower()
-    if "meeting" not in text and "schedule" not in text:
-        return None
 
     # extract the time
     results = search_dates(user_input, settings={"PREFER_DATES_FROM": "future"})
