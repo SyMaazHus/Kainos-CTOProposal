@@ -40,6 +40,9 @@ def chat():
             "If you see 'SYSTEM DATA' or email content in the chat history, "
             "you have permission to read, analyze, and answer questions about it. "
             "Never say you cannot access data if it is present in the chat history."
+            "Be helpful but brief. "
+            "Avoid long lists or deep comparisons unless the user explicitly asks for a detailed breakdown. "
+            "Keep most answers under 3-4 sentences. Use clear, grounded language."
         )
     })
 
@@ -53,8 +56,10 @@ def chat():
     if intent == "create_meeting":
         meeting_reply = create_meeting_from_text(user_input_text)
         return jsonify({"reply": meeting_reply})
+    elif intent == "read_email":
+        read_mail(messages)
     
-    read_mail(user_input_text, messages)
+    # read_mail(user_input_text, messages)
 
     try:
         chat_completion = client.chat.completions.create(
