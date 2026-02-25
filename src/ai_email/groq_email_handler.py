@@ -4,10 +4,6 @@ from authenticator.graph_api_token import get_graph_token
 from .graph_email import list_emails
 
 def read_mail(messages: list):
-
-    # if "email" not in text and "inbox" not in text:
-    #     return False
-
     try:
         token = get_graph_token()
         if not token:

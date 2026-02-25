@@ -59,8 +59,6 @@ def chat():
     elif intent == "read_email":
         read_mail(messages)
     
-    # read_mail(user_input_text, messages)
-
     try:
         chat_completion = client.chat.completions.create(
             messages=messages,
