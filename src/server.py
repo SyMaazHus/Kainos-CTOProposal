@@ -61,7 +61,7 @@ def chat():
         read_mail(messages)
 
     elif intent in ("list_files", "create_folder", "download_file"):
-        files_reply = handle_files_from_text(intent, user_input_text)
+        files_reply = handle_files_from_text(user_input_text)
     if files_reply:
         return jsonify({"reply": files_reply})
     
