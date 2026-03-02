@@ -60,9 +60,24 @@ def chat():
     elif intent == "read_email":
         read_mail(messages)
 
-    elif intent in ("list_files", "create_folder", "download_file"):
+    elif intent == "list_files":
         files_reply = handle_files(intent, user_input_text, messages)
-    if files_reply:
+        return jsonify({"reply": files_reply})
+    
+    elif intent == "create_folder":
+        files_reply = handle_files(intent, user_input_text, messages)
+        return jsonify({"reply": files_reply})
+    
+    elif intent == "download_files":
+        files_reply = handle_files(intent, user_input_text, messages)
+        return jsonify({"reply": files_reply})
+    
+    elif intent == "upload_files":
+        files_reply = handle_files(intent, user_input_text, messages)
+        return jsonify({"reply": files_reply})
+
+    elif intent == "move_files":
+        files_reply = handle_files(intent, user_input_text, messages)
         return jsonify({"reply": files_reply})
     
     try:

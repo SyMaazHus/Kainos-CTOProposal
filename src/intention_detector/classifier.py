@@ -21,6 +21,8 @@ Possible intents:
 - list_files
 - create_folder
 - download_file
+- upload_file
+- move_file
 
 Return JSON only:
 {{
