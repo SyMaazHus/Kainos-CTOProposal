@@ -3,31 +3,80 @@ import os
 from authenticator.graph_api_token import get_graph_token
 from graph_files import list_files, create_folder, download_file
 
-def handle_files_from_text(user_input: str):
+def handle_files(intent: str,user_input: str, messages:list):
     text = user_input.lower()
-
-    # LIST
-    if "list" in text and ("file" in text or "files" in text):
+    try:
         token = get_graph_token()
-        files = list_files(token)
-        if not files:
-            return "No files found."
-        return "\n".join([f["name"] for f in files])
 
-    # CREATE FOLDER
-    if "create folder" in text or "make folder" in text:
-        # very basic extraction: create folder X
-        parts = user_input.split("folder", 1)
-        folder_name = parts[1].strip() if len(parts) > 1 else ""
-        if not folder_name:
-            return "I understood you want a folder, but I couldn't detect the folder name."
+        if not token:
+            messages.append({
+                "role": "system",
+                "content": "System: Login failed."
+            })
+            return False
 
-        token = get_graph_token()
-        create_folder(token, folder_name)
-        return f"✅ Folder created: {folder_name}"
+        # ---------------- LIST FILES ----------------
+        if intent == "list_files":
 
-    # DOWNLOAD (you would need file_id, so usually you list first then ask user)
-    if "download" in text:
-        return "To download, please tell me the file name (or ID)."
+            files = list_files(token)
 
-    return None
+            if not files:
+                messages.append({
+                    "role": "system",
+                    "content": "System Notification: No files found."
+                })
+            else:
+                file_context = "SYSTEM DATA: User Files\n\n"
+
+                for f in files:
+                    name = f.get("name", "Unknown file")
+                    file_context += f"- {name}\n"
+
+                messages.append({
+                    "role": "system",
+                    "content": file_context
+                })
+
+            return True
+
+        # ---------------- CREATE FOLDER ----------------
+        elif intent == "create_folder":
+
+            parts = user_input.split("folder", 1)
+            folder_name = parts[1].strip() if len(parts) > 1 else ""
+
+            if not folder_name:
+                messages.append({
+                    "role": "system",
+                    "content": "I understood you want a folder, but I couldn't detect the folder name."
+                })
+                return False
+
+            create_folder(token, folder_name)
+
+            messages.append({
+                "role": "system",
+                "content": f"✅ Folder created: {folder_name}"
+            })
+
+            return True
+
+        # ---------------- DOWNLOAD FILE ----------------
+        elif intent == "download_file":
+
+            messages.append({
+                "role": "system",
+                "content": "To download, please tell me the file name (or ID)."
+            })
+
+            return True
+
+        return False
+
+    except Exception as e:
+        print(f"Files Handler Error: {e}")
+        messages.append({
+            "role": "system",
+            "content": f"Error: {e}"
+        })
+        return False
