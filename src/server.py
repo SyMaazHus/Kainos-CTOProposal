@@ -6,6 +6,7 @@ from groq import Groq
 from dotenv import load_dotenv
 from ai_calendar.groq_calendar_handler import create_meeting_from_text
 from ai_email.groq_email_handler import read_mail
+from ai_files.grog_files_handler import handle_files_from_text
 from intention_detector.classifier import detect_intent
 
 #Load API Key from .env
@@ -58,6 +59,11 @@ def chat():
         return jsonify({"reply": meeting_reply})
     elif intent == "read_email":
         read_mail(messages)
+
+    elif intent in ("list_files", "create_folder", "download_file"):
+        files_reply = handle_files_from_text(intent, user_input_text)
+    if files_reply:
+        return jsonify({"reply": files_reply})
     
     try:
         chat_completion = client.chat.completions.create(
