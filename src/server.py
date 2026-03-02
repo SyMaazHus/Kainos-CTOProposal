@@ -6,7 +6,7 @@ from groq import Groq
 from dotenv import load_dotenv
 from ai_calendar.groq_calendar_handler import create_meeting_from_text
 from ai_email.groq_email_handler import read_mail
-from ai_files.grog_files_handler import handle_files
+from ai_files.groq_files_handler import handle_files
 from intention_detector.classifier import detect_intent
 
 #Load API Key from .env

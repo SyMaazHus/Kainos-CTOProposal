@@ -1,7 +1,7 @@
 import sys
 import os
 from authenticator.graph_api_token import get_graph_token
-from graph_files import list_files, create_folder, download_file
+from .graph_files import list_files, create_folder, download_file
 
 def handle_files(intent: str,user_input: str, messages:list):
     text = user_input.lower()
