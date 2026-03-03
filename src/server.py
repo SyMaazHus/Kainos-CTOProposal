@@ -60,25 +60,15 @@ def chat():
     elif intent == "read_email":
         read_mail(messages)
 
-    elif intent == "list_files":
-        files_reply = handle_files(intent, user_input_text, messages)
-        return jsonify({"reply": files_reply})
-    
-    elif intent == "create_folder":
-        files_reply = handle_files(intent, user_input_text, messages)
-        return jsonify({"reply": files_reply})
-    
-    elif intent == "download_files":
-        files_reply = handle_files(intent, user_input_text, messages)
-        return jsonify({"reply": files_reply})
-    
-    elif intent == "upload_files":
-        files_reply = handle_files(intent, user_input_text, messages)
-        return jsonify({"reply": files_reply})
-
-    elif intent == "move_files":
-        files_reply = handle_files(intent, user_input_text, messages)
-        return jsonify({"reply": files_reply})
+    elif intent in [
+        "list_files",
+        "create_folder",
+        "download_file",
+        "upload_file",
+        "move_file"
+    ]:
+        reply = handle_files(intent, user_input_text)
+        return jsonify({"reply": reply})
     
     try:
         chat_completion = client.chat.completions.create(

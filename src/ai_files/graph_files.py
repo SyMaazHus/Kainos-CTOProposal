@@ -1,13 +1,8 @@
-import os
+
 import requests
-import msal
-from msal import PublicClientApplication 
-from dotenv import load_dotenv
-import json 
-from authenticator.graph_api_token import get_graph_token
 
 
-GRAPH_BASE = "https://graph.microsoft.com/v1.0/me"
+GRAPH_BASE = "https://graph.microsoft.com/v1.0"
 GRAPH_FILES = "https://graph.microsoft.com/v1.0/me/drive/root/children"
 
 # List OneDrive files
@@ -47,22 +42,22 @@ def move_file(token, file_id, new_parent_id):
         json={"parentReference": {"id": new_parent_id}})
     return response.json()
 
-# Main flow
-if __name__ == "__main__":
-    token = get_graph_token()
+# # Main flow
+# if __name__ == "__main__":
+#     token = get_graph_token()
     
-    # List files
-    files = list_files(token)
-    for f in files:
-        print(f"{'[Folder]' if 'folder' in f else '[File]'} {f['name']}")
+#     # List files
+#     files = list_files(token)
+#     for f in files:
+#         print(f"{'[Folder]' if 'folder' in f else '[File]'} {f['name']}")
     
-    # Download selected files
-    download_dir = "./downloads"
-    os.makedirs(download_dir, exist_ok=True)
+#     # Download selected files
+#     download_dir = "./downloads"
+#     os.makedirs(download_dir, exist_ok=True)
     
-    for f in files:
-        if "folder" not in f:
-            download_file(token, f["id"], os.path.join(download_dir, f["name"]))
+#     for f in files:
+#         if "folder" not in f:
+#             download_file(token, f["id"], os.path.join(download_dir, f["name"]))
     
     # Organize and upload back (example)
     # organized_folder = create_folder(token, "Organized")
