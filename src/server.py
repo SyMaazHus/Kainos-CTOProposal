@@ -5,7 +5,7 @@ from flask_cors import CORS
 from groq import Groq
 from dotenv import load_dotenv
 from ai_calendar.groq_calendar_handler import create_meeting_from_text
-from ai_email.groq_email_handler import read_mail
+from ai_email.groq_email_handler import handle_email
 from ai_files.groq_files_handler import handle_files
 from intention_detector.classifier import detect_intent
 
@@ -58,7 +58,9 @@ def chat():
         meeting_reply = create_meeting_from_text(user_input_text)
         return jsonify({"reply": meeting_reply})
     elif intent == "read_email":
-        read_mail(messages)
+        email_reply = handle_email(intent, messages)
+        if email_reply:
+            return jsonify({"reply": email_reply})
 
     elif intent in [
         "list_files",
