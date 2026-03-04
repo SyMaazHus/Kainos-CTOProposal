@@ -17,6 +17,7 @@ You are an intent classifier.
 Possible intents:
 - create_meeting
 - read_email
+- send_email
 - normal_chat
 - list_files
 - create_folder
@@ -33,6 +34,7 @@ Return JSON only:
 Rules:
 - classify as create_meeting ONLY if user is explicitly asking to schedule/create a meeting.
 - classify as read_email ONLY if user is explicitly asking to read/check emails/inbox.
+- classify as send_email ONLY if the user asks to send and email.
 - classify as list_files if user asks to list/show/view files or documents.
 - classify as create_folder if user asks to create/make a folder/directory.
 - classify as download_file if user asks to download/get a file (usually mentions a filename).
