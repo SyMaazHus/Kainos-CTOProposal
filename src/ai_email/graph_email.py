@@ -6,7 +6,9 @@ def list_graph_emails(token: str):
         "Content-Type": "application/json"
     }
 
-    r = requests.get("https://graph.microsoft.com/v1.0/me/messages?$top=5&$select=from,subject,bodyPreview", headers=headers)
+    url = "https://graph.microsoft.com/v1.0/me/messages?$top=5&$select=from,subject,bodyPreview"
+
+    r = requests.get(url, headers=headers)
     r.raise_for_status() 
     return r.json().get('value', [])
 
@@ -39,3 +41,15 @@ def send_graph_email(token: str, recipient: str, subject: str, body: str):
     r = requests.post(url, headers=headers, json=email_payload)
     r.raise_for_status()
     return True
+
+def search_graph_email(token: str, query: str):
+    headers = {
+        "Authorization": f"Bearer {token}",
+        "Content-Type": "application/json"
+    }
+    
+    url = f"https://graph.microsoft.com/v1.0/me/messages?$search=\"{query}\"&$top=5"
+    
+    r = requests.get(url, headers=headers)
+    r.raise_for_status()
+    return r.json().get('value', [])

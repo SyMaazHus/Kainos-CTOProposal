@@ -2,7 +2,7 @@ import sys
 import os
 import json
 from authenticator.graph_api_token import get_graph_token
-from .graph_email import list_graph_emails, send_graph_email
+from .graph_email import list_graph_emails, send_graph_email, search_graph_email
 
 def handle_email(intent, messages, user_input_text=None, client=None):
         try:
@@ -25,13 +25,12 @@ def handle_email(intent, messages, user_input_text=None, client=None):
         
                 system_instruction = (
                     "SYSTEM INSTRUCTION: "
-                    "The data above contains the user's real latest emails. "
-                    "You have permission to read them. "
-                    "Please summarize them in a clean, professional list format like this:\n\n"
+                    "Please summarize the emails in a clean, professional list format like this and leave gaps between each email:\n\n"
                     "1. **Sender Name**\n"
                     "   *Subject: Email Subject*\n"
                     "   - A short summary of what the email says.\n\n"
-                    "Do not mention internal IDs. Be helpful and concise."
+                    "Be helpful and concise."
+                    "---\n"
                 )
 
                 messages.append({"role": "system", "content": email_context})
@@ -39,29 +38,61 @@ def handle_email(intent, messages, user_input_text=None, client=None):
                 return None
             
             elif intent == "send_email":
-                extracted_data = extract_input_data(user_input_text, client)
+                extracted_data = extract_input_data(user_input_text, client, "'recipient', 'subject', 'body'")
                 
                 recipient = extracted_data.get('recipient')
-                body = extracted_data.get('body')
                 subject = extracted_data.get('subject')
+                body = extracted_data.get('body')
 
                 if not recipient or not body:
                         return "I am missing information. Who should i send this to, and what should the email say?"
                 send_graph_email(token, recipient, subject, body)
                 return f"Email Successfully sent to {recipient}."
+            
+            elif intent == "search_email":
+                 extracted_data = extract_input_data(user_input_text, client, "'query (keyword or sender name)'")
+                 query = extracted_data.get('query')
+
+                 if not query or query == "null":
+                    return "I couldn't figure out what you want to search for. Try saying 'Find emails from Dell'."
+
+                 email_search_results = search_graph_email(token, query)
+                 if not email_search_results:
+                        return f"I could not find any emails matching '{query}'. "
+                 
+                 email_context = f"SYSTEM DATA: Search Results for '{query}'\n\n"
+                 for email in email_search_results:
+                    sender = email.get('from', {}).get('emailAddress', {}).get('name', 'Unknown')
+                    email_context += f"FROM: {sender} | SUBJECT: {email.get('subject')}\n"
+
+                    system_instruction = (
+                        "SYSTEM INSTRUCTION: "
+                        "Please summarize the emails in a clean, professional list format like this and leave gaps between each email:\n\n"
+                        "1. **Sender Name**\n"
+                        "   *Subject: Email Subject*\n"
+                        "   - A short summary of what the email says.\n\n"
+                        "Be helpful and concise."
+                        "---\n"
+                    )
+                 messages.append({"role": "system", "content": email_context})
+                 messages.append({"role": "system", "content": system_instruction})
+                 return None
     
         except Exception as e:
-            print(f"Email Handler Error: {e}")
-            return "I encountered an error while accessing your mail."
+            print("\n--- ERROR IN EMAIL HANDLER ---")
+            import traceback
+            traceback.print_exc() 
+            print("------------------------------\n")
+            return f"I encountered an error: {str(e)}"
 
-def extract_input_data(input, client):
+def extract_input_data(input, client, fields):
     
     extraction_prompt = (
          "You are a data extraction assistnat. "
          f"Analyse this request: '{input}' "
-         "Extract the 'recipient' (email address), 'subject' and 'body'. "
+         f"Extract these fields: '{fields}' "
          "Return ONLY a JSON object. If field missing, use null. "
-         "if no subject provided, create a brief, relevant one to the context. "
+         "if task is to send email and no subject provided, create a brief, relevant one to the context. Otherwise ignore this. "
     )
 
     extract_output = client.chat.completions.create(
@@ -72,36 +103,3 @@ def extract_input_data(input, client):
     )
 
     return json.loads(extract_output.choices[0].message.content)
-
-    #     emails = list_emails(token)
-
-    #     if not emails:
-    #         messages.append({"role": "system", "content": "System Notification: User's inbox is empty."})
-    #     else:
-    #         email_context = "SYSTEM DATA: Real User Emails (You have permission to read these).\n\n"
-            
-    #         for email in emails:
-    #             sender = email.get('from', {}).get('emailAddress', {}).get('name', 'Unknown')
-    #             subject = email.get('subject', 'No Subject')
-    #             body = email.get('bodyPreview', 'No Content').replace('\n', ' ').strip()
-    #             email_context += f"FROM: {sender}\n   SUBJECT: {subject}\n   BODY: {body}\n\n"
-        
-    #     system_instruction = (
-    #             "SYSTEM INSTRUCTION: You are an intelligent assistant connected to the user's Outlook. "
-    #             "The data above contains the user's real latest emails. "
-    #             "You have permission to read them. "
-    #             "Please summarize them in a clean, professional list format like this:\n\n"
-    #             "1. **Sender Name**\n"
-    #             "   *Subject: Email Subject*\n"
-    #             "   - A short summary of what the email says.\n\n"
-    #             "Do not mention internal IDs. Be helpful and concise."
-    #         )
-
-    #     messages.append({"role": "system", "content": email_context})
-    #     messages.append({"role": "system", "content": system_instruction})
-    #     return True
-
-    # except Exception as e:
-    #     print(f"Handler Error: {e}")
-    #     messages.append({"role": "system", "content": f"Error: {e}"})
-    #     return False

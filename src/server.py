@@ -59,7 +59,8 @@ def chat():
         return jsonify({"reply": meeting_reply})
     elif intent in [
         "read_email",
-        "send_email"
+        "send_email",
+        "search_email"
     ]:
         email_reply = handle_email(intent, messages, user_input_text, client)
         if email_reply:
