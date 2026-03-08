@@ -6,7 +6,7 @@ def list_graph_emails(token: str):
         "Content-Type": "application/json"
     }
 
-    url = "https://graph.microsoft.com/v1.0/me/messages?$top=5&$select=from,subject,bodyPreview"
+    url = "https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages?$top=5&$select=from,subject,bodyPreview&$orderby=receivedDateTime desc"
 
     r = requests.get(url, headers=headers)
     r.raise_for_status() 
@@ -47,7 +47,7 @@ def search_graph_email(token: str, query: str):
         "Authorization": f"Bearer {token}",
         "Content-Type": "application/json"
     }
-    
+
     url = f"https://graph.microsoft.com/v1.0/me/messages?$search=\"{query}\"&$top=5"
     
     r = requests.get(url, headers=headers)
