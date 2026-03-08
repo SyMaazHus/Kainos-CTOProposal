@@ -15,7 +15,7 @@ def handle_email(intent, messages, user_input_text=None, client=None):
                 email_list = list_graph_emails(token)
                 if not email_list:
                         return "Inbox Empty"
-                email_context = "SYSTEM DATA: Real User Emails (You have permission to read these).\n\n"
+                email_context = "Real User Emails (You have permission to read these).\n\n"
             
                 for email in email_list:
                     sender = email.get('from', {}).get('emailAddress', {}).get('name', 'Unknown')
@@ -24,11 +24,10 @@ def handle_email(intent, messages, user_input_text=None, client=None):
                     email_context += f"FROM: {sender}\n   SUBJECT: {subject}\n   BODY: {body}\n\n"
         
                 system_instruction = (
-                    "SYSTEM INSTRUCTION: "
                     "Please summarize the emails in a clean, professional list format like this and leave gaps between each email:\n\n"
                     "1. **Sender Name**\n"
                     "   *Subject: Email Subject*\n"
-                    "   - A short summary of what the email says.\n\n"
+                    "   - Summary of what email says\n\n"
                     "Be helpful and concise."
                     "---\n"
                 )
@@ -60,17 +59,16 @@ def handle_email(intent, messages, user_input_text=None, client=None):
                  if not email_search_results:
                         return f"I could not find any emails matching '{query}'. "
                  
-                 email_context = f"SYSTEM DATA: Search Results for '{query}'\n\n"
+                 email_context = f"Search Results for '{query}'\n\n"
                  for email in email_search_results:
                     sender = email.get('from', {}).get('emailAddress', {}).get('name', 'Unknown')
                     email_context += f"FROM: {sender} | SUBJECT: {email.get('subject')}\n"
 
                     system_instruction = (
-                        "SYSTEM INSTRUCTION: "
                         "Please summarize the emails in a clean, professional list format like this and leave gaps between each email:\n\n"
                         "1. **Sender Name**\n"
                         "   *Subject: Email Subject*\n"
-                        "   - A short summary of what the email says.\n\n"
+                        "   - Summary of what email says.\n\n"
                         "Be helpful and concise."
                         "---\n"
                     )
@@ -79,10 +77,6 @@ def handle_email(intent, messages, user_input_text=None, client=None):
                  return None
     
         except Exception as e:
-            print("\n--- ERROR IN EMAIL HANDLER ---")
-            import traceback
-            traceback.print_exc() 
-            print("------------------------------\n")
             return f"I encountered an error: {str(e)}"
 
 def extract_input_data(input, client, fields):
