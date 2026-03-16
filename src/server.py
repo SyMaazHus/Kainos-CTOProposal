@@ -4,7 +4,8 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from groq import Groq
 from dotenv import load_dotenv
-from ai_calendar.groq_handler import create_meeting_from_text
+from ai_calendar.groq_calendar_handler import create_meeting_from_text, delete_meeting_from_text
+from intention_detector.classifier import detect_intent
 
 #Load API Key from .env
 load_dotenv()
@@ -28,12 +29,38 @@ def chat():
     else:
         user_input_text = user_input[-1]['content']
         messages = user_input
+    
+    # Can modify as we progress
+    messages.insert(0, {
+        "role": "system",
+        "content": (
+            "SYSTEM SETTING: You are an intelligent AI assistant. "
+            "You have access to the user's Microsoft Outlook and Calendar. "
+            "If you see 'SYSTEM DATA' or email content in the chat history, "
+            "you have permission to read, analyze, and answer questions about it. "
+            "Never say you cannot access data if it is present in the chat history."
+            "Be helpful but brief. "
+            "Avoid long lists or deep comparisons unless the user explicitly asks for a detailed breakdown. "
+            "Keep most answers under 3-4 sentences. Use clear, grounded language."
+        )
+    })
 
+    intent_data = detect_intent(user_input_text)
+    intent = intent_data["intent"]
+    confidence = intent_data["confidence"]
 
-    meeting_reply = create_meeting_from_text(user_input_text)
-    if meeting_reply:
+    if confidence < 0.75:
+        intent = "normal_chat"
+
+    if intent == "create_meeting":
+        meeting_reply = create_meeting_from_text(user_input_text)
+        return jsonify({"reply": meeting_reply})
+    
+    elif intent == "delete meeting":
+        meeting_reply = delete_meeting_from_text(user_input_text)
         return jsonify({"reply": meeting_reply})
 
+    
     try:
         chat_completion = client.chat.completions.create(
             messages=messages,
