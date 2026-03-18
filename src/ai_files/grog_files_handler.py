@@ -1,10 +1,7 @@
 from authenticator.graph_api_token import get_graph_token
-<<<<<<< HEAD:src/ai_files/grog_files_handler.py
-from graph_files import list_files, create_folder, download_file
-=======
 from .graph_files import list_files, create_folder, download_file, upload_file, move_file
 import os
->>>>>>> 2b79d8f8 (file part fix):src/ai_files/groq_files_handler.py
+from .ai_parser import parse_file_action_with_ai
 
 def handle_files(intent: str,user_input: str):
     try:
