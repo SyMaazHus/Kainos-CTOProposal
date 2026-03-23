@@ -61,12 +61,17 @@ Kainos CTO Project Proposal
     pip install flask groq python-dotenv flask-cors
     ```
 
-7. create a file called `.env` and write in following 
+7. Type the installation for the azure packages in the VScode terminal
+    ```
+    npm install --save @azure/identity
+    ```
+
+8. create a file called `.env` and write in following 
     ```
     GROQ_API_KEY="REMOVED"
     ```
 
-8. Try `npm start` again and it should run!
+9. Try `npm start` again and it should run!
     ```
     npm start
     ```
