@@ -23,7 +23,7 @@
     "@electron/rebuild": "^4.0.3",
     "@playwright/test": "^1.57.0",
     "@types/node": "^24.10.1",
-    "electron": "^39.6.0",
+    "electron": "^39.7.0",
     "electron-reloader": "^1.2.3"
   },
   "dependencies": {
