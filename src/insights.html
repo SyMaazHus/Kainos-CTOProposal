@@ -38,7 +38,7 @@
 
   <section class="insights-body">
 
-    <!-- LEFT SIDE (grey rectangles) -->
+    <!-- LEFT SIDE  -->
     <div class="left-panel">
       <div class="widget grey-card grey-top"></div>
       <div class="widget grey-card grey-bottom"></div>
@@ -46,9 +46,30 @@
 
     <!-- RIGHT SIDE -->
     <div class="right-panel">
-      <div class="widget grey-card grey-right-top"></div>
+      <div class="widget grey-card grey-top working-widget">
 
-      <!-- YOUR GREEN BOXES moved here -->
+  <h2>What are you working on right now?</h2>
+
+  <!-- Input for user task -->
+  <textarea id="taskInput" placeholder="Enter what you are working on..." rows="3"></textarea>
+
+  <!-- Buttons -->
+  <div class="working-buttons">
+    <button id="startBtn">Confirm & Start Now</button>
+    <button id="finishBtn" style="display:none;">Finish Session</button>
+  </div>
+
+  <!-- Active session display -->
+  <div id="activeSession" style="display:none;">
+    <h3>Currently Working On:</h3>
+    <p id="activeTask"></p>
+
+    <h2 id="timer">00:00:00</h2>
+  </div>
+
+</div>
+
+      <!-- the green boxes have been moved -->
       <div class="green-grid">
         <div class="widget small-card green-card"></div>
         <div class="widget small-card green-card"></div>
@@ -61,6 +82,8 @@
 
     </main>
   </main>
+  <script src="insights.js"></script>
+
 
 </body>
 </html>
