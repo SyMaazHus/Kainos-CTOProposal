@@ -59,13 +59,13 @@ def handle_files(intent: str, user_input: str):
             download_file(token, file_id, f"./downloads/{file_name}")
             return f"✅ Downloaded to ./downloads/{file_name}"
 
-        elif intent == "upload_file":
-            local_path = data.get("local_path", "").strip()  
-            remote_name = data.get("remote_name", local_path).strip()
-            if not local_path or not os.path.exists(local_path):
-                return f"❌ Local file not found: {local_path}"
-            upload_file(token, local_path, remote_name)
-            return f"✅ Uploaded as {remote_name}"
+        # elif intent == "upload_file":
+        #     local_path = data.get("local_path", "").strip()  
+        #     remote_name = data.get("remote_name", local_path).strip()
+        #     if not local_path or not os.path.exists(local_path):
+        #         return f"❌ Local file not found: {local_path}"
+        #     upload_file(token, local_path, remote_name)
+        #     return f"✅ Uploaded as {remote_name}"
 
         elif intent == "move_file":
             file_name = data.get("file_name", "").strip()     

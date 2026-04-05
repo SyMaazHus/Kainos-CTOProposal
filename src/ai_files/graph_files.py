@@ -36,11 +36,11 @@ def create_folder(token, folder_name, parent_id=None):
     return response.json()
 
 # Upload file
-def upload_file(token, local_path, remote_name, parent_id=None):
-    endpoint = f"{GRAPH_BASE}/me/drive/items/{parent_id}:/{remote_name}:/content" if parent_id else f"{GRAPH_BASE}/me/drive/root:/{remote_name}:/content"
-    with open(local_path, "rb") as f:
-        response = requests.put(endpoint, headers={"Authorization": f"Bearer {token}"}, data=f)
-    return response.json()
+# def upload_file(token, local_path, remote_name, parent_id=None):
+#     endpoint = f"{GRAPH_BASE}/me/drive/items/{parent_id}:/{remote_name}:/content" if parent_id else f"{GRAPH_BASE}/me/drive/root:/{remote_name}:/content"
+#     with open(local_path, "rb") as f:
+#         response = requests.put(endpoint, headers={"Authorization": f"Bearer {token}"}, data=f)
+#     return response.json()
 
 # Move file
 def move_file(token, file_id, new_parent_id):
