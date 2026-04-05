@@ -1,7 +1,7 @@
 from authenticator.graph_api_token import get_graph_token
 from .graph_files import list_files, create_folder, move_file
 # from .graph_files import download_file, upload_file
-from .ai_parser import parse_file_action_with_ai 
+from .ai_file_parser import parse_file_action_with_ai 
 import os
 
 def handle_files(intent: str, user_input: str):
