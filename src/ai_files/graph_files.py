@@ -8,7 +8,7 @@ GRAPH_FILES = "https://graph.microsoft.com/v1.0/me/drive/root/children"
 # List OneDrive files
 def list_files(token, folder_id=None, recursive=False):
     if recursive:
-        endpoint = f"{GRAPH_BASE}/me/drive/root/search(q='')"
+        endpoint = f"{GRAPH_BASE}/me/drive/root/search(q='*')"
     else:
         if folder_id:
             endpoint = f"{GRAPH_BASE}/me/drive/items/{folder_id}/children"
