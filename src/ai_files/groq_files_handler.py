@@ -13,17 +13,31 @@ def handle_files(intent: str, user_input: str):
         data = parse_file_action_with_ai(user_input)
 
         if intent == "list_files":
-            files = list_files(token, recursive=True)
-            if not files:
-                return "Your OneDrive is empty."
-            file_context = "SYSTEM DATA: User Files\n\n"
+
+            folder_name = (data.get("folder_name") or "").strip() 
+
+            if folder_name:
+                all_files = list_files(token, recursive=False)
+                folder_item = next((f for f in all_files if f.get("name", "").lower() == folder_name.lower() and "folder" in f), None)
+
+                if folder_item:
+                    folder_id = folder_item["id"]
+                    files = list_files(token, folder_id=folder_id, recursive=False)
+                    file_context = f"{folder_name} Files\n\n"
+                else:
+                    return f"Could not find {folder_name}\n\n"
+            else:
+                files = list_files(token, recursive=False)
+                file_context = "User Files\n\n"
+
+                if not files:
+                    return "Your OneDrive is empty."
+                
             for f in files:
                 name = f.get("name", "Unknown")
-                parent = f.get("parentReference", {}).get("path", "")
-                parent_clean = parent.replace("/drive/root:", "").strip("/")
                 label = "[Folder]" if "folder" in f else "[File]"
-                path_display = f"{parent_clean}/{name}" if parent_clean else name
-                file_context += f"{label} {path_display}\n"
+                file_context += f"{label} {name}\n"
+
             return file_context
 
         elif intent == "create_folder":
