@@ -8,7 +8,7 @@ GRAPH_FILES = "https://graph.microsoft.com/v1.0/me/drive/root/children"
 # List OneDrive files
 def list_files(token, folder_id=None, recursive=False):
     if recursive:
-        endpoint = f"{GRAPH_BASE}/me/drive/root/search(q='')"
+        endpoint = f"{GRAPH_BASE}/me/drive/root/search(q='*')"
     else:
         if folder_id:
             endpoint = f"{GRAPH_BASE}/me/drive/items/{folder_id}/children"
@@ -19,13 +19,13 @@ def list_files(token, folder_id=None, recursive=False):
     return response.json().get("value", [])
 
 # Download file
-def download_file(token, file_id, save_path):
-    response = requests.get(f"{GRAPH_BASE}/me/drive/items/{file_id}", headers={"Authorization": f"Bearer {token}"})
-    download_url = response.json().get("@microsoft.graph.downloadUrl")
-    content = requests.get(download_url).content
-    with open(save_path, "wb") as f:
-        f.write(content)
-    print(f"Downloaded: {save_path}")
+# def download_file(token, file_id, save_path):
+#     response = requests.get(f"{GRAPH_BASE}/me/drive/items/{file_id}", headers={"Authorization": f"Bearer {token}"})
+#     download_url = response.json().get("@microsoft.graph.downloadUrl")
+#     content = requests.get(download_url).content
+#     with open(save_path, "wb") as f:
+#         f.write(content)
+#     print(f"Downloaded: {save_path}")
 
 # Create folder
 def create_folder(token, folder_name, parent_id=None):

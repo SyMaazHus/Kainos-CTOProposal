@@ -1,5 +1,6 @@
 from authenticator.graph_api_token import get_graph_token
-from .graph_files import list_files, create_folder, download_file, upload_file, move_file
+from .graph_files import list_files, create_folder, move_file
+# from .graph_files import download_file, upload_file
 from .ai_parser import parse_file_action_with_ai 
 import os
 
@@ -47,17 +48,17 @@ def handle_files(intent: str, user_input: str):
             create_folder(token, folder_name)
             return f"✅ Folder created: {folder_name}"
 
-        elif intent == "download_file":
-            file_name = data.get("file_name", "").strip()  
-            if not file_name:
-                return "❌ Couldn't detect file name."
-            files = list_files(token, recursive=True)
-            file_id = next((f["id"] for f in files if f.get("name","").lower() == file_name.lower()), None)
-            if not file_id:
-                return f"❌ File '{file_name}' not found."
-            os.makedirs("./downloads", exist_ok=True)
-            download_file(token, file_id, f"./downloads/{file_name}")
-            return f"✅ Downloaded to ./downloads/{file_name}"
+        # elif intent == "download_file":
+        #     file_name = data.get("file_name", "").strip()  
+        #     if not file_name:
+        #         return "❌ Couldn't detect file name."
+        #     files = list_files(token, recursive=True)
+        #     file_id = next((f["id"] for f in files if f.get("name","").lower() == file_name.lower()), None)
+        #     if not file_id:
+        #         return f"❌ File '{file_name}' not found."
+        #     os.makedirs("./downloads", exist_ok=True)
+        #     download_file(token, file_id, f"./downloads/{file_name}")
+        #     return f"✅ Downloaded to ./downloads/{file_name}"
 
         # elif intent == "upload_file":
         #     local_path = data.get("local_path", "").strip()  
@@ -70,16 +71,18 @@ def handle_files(intent: str, user_input: str):
         elif intent == "move_file":
             file_name = data.get("file_name", "").strip()     
             target_folder = data.get("target_folder", "").strip()
+
+            root_items = list_files(token, recursive=False)
+            search_items = list_files(token, recursive=True)
+            all_items = root_items + search_items
+
+            file_item = next((f for f in all_items if f.get("name", "").lower() == file_name.lower() and "folder" not in f), None)
+            folder_item = next((f for f in all_items if f.get("name", "").lower() == target_folder.lower() and "folder" in f), None)
+
             if not file_name or not target_folder:
                 return "❌ Couldn't detect file or target folder."
-            files = list_files(token, recursive=True)
-            file_id = next((f["id"] for f in files if f.get("name","").lower() == file_name.lower()), None)
-            folder_id = next((f["id"] for f in files if f.get("name","").lower() == target_folder.lower()), None)
-            if not file_id:
-                return f"❌ File '{file_name}' not found."
-            if not folder_id:
-                return f"❌ Folder '{target_folder}' not found."
-            move_file(token, file_id, folder_id)
+            
+            move_file(token, file_item["id"], folder_item["id"])
             return f"✅ '{file_name}' moved to '{target_folder}'"
 
         return "❌ Unsupported file operation."
