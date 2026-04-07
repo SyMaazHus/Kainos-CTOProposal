@@ -52,8 +52,9 @@ function startPythonServer() {
 }
 
 
-app.whenReady().then(() => {
+app.whenReady().then( async () => {
   db = new AppDatabase;
+  await db.connect();
   workflowHandler(db);
   startPythonServer();
   createWindow();
