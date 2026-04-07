@@ -32,8 +32,13 @@ class AppDatabase {
         try{
             this.pool = await sql.connect(this.config);
         } catch(err){
-            console.log("\n\nFailed to connect to Azure:", err);
+            console.log("Failed to connect to Azure:", err);
         }
+    }
+
+    async getAllWorkflow(){
+        const stmt = await this.pool.request().query('SELECT * FROM workflow');
+        return stmt.recordset;
     }
 
     async getAllWorkflow(){
@@ -55,44 +60,6 @@ class AppDatabase {
             status: 1,
             userID: 1 //need refactor to assign userID
         };
-    }
-
-    async deleteTask(jobID){
-        const info = await this.pool.request()
-                    .input('jobID', sql.Int, jobID)
-                    .query('DELETE FROM workflow WHERE jobID = @jobID');
-        return info.rowAffected > 0;
-    }
-
-    async switchStatus(jobID,status){
-        const info = await this.pool.request()
-                    .input('status', sql.Int, status)
-                    .input('jobID', sql.Int, jobID)
-                    .query('UPDATE workflow SET status = @status WHERE jobID = @jobID');
-        return info.rowAffected > 0;
-    }
-
-        async getSetting() {
-        try {
-
-            const result = await this.pool.request()
-                .input('userID', sql.Int, 1) 
-                .query(`
-                    SELECT 
-                        UserName as displayName,
-                        Email as email,
-                        PhoneNumber as phone,
-                        Notifications as notifications,
-                        PFP as pfp
-                    FROM UserPage
-                    WHERE UserID = @userID
-                `);
-            
-            return result.recordset[0];
-        } catch (err) {
-            console.error("SQL getSetting error:", err);
-            throw err;
-        }
     }
 
         async updateSetting(displayName, email, phone, notifications) {
@@ -139,12 +106,11 @@ class AppDatabase {
         }
     }
 
-
-
     async close(){
         if (this.pool){
             await this.pool.close();
         }
     }
 }
+
 export default AppDatabase;
