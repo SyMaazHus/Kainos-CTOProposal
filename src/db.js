@@ -41,11 +41,6 @@ class AppDatabase {
         return stmt.recordset;
     }
 
-    async getAllWorkflow(){
-        const stmt = await this.pool.request().query('SELECT * FROM workflow');
-        return stmt.recordset;
-    }
-
     async addTask(title,description){
         const info = await this.pool.request()
                     .input('title',sql.NVarChar,title)
