@@ -147,5 +147,4 @@ class AppDatabase {
         }
     }
 }
-
 export default AppDatabase;
