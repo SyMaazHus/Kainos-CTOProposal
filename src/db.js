@@ -1,6 +1,5 @@
 import {app} from 'electron';
 import path from 'node:path';
-import Database from 'better-sqlite3';
 import { fileURLToPath } from 'node:url';
 import sql from 'mssql';
 
@@ -9,13 +8,37 @@ const __dirname = path.dirname(__filename);
 
 class AppDatabase {
     constructor(){
-        const dbPath = path.join(__dirname,'database','UserPage.db');
-        this.db = new Database(dbPath);
-        this.db.pragma('journal_mode = WAL');
+        this.config = {
+            user: 'Project21Admin',
+            password: 'Password1?',
+            database: 'kainosdatabase',
+            server: 'group21serverkainos.database.windows.net',
+            pool: {
+                max: 10,
+                min: 0,
+                idleTimeoutMillis: 30000
+            },
+            connectionTimeout: 60000,
+            requestTimeout: 60000,
+            options: {
+                encrypt: true,
+                trustServerCertificate: false
+            }
+        };
+        this.pool = null;
     }
-    getAllWorkflow(){
-        const stmt = this.db.prepare('SELECT * FROM workflow');
-        return stmt.all();
+
+    async connect(){
+        try{
+            this.pool = await sql.connect(this.config);
+        } catch(err){
+            console.log("Failed to connect to Azure:", err);
+        }
+    }
+
+    async getAllWorkflow(){
+        const stmt = await this.pool.request().query('SELECT * FROM workflow');
+        return stmt.recordset;
     }
 
     async addTask(title,description){
@@ -48,8 +71,12 @@ class AppDatabase {
                     .query('UPDATE workflow SET status = @status WHERE jobID = @jobID');
         return info.rowAffected > 0;
     }
-    close(){
-        this.db.close();
+
+    async close(){
+        if (this.pool){
+            await this.pool.close();
+        }
     }
 }
+
 export default AppDatabase;
