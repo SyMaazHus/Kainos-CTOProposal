@@ -71,12 +71,8 @@ class AppDatabase {
                     .query('UPDATE workflow SET status = @status WHERE jobID = @jobID');
         return info.rowAffected > 0;
     }
-
-    async close(){
-        if (this.pool){
-            await this.pool.close();
-        }
+    close(){
+        this.db.close();
     }
 }
-
 export default AppDatabase;
