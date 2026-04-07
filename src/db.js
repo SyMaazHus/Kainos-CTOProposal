@@ -32,7 +32,7 @@ class AppDatabase {
         try{
             this.pool = await sql.connect(this.config);
         } catch(err){
-            console.log("Failed to connect to Azure:", err);
+            console.log("\n\nFailed to connect to Azure:", err);
         }
     }
 
