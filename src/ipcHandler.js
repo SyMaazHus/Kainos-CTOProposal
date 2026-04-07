@@ -1,16 +1,16 @@
 import { ipcMain } from "electron";
 
 export default function workflowHandler(db){
-    ipcMain.handle('workflow:getAllWorkflow', async ()=>{
-        return await db.getAllWorkflow();})
-    ipcMain.handle('workflow:addTask', async (_,title,description)=>{
-        return await db.addTask(title,description);
+    ipcMain.handle('workflow:getAllWorkflow', async async ()=>{
+        return await await db.getAllWorkflow();})
+    ipcMain.handle('workflow:addTask', async async (_,title,description)=>{
+        return await await db.addTask(title,description);
     })
-    ipcMain.handle('workflow:deleteTask', async (_,jobID)=>{
-        return await db.deleteTask(jobID);
+    ipcMain.handle('workflow:deleteTask', async  async (_,jobID)=>{
+        return await await db.deleteTask(jobID);
     })
-    ipcMain.handle('workflow:switchStatus', async (_,jobID,status)=>{
-        return await db.switchStatus(jobID,status);
+    ipcMain.handle('workflow:switchStatus', async  async (_,jobID,status)=>{
+        return await await db.switchStatus(jobID,status);
     })
 }
 
