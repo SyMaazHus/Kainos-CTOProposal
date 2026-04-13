@@ -57,3 +57,9 @@ node_modules/
 /instance
 
 
+.venv/
+__pycache__/
+*.pyc
+.venv/
+__pycache__/
+*.pyc

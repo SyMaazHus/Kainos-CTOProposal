@@ -72,6 +72,75 @@ class AppDatabase {
         return info.rowAffected > 0;
     }
 
+        async getSetting() {
+        try {
+
+            const result = await this.pool.request()
+                .input('userID', sql.Int, 1) 
+                .query(`
+                    SELECT 
+                        UserName as displayName,
+                        Email as email,
+                        PhoneNumber as phone,
+                        Notifications as notifications,
+                        PFP as pfp
+                    FROM UserPage
+                    WHERE UserID = @userID
+                `);
+            
+            return result.recordset[0];
+        } catch (err) {
+            console.error("SQL getSetting error:", err);
+            throw err;
+        }
+    }
+
+        async updateSetting(displayName, email, phone, notifications) {
+        try {
+            const result = await this.pool.request()
+                .input('name', sql.NVarChar, displayName)
+                .input('email', sql.NVarChar, email)
+                .input('phone', sql.NVarChar, phone)
+                .input('notify', sql.Int, notifications)
+                .input('userID', sql.Int, 1)
+                .query(`
+                    UPDATE UserPage 
+                    SET UserName = @name, 
+                        Email = @email, 
+                        PhoneNumber = @phone,
+                        Notifications = @notify
+                    WHERE UserID = @userID
+                `);
+
+
+            return result.rowsAffected[0] > 0;
+        } catch (err) {
+            console.error("SQL updateSetting error:", err);
+            return false;
+        }
+    }
+
+
+        async updateAvatar(base64) {
+        try {
+            const result = await this.pool.request()
+                .input('pfp', sql.NVarChar(sql.MAX), base64) 
+                .input('userID', sql.Int, 1)
+                .query(`
+                    UPDATE UserPage
+                    SET PFP = @pfp
+                    WHERE UserID = @userID
+                `);
+
+            return result.rowsAffected[0] > 0;
+        } catch (err) {
+            console.error("SQL updateAvatar error:", err);
+            return false;
+        }
+    }
+
+
+
     async close(){
         if (this.pool){
             await this.pool.close();

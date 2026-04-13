@@ -209,3 +209,34 @@
 .center-circle:hover {
   filter: brightness(0.7);  
 }
+
+
+
+.save-button {
+  position: fixed;
+  bottom: 40px;
+  right: 50px;
+  padding: 14px 40px;
+  background-color: #1D1B20; 
+  color: white;
+  border: none;
+  border-radius: 30px; 
+  font-family: "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 1.2px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 100;
+}
+
+.save-button:hover {
+  background-color: #333;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+.save-button:active {
+  transform: translateY(-1px);
+}
