@@ -12,4 +12,19 @@ export default function workflowHandler(db){
     ipcMain.handle('workflow:switchStatus', async (_,jobID,status)=>{
         return await db.switchStatus(jobID,status);
     })
+
+
+    // setting
+
+    ipcMain.handle('settings:getSetting', async () => {
+        return await db.getSetting();
+    });
+    ipcMain.handle('settings:updateSetting', async (_, displayName, email, phone, notifications) => {
+        return await db.updateSetting(displayName, email, phone, notifications);
+    });
+
+    ipcMain.handle('settings:updateAvatar', async (_, base64) => {
+        return await db.updateAvatar(base64);
+    });
 }
+
