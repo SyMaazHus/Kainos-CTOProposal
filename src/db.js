@@ -101,6 +101,13 @@ class AppDatabase {
         }
     }
 
+
+    async getActiveWorkflows(){
+        const stmt = await this.pool.request().query('SELECT * FROM workflow WHERE STATUS=1');
+        return stmt.recordset;
+    }
+
+
     async close(){
         if (this.pool){
             await this.pool.close();

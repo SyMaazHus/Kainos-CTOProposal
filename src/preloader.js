@@ -14,7 +14,12 @@ const apiST = {
     updateAvatar: (base64) => ipcRenderer.invoke('settings:updateAvatar', base64)
 }
 
+const apiDB = {
+    getActiveWorkflows: () => ipcRenderer.invoke('dashboard:getActiveWorkflows')
+}
+
 contextBridge.exposeInMainWorld('apiST', apiST);
 contextBridge.exposeInMainWorld('apiWF', apiWF);
+contextBridge.exposeInMainWorld('apiDB', apiDB);
 // window.apiWF = apiWF;
 
