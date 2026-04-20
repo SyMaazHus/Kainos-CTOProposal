@@ -39,62 +39,6 @@ const renderWork = async () => {
 
 renderWork();
 
-// function ExampleStartup() {
-//     const TimeSpentWidget = document.getElementById("TimeSpentBox");
-//     const WorkflowWidget = document.getElementById("WorkflowBox");
-//     const BriefWidget = document.getElementById("DailyBriefBox");
-//     const TaskWidget = document.getElementById("TaskBox");
-//     const SuggestionArea = document.getElementById("FloatingSpace");
-
-//     // If there is nothing there you have to make a empty
-
-//     for (var i = 0; i < 3; i++) {
-
-//         var taskItem = document.createElement('div');
-//         taskItem.id = "TaskItem";
-
-//         var date = document.createElement('div');
-//         date.id = "TaskBlockDate";
-//         date.innerHTML = "The Date";
-
-//         var task = document.createElement('div');
-//         task.id = "TaskBlockText";
-//         task.innerHTML= (Tasks[i]);
-
-//         var check = document.createElement('button');
-//         check.id="TaskCheckdot";
-
-//         taskItem.append(date);
-//         taskItem.append(task);
-//         taskItem.append(check);
-
-//         taskItem.style.backgroundColor = ColourCollections[Math.floor(Math.random() * 3)];
-
-//         TaskWidget.appendChild(taskItem);
-
-//     }
-    
-//     addToGeneral2(TaskWidget,"TaskItem","TaskBlockDate","25/12","TaskBlockText","Deliver Presents");
-
-//     for (var i =0; i<3; i++){
-
-//         addToGeneral1(WorkflowWidget,"WorkflowItem","WorkflowText", "The workflow Item#"+1 );
-
-//     }
-
-//     for (var i =0; i<5; i++){
-        
-//         addToTimeTask(TimeSpentWidget,TaskTag[i],TaskTime[i]);
-
-//     }
-    
-//     for (var i=0; i<3; i++){
-
-//         addToBasicSection(SuggestionArea, "SuggestionBubble", SuggestionExmp[i]);
-//     }
-
-//     return 0;
-// }
 
 function addToGeneral2(ContainerName, WidgetName, DivName, DivContent, DivName2, DivContent2){
     
