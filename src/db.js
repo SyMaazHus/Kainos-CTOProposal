@@ -103,10 +103,45 @@ class AppDatabase {
 
 
     async getActiveWorkflows(){
-        const stmt = await this.pool.request().query('SELECT * FROM workflow WHERE STATUS=1');
+        try {
+        const stmt = await this.pool.request()
+            .query(`SELECT * 
+                    FROM workflow 
+                    WHERE status = 1`);
         return stmt.recordset;
+        }
+        catch (err) {
+            console.error("SQL get active workflows:", err);
+            return false;
+        }
     }
 
+    async getPassiveWorkflows(){
+        try {
+        const stmt = await this.pool.request()
+            .query(`SELECT * 
+                    FROM workflow 
+                    WHERE status = 0`);
+        return stmt.recordset;
+        }
+        catch (err) {
+            console.error("SQL get passive workflows:", err);
+            return false;
+        }
+    }
+
+    async getTimeTable(){
+        try {
+        const stmt = await this.pool.request()
+            .query(`SELECT * 
+                    FROM Insights`);
+        return stmt.recordset;
+        }
+        catch (err) {
+            console.error("SQL get time table:", err);
+            return false;
+        }
+    }
 
     async close(){
         if (this.pool){

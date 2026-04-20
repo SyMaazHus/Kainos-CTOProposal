@@ -15,7 +15,9 @@ const apiST = {
 }
 
 const apiDB = {
-    getActiveWorkflows: () => ipcRenderer.invoke('dashboard:getActiveWorkflows')
+    getActiveWorkflows: () => ipcRenderer.invoke('dashboard:getActiveWorkflows'),
+    getPassiveWorkflows: () => ipcRenderer.invoke('dashboard:getPassiveWorkflows'),
+    getTimeTable: () => ipcRenderer.invoke('dashboard:getTimeTable')
 }
 
 contextBridge.exposeInMainWorld('apiST', apiST);

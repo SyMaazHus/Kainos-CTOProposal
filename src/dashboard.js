@@ -14,23 +14,25 @@ const SuggestionArea = document.getElementById("FloatingSpace");
 // Initial loader and startup function that accesses the azure database
 const renderWork = async () => {
     const WorkflowWidget = document.getElementById("WorkflowBox");
-    console.log("HERE");
+
     const tasks = await window.apiDB.getActiveWorkflows();
     tasks.forEach(task =>{
-        console.log("tas",task);
+        addToGeneral1(WorkflowWidget,"WorkflowItem","WorkflowText", task.title );
 
-        var Widget = document.createElement('div');
-        Widget.id = "WorkflowItem";
+    });
+    const todo = await window.apiDB.getPassiveWorkflows();
+    todo.forEach(item =>{
 
-        var item1 = document.createElement('div');
-        item1.id = "WorkflowText";
-        item1.innerHTML = task.title;
+        addToGeneral2(TaskWidget,"TaskItem","TaskBlockDate","To Do:","TaskBlockText",item.title);
 
-        Widget.append(item1);
+    });
 
-        Widget.style.backgroundColor = ColourCollections[Math.floor(Math.random() * 3)];
+    const times = await window.apiDB.getTimeTable();
+    times.forEach(item =>{
+        timeHourValue = item.TimeSpent /60;
+        timeToPrint = ""+timeHourValue+" Hours";
 
-        ContainerName.appendChild(Widget);
+        addToTimeTask(TimeSpentWidget, item.Task, timeToPrint)
 
     });
 }
@@ -94,66 +96,66 @@ renderWork();
 //     return 0;
 // }
 
-// function addToGeneral2(ContainerName, WidgetName, DivName, DivContent, DivName2, DivContent2){
+function addToGeneral2(ContainerName, WidgetName, DivName, DivContent, DivName2, DivContent2){
     
-//         var Widget = document.createElement('div');
-//         Widget.id = WidgetName;
+        var Widget = document.createElement('div');
+        Widget.id = WidgetName;
 
-//         var item1 = document.createElement('div');
-//         item1.id = DivName;
-//         item1.innerHTML = DivContent;
+        var item1 = document.createElement('div');
+        item1.id = DivName;
+        item1.innerHTML = DivContent;
 
-//         var item2 = document.createElement('div');
-//         item2.id = DivName2;
-//         item2.innerHTML= DivContent2;
+        var item2 = document.createElement('div');
+        item2.id = DivName2;
+        item2.innerHTML= DivContent2;
 
-//         Widget.append(item1);
-//         Widget.append(item2);
+        Widget.append(item1);
+        Widget.append(item2);
 
-//         Widget.style.backgroundColor = ColourCollections[Math.floor(Math.random() * 3)];
-
-
-//         ContainerName.appendChild(Widget);
-// }
+        Widget.style.backgroundColor = ColourCollections[Math.floor(Math.random() * 3)];
 
 
-// function addToGeneral1(ContainerName,WidgetName,DivName,DivContent){
-//     var Widget = document.createElement('div');
-//     Widget.id = WidgetName;
-
-//     var item1 = document.createElement('div');
-//     item1.id = DivName;
-//     item1.innerHTML = DivContent;
-
-//     Widget.append(item1);
-
-//     Widget.style.backgroundColor = ColourCollections[Math.floor(Math.random() * 3)];
-
-//     ContainerName.appendChild(Widget);
+        ContainerName.appendChild(Widget);
+}
 
 
-// }
+function addToGeneral1(ContainerName,WidgetName,DivName,DivContent){
+    var Widget = document.createElement('div');
+    Widget.id = WidgetName;
+
+    var item1 = document.createElement('div');
+    item1.id = DivName;
+    item1.innerHTML = DivContent;
+
+    Widget.append(item1);
+
+    Widget.style.backgroundColor = ColourCollections[Math.floor(Math.random() * 3)];
+
+    ContainerName.appendChild(Widget);
 
 
-// function addToTimeTask(TimeWidget, Tag,Time){
-//     var timeItem = document.createElement('div');
-//     timeItem.id = "TimedItem";
+}
 
-//     var timedTag = document.createElement('div');
-//     timedTag.id = "TimedTag";
-//     timedTag.innerHTML = Tag;
 
-//     var timeTime = document.createElement('div');
-//     timeTime.id = "TimedTime";
-//     timeTime.innerHTML = Time;
+function addToTimeTask(TimeWidget, Tag,Time){
+    var timeItem = document.createElement('div');
+    timeItem.id = "TimedItem";
 
-//     timeItem.append(timedTag);
-//     timeItem.append(timeTime);
+    var timedTag = document.createElement('div');
+    timedTag.id = "TimedTag";
+    timedTag.innerHTML = Tag;
 
-//     timeItem.style.backgroundColor = ColourCollections[Math.floor(Math.random() * 3)];
+    var timeTime = document.createElement('div');
+    timeTime.id = "TimedTime";
+    timeTime.innerHTML = Time;
 
-//     TimeWidget.appendChild(timeItem);
-// }
+    timeItem.append(timedTag);
+    timeItem.append(timeTime);
+
+    timeItem.style.backgroundColor = ColourCollections[Math.floor(Math.random() * 3)];
+
+    TimeWidget.appendChild(timeItem);
+}
 
 // function addToBasicSection(ContainerName, ItemClass, text){
 

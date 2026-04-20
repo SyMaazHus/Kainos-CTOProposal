@@ -32,5 +32,13 @@ export default function workflowHandler(db){
 
     ipcMain.handle('dashboard:getActiveWorkflows', async ()=>{
         return await db.getActiveWorkflows();
+    });
+    
+    ipcMain.handle('dashboard:getPassiveWorkflows', async ()=>{
+        return await db.getPassiveWorkflows();
+    });
+
+    ipcMain.handle('dashboard:getTimeTable', async ()=>{
+        return await db.getTimeTable();
     })
 }
