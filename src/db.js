@@ -105,8 +105,8 @@ class AppDatabase {
     async getActiveWorkflows(){
         try {
         const stmt = await this.pool.request()
-            .query(`SELECT * 
-                    FROM workflow 
+            .query(`SELECT *
+                    FROM workflow
                     WHERE status = 1`);
         return stmt.recordset;
         }
@@ -119,7 +119,7 @@ class AppDatabase {
     async getPassiveWorkflows(){
         try {
         const stmt = await this.pool.request()
-            .query(`SELECT * 
+            .query(`SELECT *
                     FROM workflow 
                     WHERE status = 0`);
         return stmt.recordset;
@@ -133,8 +133,7 @@ class AppDatabase {
     async getTimeTable(){
         try {
         const stmt = await this.pool.request()
-            .query(`SELECT * 
-                    FROM Insights`);
+            .query(`SELECT TOP 7 * FROM Insights ORDER BY TaskID DESC`);
         return stmt.recordset;
         }
         catch (err) {

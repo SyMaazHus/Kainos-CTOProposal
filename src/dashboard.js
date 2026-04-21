@@ -5,11 +5,11 @@ const SuggestionExmp = ["Update Language", "Opt in for the analysis AI", "Chat t
 
 // These are the document constants
 const ColourCollections = ["#366184","#658b91","#86ab93"]
-const TimeSpentWidget = document.getElementById("TimeSpentBox");
-const WorkflowWidget = document.getElementById("WorkflowBox");
-const BriefWidget = document.getElementById("DailyBriefBox");
-const TaskWidget = document.getElementById("TaskBox");
-const SuggestionArea = document.getElementById("FloatingSpace");
+const TimeSpentWidget = document.querySelector(".TimeSpentBox");
+const WorkflowWidget = document.querySelector(".WorkflowBox");
+const BriefWidget = document.querySelector(".DailyBriefBox");
+const TaskWidget = document.querySelector(".TaskBox");
+const SuggestionArea = document.querySelector(".FloatingSpace");
 
 // Initial loader and startup function that accesses the azure database
 const renderWork = async () => {
@@ -17,41 +17,43 @@ const renderWork = async () => {
 
     const tasks = await window.apiDB.getActiveWorkflows();
     tasks.forEach(task =>{
-        addToGeneral1(WorkflowWidget,"WorkflowItem","WorkflowText", task.title );
+        addToWorkflow(WorkflowWidget,task.title );
 
     });
     const todo = await window.apiDB.getPassiveWorkflows();
     todo.forEach(item =>{
 
-        addToGeneral2(TaskWidget,"TaskItem","TaskBlockDate","To Do:","TaskBlockText",item.title);
+        addToTodo(TaskWidget, item.title);
 
     });
 
     const times = await window.apiDB.getTimeTable();
     times.forEach(item =>{
-        timeHourValue = item.TimeSpent /60;
-        timeToPrint = ""+timeHourValue+" Hours";
+        let timeHourValue = item.TimeSpent /60;
+        let timeToPrint = ""+timeHourValue.toFixed(2);
 
-        addToTimeTask(TimeSpentWidget, item.Task, timeToPrint)
+        addToTimeTask(TimeSpentWidget, item.Task, timeToPrint);
 
     });
+
+    addToBrief(BriefWidget,"... No tasks yet");
 }
 
 renderWork();
 
 
-function addToGeneral2(ContainerName, WidgetName, DivName, DivContent, DivName2, DivContent2){
+function addToTodo(ContainerName, Content){
     
         var Widget = document.createElement('div');
-        Widget.id = WidgetName;
+        Widget.id = "TwoInfoItem";
 
         var item1 = document.createElement('div');
-        item1.id = DivName;
-        item1.innerHTML = DivContent;
+        item1.id = "ContentText";
+        item1.innerHTML = "To Do:";
 
         var item2 = document.createElement('div');
-        item2.id = DivName2;
-        item2.innerHTML= DivContent2;
+        item2.id = "ContentText";
+        item2.innerHTML= Content;
 
         Widget.append(item1);
         Widget.append(item2);
@@ -63,13 +65,13 @@ function addToGeneral2(ContainerName, WidgetName, DivName, DivContent, DivName2,
 }
 
 
-function addToGeneral1(ContainerName,WidgetName,DivName,DivContent){
+function addToWorkflow(ContainerName,Content){
     var Widget = document.createElement('div');
-    Widget.id = WidgetName;
+    Widget.id = "OneInfoItem";
 
     var item1 = document.createElement('div');
-    item1.id = DivName;
-    item1.innerHTML = DivContent;
+    item1.id = "ContentText";
+    item1.innerHTML = Content;
 
     Widget.append(item1);
 
@@ -83,14 +85,14 @@ function addToGeneral1(ContainerName,WidgetName,DivName,DivContent){
 
 function addToTimeTask(TimeWidget, Tag,Time){
     var timeItem = document.createElement('div');
-    timeItem.id = "TimedItem";
+    timeItem.id = "TwoInfoItem";
 
     var timedTag = document.createElement('div');
-    timedTag.id = "TimedTag";
+    timedTag.id = "ContentText";
     timedTag.innerHTML = Tag;
 
     var timeTime = document.createElement('div');
-    timeTime.id = "TimedTime";
+    timeTime.id = "ContentText";
     timeTime.innerHTML = Time;
 
     timeItem.append(timedTag);
@@ -101,15 +103,20 @@ function addToTimeTask(TimeWidget, Tag,Time){
     TimeWidget.appendChild(timeItem);
 }
 
-// function addToBasicSection(ContainerName, ItemClass, text){
+function addToBrief(BriefBox, information){
 
-//     var item = document.createElement('div');
-//     item.id = ItemClass;
-//     item.className = ItemClass;
+    var item = document.createElement('div');
+    item.id = "OneInfoItem";
+    item.className = "OneInfoItem";
 
-//     item.innerHTML = text;
+    var text = document.createElement('div');
+    text.id = "ContentText";
+    text.className = "ContentText";
 
-//     ContainerName.appendChild(item);
+    text.innerHTML = information;
 
-// }
-// window.onload = ExampleStartup;
+    item.appendChild(text);
+    BriefBox.appendChild(item);
+
+}
+
