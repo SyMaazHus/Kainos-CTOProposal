@@ -2,58 +2,78 @@ const Tasks = ["Work on CW1", "Send an email to boss", "Reply to Mark", "Finish 
 const TaskTag = ["CSS","Emails","General","Coding","Backend"]; // These are examples of possible task tags for the "time spent box"
 const TaskTime = [0.23,1.5,5.00,0.30,0.23]; // These are examples of times that would have been spent on those tags
 const SuggestionExmp = ["Update Language", "Opt in for the analysis AI", "Chat to __ for help"]
-
-// These are the document constants
 const ColourCollections = ["#366184","#658b91","#86ab93"]
-const TimeSpentWidget = document.querySelector(".TimeSpentBox");
-const WorkflowWidget = document.querySelector(".WorkflowBox");
-const BriefWidget = document.querySelector(".DailyBriefBox");
-const TaskWidget = document.querySelector(".TaskBox");
-const SuggestionArea = document.querySelector(".FloatingSpace");
 
-// Initial loader and startup function that accesses the azure database
-const renderWork = async () => {
+
+function ExampleStartup() {
+    const TimeSpentWidget = document.getElementById("TimeSpentBox");
     const WorkflowWidget = document.getElementById("WorkflowBox");
+    const BriefWidget = document.getElementById("DailyBriefBox");
+    const TaskWidget = document.getElementById("TaskBox");
+    const SuggestionArea = document.getElementById("FloatingSpace");
 
-    const tasks = await window.apiDB.getActiveWorkflows();
-    tasks.forEach(task =>{
-        addToWorkflow(WorkflowWidget,task.title );
+    // If there is nothing there you have to make a empty
 
-    });
-    const todo = await window.apiDB.getPassiveWorkflows();
-    todo.forEach(item =>{
+    for (var i = 0; i < 3; i++) {
 
-        addToTodo(TaskWidget, item.title);
+        var taskItem = document.createElement('div');
+        taskItem.id = "TaskItem";
 
-    });
+        var date = document.createElement('div');
+        date.id = "TaskBlockDate";
+        date.innerHTML = "The Date";
 
-    const times = await window.apiDB.getTimeTable();
-    times.forEach(item =>{
-        let timeHourValue = item.TimeSpent /60;
-        let timeToPrint = ""+timeHourValue.toFixed(2);
+        var task = document.createElement('div');
+        task.id = "TaskBlockText";
+        task.innerHTML= (Tasks[i]);
 
-        addToTimeTask(TimeSpentWidget, item.Task, timeToPrint);
+        var check = document.createElement('button');
+        check.id="TaskCheckdot";
 
-    });
+        taskItem.append(date);
+        taskItem.append(task);
+        taskItem.append(check);
 
-    addToBrief(BriefWidget,"... No tasks yet");
+        taskItem.style.backgroundColor = ColourCollections[Math.floor(Math.random() * 3)];
+
+        TaskWidget.appendChild(taskItem);
+
+    }
+    
+    addToGeneral2(TaskWidget,"TaskItem","TaskBlockDate","25/12","TaskBlockText","Deliver Presents");
+
+    for (var i =0; i<3; i++){
+
+        addToGeneral1(WorkflowWidget,"WorkflowItem","WorkflowText", "The workflow Item#"+1 );
+
+    }
+
+    for (var i =0; i<5; i++){
+        
+        addToTimeTask(TimeSpentWidget,TaskTag[i],TaskTime[i]);
+
+    }
+    
+    for (var i=0; i<3; i++){
+
+        addToBasicSection(SuggestionArea, "SuggestionBubble", SuggestionExmp[i]);
+    }
+
+    return 0;
 }
 
-renderWork();
-
-
-function addToTodo(ContainerName, Content){
+function addToGeneral2(ContainerName, WidgetName, DivName, DivContent, DivName2, DivContent2){
     
         var Widget = document.createElement('div');
-        Widget.id = "TwoInfoItem";
+        Widget.id = WidgetName;
 
         var item1 = document.createElement('div');
-        item1.id = "ContentText";
-        item1.innerHTML = "To Do:";
+        item1.id = DivName;
+        item1.innerHTML = DivContent;
 
         var item2 = document.createElement('div');
-        item2.id = "ContentText";
-        item2.innerHTML= Content;
+        item2.id = DivName2;
+        item2.innerHTML= DivContent2;
 
         Widget.append(item1);
         Widget.append(item2);
@@ -65,13 +85,13 @@ function addToTodo(ContainerName, Content){
 }
 
 
-function addToWorkflow(ContainerName,Content){
-    var Widget = document.createElement('div');
-    Widget.id = "OneInfoItem";
+function addToGeneral1(ContainerName,WidgetName,DivName,DivContent){
+     var Widget = document.createElement('div');
+    Widget.id = WidgetName;
 
     var item1 = document.createElement('div');
-    item1.id = "ContentText";
-    item1.innerHTML = Content;
+    item1.id = DivName;
+    item1.innerHTML = DivContent;
 
     Widget.append(item1);
 
@@ -85,14 +105,14 @@ function addToWorkflow(ContainerName,Content){
 
 function addToTimeTask(TimeWidget, Tag,Time){
     var timeItem = document.createElement('div');
-    timeItem.id = "TwoInfoItem";
+    timeItem.id = "TimedItem";
 
     var timedTag = document.createElement('div');
-    timedTag.id = "ContentText";
+    timedTag.id = "TimedTag";
     timedTag.innerHTML = Tag;
 
     var timeTime = document.createElement('div');
-    timeTime.id = "ContentText";
+    timeTime.id = "TimedTime";
     timeTime.innerHTML = Time;
 
     timeItem.append(timedTag);
@@ -103,20 +123,15 @@ function addToTimeTask(TimeWidget, Tag,Time){
     TimeWidget.appendChild(timeItem);
 }
 
-function addToBrief(BriefBox, information){
+function addToBasicSection(ContainerName, ItemClass, text){
 
     var item = document.createElement('div');
-    item.id = "OneInfoItem";
-    item.className = "OneInfoItem";
+    item.id = ItemClass;
+    item.className = ItemClass;
 
-    var text = document.createElement('div');
-    text.id = "ContentText";
-    text.className = "ContentText";
+    item.innerHTML = text;
 
-    text.innerHTML = information;
-
-    item.appendChild(text);
-    BriefBox.appendChild(item);
+    ContainerName.appendChild(item);
 
 }
-
+window.onload = ExampleStartup;

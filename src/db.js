@@ -70,7 +70,6 @@ class AppDatabase {
                     .input('jobID', sql.Int, jobID)
                     .query('UPDATE workflow SET status = @status WHERE jobID = @jobID');
         return info.rowAffected > 0;
-        return info.rowAffected > 0;
     }
 
         async getSetting() {

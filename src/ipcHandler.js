@@ -1,10 +1,8 @@
 import { ipcMain } from "electron";
 
 export default function workflowHandler(db){
-
     ipcMain.handle('workflow:getAllWorkflow', async ()=>{
-        return await db.getAllWorkflow();
-    });
+        return await db.getAllWorkflow();})
     ipcMain.handle('workflow:addTask', async (_,title,description)=>{
         return await db.addTask(title,description);
     });
@@ -42,4 +40,8 @@ export default function workflowHandler(db){
     ipcMain.handle('dashboard:getTimeTable', async ()=>{
         return await db.getTimeTable();
     })
+
+
+
 }
+
