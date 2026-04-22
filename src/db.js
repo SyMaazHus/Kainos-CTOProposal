@@ -57,6 +57,44 @@ class AppDatabase {
         };
     }
 
+    async deleteTask(jobID){
+        const info = await this.pool.request()
+                    .input('jobID', sql.Int, jobID)
+                    .query('DELETE FROM workflow WHERE jobID = @jobID');
+        return info.rowAffected > 0;
+    }
+
+    async switchStatus(jobID,status){
+        const info = await this.pool.request()
+                    .input('status', sql.Int, status)
+                    .input('jobID', sql.Int, jobID)
+                    .query('UPDATE workflow SET status = @status WHERE jobID = @jobID');
+        return info.rowAffected > 0;
+    }
+
+        async getSetting() {
+        try {
+
+            const result = await this.pool.request()
+                .input('userID', sql.Int, 1) 
+                .query(`
+                    SELECT 
+                        UserName as displayName,
+                        Email as email,
+                        PhoneNumber as phone,
+                        Notifications as notifications,
+                        PFP as pfp
+                    FROM UserPage
+                    WHERE UserID = @userID
+                `);
+            
+            return result.recordset[0];
+        } catch (err) {
+            console.error("SQL getSetting error:", err);
+            throw err;
+        }
+    }
+
         async updateSetting(displayName, email, phone, notifications) {
         try {
             const result = await this.pool.request()
@@ -100,7 +138,6 @@ class AppDatabase {
             return false;
         }
     }
-
 
     async getActiveWorkflows(){
         try {
