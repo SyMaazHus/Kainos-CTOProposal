@@ -104,9 +104,6 @@
   flex: 1;
   flex-direction: column;  
   width: 30%;
-
-  
-
   background-color: #477776;
   border-radius: 35px;
   padding: 10px;
@@ -133,34 +130,7 @@
 }
 /* This is the outline circle for the task item */
 
-.TaskBox #TaskItem {
-    display: grid;
-    overflow: hidden;
-    height: auto;
-    margin: 5px;
-    background-color: #604d59;
-    border-radius: 35px;
-    grid-template-columns: 1fr 1fr 1fr;
-    flex-direction: column !important;
-    /* This is the date in the first task block - this should become generalised */
-
-    #TaskBlockDate{
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: "Play-Regular", Helvetica;
-      font-weight: 40;
-      color: #ffffff;
-      font-size: 10px;
-      text-align: center;
-      letter-spacing: 0;
-      line-height: 27px;
-      white-space: nowrap;
-
-    }
-
-  /* This is the text in the first task block - this should become generalised */
-    #TaskBlockText {
+#ContentText {
       height: auto;
       
       display: flex;
@@ -181,23 +151,30 @@
       white-space: normal; 
     }
 
+#OneInfoItem {
 
-  /* This is the checklist dot for the first task but we need to make it so that it can */
-    #TaskCheckdot {
-      display: flex;
-      width: 17px;
-      height: 17px;
-      background-color: #ffffff;
-      border-radius: 23.5px;
-      right: 0;
-      float: right;
-    }
+    display: grid;
+    overflow: hidden;
+    height: auto;
+    min-height: 20px;
+    margin: 5px;
+    background-color: #604d59;
+    border-radius: 35px;
+    grid-template-columns: 1fr;
+    flex-direction: column !important;
+}
 
-    .button #TaskCheckdot{
-      display:block;
-      
-      border-radius: 50%;
-    }
+#TwoInfoItem {
+
+    display: grid;
+    overflow: hidden;
+    height: auto;
+    min-height: 20px;
+    margin: 5px;
+    background-color: #604d59;
+    border-radius: 35px;
+    grid-template-columns: 1fr 1fr;
+    flex-direction: column !important;
 }
 
 
@@ -239,93 +216,6 @@
 
 }
 
-/* The time spent text for that section */
-.TimeSpentBox #TimedItem {
-
-    display: grid;
-    overflow: hidden;
-    height: auto;
-    min-height: 20px;
-    margin: 5px;
-    background-color: #604d59;
-    border-radius: 35px;
-    grid-template-columns: 1fr 1fr;
-    flex-direction: column !important;
-
-
-  /* The tag name that has been worked on */
-    #TimedTag {
-      height: auto;
-      
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: "Play-Regular", Helvetica;
-      font-weight: 400;
-      color: #ffffff;
-      font-size: 10px;
-      text-align: center;
-      letter-spacing: 0;
-      
-      line-height: auto;
-
-      /*Text detailing */
-      overflow-wrap: break-word; /* modern */
-      word-wrap: break-word;     /* fallback */
-      white-space: normal; 
-    }
-
-    /* The time worked on the tag */
-
-    #TimedTime{
-      
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: "Play-Regular", Helvetica;
-      font-weight: 400;
-      color: #ffffff;
-      font-size: 10px;
-      text-align: center;
-      letter-spacing: 0;
-      
-      line-height: auto;
-
-      /*Text detailing */
-      overflow-wrap: break-word; /* modern */
-      word-wrap: break-word;     /* fallback */
-      white-space: normal; 
-
-    }
-
-}
-
-.TimeSpentBox .TimedInsights {
-  background-color: #604d59;
-  border-radius: 35px;
-  grid-template-columns: 1fr 1fr;
-
-  #Title {
-    float: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: "Play-Regular", Helvetica;
-    font-weight: 400;
-    color: #ffffff;
-    font-size: 15px;
-    text-align: center;
-    letter-spacing: 0;
-    line-height: 32px;
-    white-space: nowrap;
-  }
-
-  #img {
-    float: center;
-  }
-}
-
-
 /* The daily brief box will use the following CSS;
         - Daily Brief Box - This is going to be the background and the container for the brief box, this is going to use a grid system to add the item widgets
         - Daily Item - This is going to be a widget in the grid that will contain text for the item
@@ -364,35 +254,6 @@
 
 }
 
-.DailyBriefBox .DailyItem {
-    display: block;
-    background-color: #604d59;
-    border-radius: 35px;
-    min-height: 20px;
-
-
-  /* The text with the data */
-    .DailyText {
-      height: auto;
-      
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: "Play-Regular", Helvetica;
-      font-weight: 400;
-      color: #ffffff;
-      font-size: 10px;
-      text-align: center;
-      letter-spacing: 0;
-      
-      line-height: auto;
-
-      /*Text detailing */
-      overflow-wrap: break-word; /* modern */
-      word-wrap: break-word;     /* fallback */
-      white-space: normal; 
-    }
-}
 
 /* The workflows box will use the following CSS;
         - Workflows Box - This is going to be the background and the main container for the workflows box, using a grid system to store all the other divs and widgets
@@ -430,34 +291,4 @@
       white-space: nowrap;
   }
 
-}
-
-.WorkflowBox #WorkflowItem {
-    display: block;
-    background-color: #604d59;
-    border-radius: 35px;
-    min-height: 20px;
-    height:auto;
-    margin: 5px;
-
-  /* The text with the data */
-    
-    #WorkflowText{
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: "Play-Regular", Helvetica;
-      font-weight: 400;
-      color: #ffffff;
-      font-size: 10px;
-      text-align: center;
-      letter-spacing: 0;
-      
-      line-height: center;
-
-      /*Text detailing */
-      overflow-wrap: break-word; /* modern */
-      word-wrap: break-word;     /* fallback */
-      white-space: normal; 
-    }
 }
