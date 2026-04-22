@@ -3,6 +3,7 @@ import { ipcMain } from "electron";
 export default function workflowHandler(db){
     ipcMain.handle('workflow:getAllWorkflow', async ()=>{
         return await db.getAllWorkflow();})
+
     ipcMain.handle('workflow:addTask', async (_,title,description)=>{
         return await db.addTask(title,description);
     })
@@ -26,5 +27,18 @@ export default function workflowHandler(db){
     ipcMain.handle('settings:updateAvatar', async (_, base64) => {
         return await db.updateAvatar(base64);
     });
-}
 
+    // Dashboard
+
+    ipcMain.handle('dashboard:getActiveWorkflows', async ()=>{
+        return await db.getActiveWorkflows();
+    });
+    
+    ipcMain.handle('dashboard:getPassiveWorkflows', async ()=>{
+        return await db.getPassiveWorkflows();
+    });
+
+    ipcMain.handle('dashboard:getTimeTable', async ()=>{
+        return await db.getTimeTable();
+    })
+}

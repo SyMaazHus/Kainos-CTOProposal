@@ -57,44 +57,6 @@ class AppDatabase {
         };
     }
 
-    async deleteTask(jobID){
-        const info = await this.pool.request()
-                    .input('jobID', sql.Int, jobID)
-                    .query('DELETE FROM workflow WHERE jobID = @jobID');
-        return info.rowAffected > 0;
-    }
-
-    async switchStatus(jobID,status){
-        const info = await this.pool.request()
-                    .input('status', sql.Int, status)
-                    .input('jobID', sql.Int, jobID)
-                    .query('UPDATE workflow SET status = @status WHERE jobID = @jobID');
-        return info.rowAffected > 0;
-    }
-
-        async getSetting() {
-        try {
-
-            const result = await this.pool.request()
-                .input('userID', sql.Int, 1) 
-                .query(`
-                    SELECT 
-                        UserName as displayName,
-                        Email as email,
-                        PhoneNumber as phone,
-                        Notifications as notifications,
-                        PFP as pfp
-                    FROM UserPage
-                    WHERE UserID = @userID
-                `);
-            
-            return result.recordset[0];
-        } catch (err) {
-            console.error("SQL getSetting error:", err);
-            throw err;
-        }
-    }
-
         async updateSetting(displayName, email, phone, notifications) {
         try {
             const result = await this.pool.request()
@@ -140,6 +102,45 @@ class AppDatabase {
     }
 
 
+    async getActiveWorkflows(){
+        try {
+        const stmt = await this.pool.request()
+            .query(`SELECT *
+                    FROM workflow
+                    WHERE status = 1`);
+        return stmt.recordset;
+        }
+        catch (err) {
+            console.error("SQL get active workflows:", err);
+            return false;
+        }
+    }
+
+    async getPassiveWorkflows(){
+        try {
+        const stmt = await this.pool.request()
+            .query(`SELECT *
+                    FROM workflow 
+                    WHERE status = 0`);
+        return stmt.recordset;
+        }
+        catch (err) {
+            console.error("SQL get passive workflows:", err);
+            return false;
+        }
+    }
+
+    async getTimeTable(){
+        try {
+        const stmt = await this.pool.request()
+            .query(`SELECT TOP 7 * FROM Insights ORDER BY TaskID DESC`);
+        return stmt.recordset;
+        }
+        catch (err) {
+            console.error("SQL get time table:", err);
+            return false;
+        }
+    }
 
     async close(){
         if (this.pool){
