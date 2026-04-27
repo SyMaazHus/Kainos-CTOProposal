@@ -78,3 +78,54 @@ window.addEventListener("DOMContentLoaded", () => {
     startTimer();
   }
 });
+
+const focusChart = document.getElementById("focusChart");
+const productivityChart = document.getElementById("productivityChart");
+
+if (focusChart) {
+  new Chart(focusChart, {
+    type: "bar",
+    data: {
+      labels: ["Mon", "Tue", "Wed", "Thu", "Fri"],
+      datasets: [{
+        label: "Hours",
+        data: [2, 1.5, 3, 2.5, 1],
+        backgroundColor: "#4C7C78",
+        borderRadius: 8
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: false
+        }
+      }
+    }
+  });
+}
+
+if (productivityChart) {
+  new Chart(productivityChart, {
+    type: "line",
+    data: {
+      labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
+      datasets: [{
+        label: "Productivity",
+        data: [40, 55, 48, 70],
+        borderColor: "#4C7C78",
+        backgroundColor: "rgba(76, 124, 120, 0.2)",
+        fill: true,
+        tension: 0.4
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: false
+        }
+      }
+    }
+  });
+}
