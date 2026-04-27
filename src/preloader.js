@@ -20,10 +20,15 @@ const apiDB = {
     getTimeTable: () => ipcRenderer.invoke('dashboard:getTimeTable')
 }
 
+const apiIS = {
+    addTimeActivity: (timeSpent, taskName, dateLogged, currentTime) => ipcRenderer.invoke('insights:addTimeActivity',timeSpent, taskName, dateLogged, currentTime)
+}
+
 
 contextBridge.exposeInMainWorld('apiST', apiST);
 contextBridge.exposeInMainWorld('apiWF', apiWF);
 contextBridge.exposeInMainWorld('apiDB', apiDB);
+contextBridge.exposeInMainWorld('apiIS', apiIS);
 
 // window.apiWF = apiWF;
 

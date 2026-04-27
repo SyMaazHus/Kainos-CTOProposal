@@ -26,6 +26,34 @@ function startTimer() {
   }, 1000);
 }
 
+function formatDateDB(today){
+  // Extract day, month, and year
+  let day = today.getDate();
+  let month = today.getMonth() + 1;
+  let year = today.getFullYear();
+
+  // Add leading zero to day and month if needed
+  day = day < 10 ? '0' + day : day;
+  month = month < 10 ? '0' + month : month;
+
+  // Format the date as dd/mm/yyyy
+  const formattedDate = Number(`${day}${month}${year}`);
+  return formattedDate;
+}
+
+function formatTimeDB(today){
+  // Extracting hours and minutes
+  let hour = today.getHours();
+  let minute = today.getMinutes();
+
+  // Add leading zero to hour and minute if needed
+  hour = hour < 10 ? '0' + hour : hour;
+  minute = minute < 10 ? '0' + minute : minute;
+
+  const formattedTime = Number(`${hour}${minute}`);
+  return formattedTime;
+}
+
 window.addEventListener("DOMContentLoaded", () => {
   // Starts the session button
   startBtn.addEventListener("click", () => {
@@ -45,7 +73,16 @@ window.addEventListener("DOMContentLoaded", () => {
     startTimer();
   });
 
-  finishBtn.addEventListener("click", () => {
+  finishBtn.onclick = async function() {
+    // Here is the timer being saved to the database
+
+    // We need the current time in the format hrsmins
+    // Time spent, Task name, Task date added, time added
+
+    // We need the currentdate in the format DDMMYYYY
+
+    await window.apiIS.addTimeActivity(Math.floor((Date.now() - startTime) / 60000),localStorage.getItem("activeTask"),formatDateDB(new Date()),formatTimeDB(new Date()));
+
     clearInterval(timerInterval);
     localStorage.removeItem("activeTask");
     localStorage.removeItem("startTime");
@@ -56,7 +93,7 @@ window.addEventListener("DOMContentLoaded", () => {
     startBtn.style.display = "inline-block";
     finishBtn.style.display = "none";
     timerDisplay.textContent = "00:00:00";
-  });
+  };
 
   // Restores the session if app reloads
   const savedTask = localStorage.getItem("activeTask");
@@ -78,6 +115,49 @@ window.addEventListener("DOMContentLoaded", () => {
     startTimer();
   }
 });
+
+
+//   finishBtn.addEventListener("click", () => {
+//     // Here is the timer being saved to the database
+
+//     // We need the current time in the format hrsmins
+
+//     // We need the currentdate in the format DDMMYYYY
+
+//     await window.apiIS.addTimeActivity(10,localStorage.getItem("activeTask"),27042006,0o0);
+
+//     clearInterval(timerInterval);
+//     localStorage.removeItem("activeTask");
+//     localStorage.removeItem("startTime");
+
+//     taskInput.value = "";
+//     taskInput.disabled = false;
+//     activeSession.style.display = "none";
+//     startBtn.style.display = "inline-block";
+//     finishBtn.style.display = "none";
+//     timerDisplay.textContent = "00:00:00";
+//   });
+
+//   // Restores the session if app reloads
+//   const savedTask = localStorage.getItem("activeTask");
+//   const savedStart = localStorage.getItem("startTime");
+
+//   if (savedTask && savedStart) {
+//     startTime = Number(savedStart);
+    
+//     // Restores the task input
+//     taskInput.value = savedTask;
+//     taskInput.disabled = true;
+
+//     activeTask.textContent = savedTask;
+//     activeSession.style.display = "block";
+//     startBtn.style.display = "none";
+//     finishBtn.style.display = "inline-block";
+   
+//     // Restarts the timer
+//     startTimer();
+//   }
+// });
 
 const focusChart = document.getElementById("focusChart");
 const productivityChart = document.getElementById("productivityChart");
