@@ -10,6 +10,7 @@ body {
     display: flex;
     height: 100vh;
     background-color: #86AB93; 
+    overflow: hidden;
 }
 
 /* The following code is the global information for the navigation bar. 

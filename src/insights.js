@@ -10,7 +10,9 @@ const activeSession = document.getElementById("activeSession");
 const activeTask = document.getElementById("activeTask");
 const TotalFocus = document.getElementById("totalFocus");
 const timerDisplay = document.getElementById("timer");
+const AverageSession = document.getElementById("averageSession");
 const SessionCount = document.getElementById("sessionCount");
+const BestDat = document.getElementById("bestDay");
 
 function formatTime(seconds) {
   const hrs = String(Math.floor(seconds / 3600)).padStart(2, "0");
@@ -50,6 +52,7 @@ function formatTimeDB(today){
 
   // Add leading zero to hour and minute if needed
   hour = hour < 10 ? '0' + hour : hour;
+  hour = hour = 0 ? '00' + hour: hour;
   minute = minute < 10 ? '0' + minute : minute;
 
   const formattedTime = Number(`${hour}${minute}`);
@@ -165,17 +168,34 @@ getTotalSessionsToday = async function(){
   return returnVal;
 }
 
+getAverageSessionTimeToday = async function(){
+  const today = new Date();
+
+  const dateSearch = formatDateDB(today);
+  let totalTime = 0;
+  const arrayOfTimesSpent = await window.apiIS.getTimeSpentFromDate(dateSearch);
+  arrayOfTimesSpent.forEach(time =>{
+      totalTime = totalTime + time.TimeSpent;
+  });
+
+  const returnVal = (totalTime / await getTotalSessionsToday())+" minutes";
+  return returnVal;
+
+}
+
 getTotalTimeSpentOnWeek = async function(weekAgo){
 
   const today = new Date();
 
   let totalTime = 0;
+
+  const daysToWeek = today.getDay() + (weekAgo*7);
+
   for(let weekday=0; weekday<7; weekday++){
   // Add 7 days to that difference to jump back to the PREVIOUS week
-  let daysToSubtract = (today.getDay() - (weekDay*weekAgo)) + 7*weekAgo;
 
   const lastWeek = new Date();
-  lastWeek.setDate(today.getDate() - daysToSubtract);
+  lastWeek.setDate(today.getDate() - daysToWeek + weekday);
 
 
   const dateSearch = formatDateDB(lastWeek);
@@ -189,6 +209,7 @@ getTotalTimeSpentOnWeek = async function(weekAgo){
 }
 
 const renderWork = async () => {
+    const weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
     const dayIndices = [1, 2, 3, 4, 5, 6, 0]; // Mon-Sun
     const dataPoints = await Promise.all(dayIndices.map(day => getTotalTimeSpentOnDay(day))); // This is all days from the previous week not the current week to today
     if (focusChart) {
@@ -196,7 +217,7 @@ const renderWork = async () => {
       new Chart(focusChart, {
       type: "bar",
       data: {
-        labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+        labels: weekdays,
         datasets: [{
           label: "Minutes",
           data: dataPoints,
@@ -217,37 +238,45 @@ const renderWork = async () => {
 
     };
 
+    let maximum = Math.max(...dataPoints);
+    let dayindex = dataPoints.indexOf(maximum);
+
+
+    BestDat.innerText = weekdays[dayindex];
+
     TotalFocus.innerText = await getTotalTimeSpentToday();
 
     SessionCount.innerText = await getTotalSessionsToday();
 
-    // const weekIndices = [4,3,2,1];
-    // const weekdataPoints = await Promise.all(weekIndices.map(week => getTotalTimeSpentOnWeek(week))); // This is all days from the previous week not the current week to today
+    AverageSession.innerText = await getAverageSessionTimeToday();
 
-    // if (productivityChart) {
-    // new Chart(productivityChart, {
-    //   type: "line",
-    //   data: {
-    //     labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
-    //     datasets: [{
-    //       label: "Productivity",
-    //       data: weekdataPoints,
-    //       borderColor: "#4C7C78",
-    //       backgroundColor: "rgba(76, 124, 120, 0.2)",
-    //       fill: true,
-    //       tension: 0.4
-    //     }]
-    //   },
-    //   options: {
-    //     responsive: true,
-    //     plugins: {
-    //       legend: {
-    //         display: false
-    //       }
-    //     }
-    //   }
-    // });
-    // }
+    const weekIndices = [4,3,2,1];
+    const weekdataPoints = await Promise.all(weekIndices.map(week => getTotalTimeSpentOnWeek(week))); // This is all days from the previous week not the current week to today
+
+    if (productivityChart) {
+    new Chart(productivityChart, {
+      type: "line",
+      data: {
+        labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
+        datasets: [{
+          label: "Productivity",
+          data: weekdataPoints,
+          borderColor: "#4C7C78",
+          backgroundColor: "rgba(76, 124, 120, 0.2)",
+          fill: true,
+          tension: 0.4
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: false
+          }
+        }
+      }
+    });
+    }
 
 }
 
@@ -276,27 +305,27 @@ renderWork();
 //   });
 // }
 
-if (productivityChart) {
-  new Chart(productivityChart, {
-    type: "line",
-    data: {
-      labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
-      datasets: [{
-        label: "Productivity",
-        data: [40, 55, 48, 70],
-        borderColor: "#4C7C78",
-        backgroundColor: "rgba(76, 124, 120, 0.2)",
-        fill: true,
-        tension: 0.4
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: {
-          display: false
-        }
-      }
-    }
-  });
-}
+// if (productivityChart) {
+//   new Chart(productivityChart, {
+//     type: "line",
+//     data: {
+//       labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
+//       datasets: [{
+//         label: "Productivity",
+//         data: [40, 55, 48, 70],
+//         borderColor: "#4C7C78",
+//         backgroundColor: "rgba(76, 124, 120, 0.2)",
+//         fill: true,
+//         tension: 0.4
+//       }]
+//     },
+//     options: {
+//       responsive: true,
+//       plugins: {
+//         legend: {
+//           display: false
+//         }
+//       }
+//     }
+//   });
+// }
