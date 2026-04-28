@@ -142,7 +142,6 @@ class AppDatabase {
     // Insights Page
 
     async addTimeActivity(timeSpent, taskName, dateLogged, currentTime){
-        console.log("Inputs:", {timeSpent, taskName, dateLogged, currentTime})
         try {
             const result = await this.pool.request()
                 .input('Task', sql.NVarChar, taskName)
@@ -161,6 +160,22 @@ class AppDatabase {
         }
     }
     
+    async getTimeSpentFromDate(dateLogged){
+        try{
+            const result = await this.pool.request()
+                .input("DateAddedDB",sql.Int, dateLogged)
+                .query(`
+                   SELECT * FROM Insights WHERE DateAddedDB=@DateAddedDB 
+                `);
+            return result.recordset;
+        } catch (err) {
+            console.error("SQL getTimeSpent error:", err);
+            return false;
+        }
+    }
+
+
+    // Dashboard 
 
     async getActiveWorkflows(){
         try {

@@ -21,7 +21,8 @@ const apiDB = {
 }
 
 const apiIS = {
-    addTimeActivity: (timeSpent, taskName, dateLogged, currentTime) => ipcRenderer.invoke('insights:addTimeActivity',timeSpent, taskName, dateLogged, currentTime)
+    addTimeActivity: (timeSpent, taskName, dateLogged, currentTime) => ipcRenderer.invoke('insights:addTimeActivity',timeSpent, taskName, dateLogged, currentTime),
+    getTimeSpentFromDate: (dateLogged) => ipcRenderer.invoke('insights:getTimeSpentFromDate', dateLogged)
 }
 
 

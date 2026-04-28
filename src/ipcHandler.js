@@ -45,6 +45,10 @@ export default function workflowHandler(db){
 
     ipcMain.handle('insights:addTimeActivity', async (_,timeSpent, taskName, dateLogged, currentTime)=>{
         return await db.addTimeActivity(timeSpent, taskName, dateLogged, currentTime);
+    });
+    
+    ipcMain.handle('insights:getTimeSpentFromDate', async (_, dateLogged)=>{
+        return await db.getTimeSpentFromDate(dateLogged);
     })
 
 
