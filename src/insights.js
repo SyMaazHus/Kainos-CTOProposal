@@ -123,8 +123,15 @@ getTotalTimeSpentOnDay = async function(weekDay){
   const today = new Date();
 
 
+  let daysToSubtract = 0;
   // Add 7 days to that difference to jump back to the PREVIOUS week
-  let daysToSubtract = (today.getDay() - weekDay) + 7;
+  if (today.getDay() > weekDay){
+    daysToSubtract = (today.getDay() - (weekDay)) ;
+  }
+  else if( today.getDay() < weekDay){
+    daysToSubtract = (today.getDay() - (weekDay)) + 7;
+  }
+  // so if today is 3 adn we need to go back to lastweek 
 
   const lastWeek = new Date();
   lastWeek.setDate(today.getDate() - daysToSubtract);
@@ -206,6 +213,7 @@ getTotalTimeSpentOnWeek = async function(weekAgo){
   });
   }
   return totalTime;
+
 }
 
 const renderWork = async () => {
@@ -248,7 +256,7 @@ const renderWork = async () => {
 
     SessionCount.innerText = await getTotalSessionsToday();
 
-    AverageSession.innerText = await getAverageSessionTimeToday();
+    // AverageSession.innerText = await getAverageSessionTimeToday();
 
     const weekIndices = [4,3,2,1];
     const weekdataPoints = await Promise.all(weekIndices.map(week => getTotalTimeSpentOnWeek(week))); // This is all days from the previous week not the current week to today
