@@ -169,11 +169,6 @@ def summarize_latest_onenote():
     for page in pages:
         print("Checking page:", page["title"], flush=True)
 
-        # 防止同一个 workflow 重复处理同一页
-        if last_processed_page_id and page["id"] == last_processed_page_id:
-            print("Skipping already processed page:", page["title"], flush=True)
-            continue
-
         match = page_matches_workflow(
             workflow_description,
             page["title"],
@@ -184,6 +179,15 @@ def summarize_latest_onenote():
 
         if not match["matches"] or match["confidence"] < 0.75:
             continue
+
+        if last_processed_page_id and page["id"] == last_processed_page_id:
+            print("Latest matching page already processed:", page["title"], flush=True)
+            return jsonify({
+                "skipped": True,
+                "reason": "Latest matching page already processed",
+                "sourcePageId": page["id"],
+                "sourceTitle": page["title"]
+            })
 
         target_page = page
         target_match = match

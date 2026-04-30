@@ -1,8 +1,13 @@
+
 export async function handleWorkflow(wf, db) {
     console.log("Running workflow:", wf.title);
 
     if (wf.intention === "summarize_note") {
         await runSummarizeWorkflow(wf, db);
+    }
+
+    if (wf.intention === "organize_files") {
+        await runOrganizeFilesWorkflow(wf);
     }
 }
 
@@ -59,18 +64,6 @@ async function runSummarizeWorkflow(wf, db) {
 
     } catch (err) {
         console.error("runSummarizeWorkflow error:", err);
-    }
-}
-
-export async function handleWorkflow(wf, db) {
-    console.log("Running workflow:", wf.title);
-
-    if (wf.intention === "summarize_note") {
-        await runSummarizeWorkflow(wf, db);
-    }
-
-    if (wf.intention === "organize_files") {
-        await runOrganizeFilesWorkflow(wf);
     }
 }
 

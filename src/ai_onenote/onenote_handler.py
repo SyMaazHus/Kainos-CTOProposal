@@ -174,6 +174,10 @@ def get_recent_onenote_pages(limit=20):
         if title.startswith("ai summary") or "summary" in title:
             continue
 
+        if not is_page_stable(page, minutes=5):
+            print("Skipping unstable page:", page.get("title"), flush=True)
+            continue
+
         content_url = f"{GRAPH}/me/onenote/pages/{page['id']}/content"
         html = graph_get(content_url).text
 
