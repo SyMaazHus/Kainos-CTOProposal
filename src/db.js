@@ -139,6 +139,44 @@ class AppDatabase {
         }
     }
 
+    // Insights Page
+
+    async addTimeActivity(timeSpent, taskName, dateLogged, currentTime){
+        try {
+            const result = await this.pool.request()
+                .input('Task', sql.NVarChar, taskName)
+                .input('TimeSpent', sql.Int, timeSpent)
+                .input('DateAddedDB', sql.Int, dateLogged)
+                .input('TimeLogged', sql.Int, currentTime)
+                .input('UserID', sql.Int, 1)
+                .query(`
+                    INSERT INTO Insights (userID,TimeSpent,Task,DateAddedDB,TimeLogged) 
+                    OUTPUT INSERTED.TaskID VALUES(@UserID,@TimeSpent,@Task,@DateAddedDB,@TimeLogged)
+                `);
+            return result.rowsAffected[0] > 0;
+        } catch (err) {
+            console.error("SQL updateTimeActivity error:", err);
+            return false;
+        }
+    }
+    
+    async getTimeSpentFromDate(dateLogged){
+        try{
+            const result = await this.pool.request()
+                .input("DateAddedDB",sql.Int, dateLogged)
+                .query(`
+                   SELECT * FROM Insights WHERE DateAddedDB=@DateAddedDB 
+                `);
+            return result.recordset;
+        } catch (err) {
+            console.error("SQL getTimeSpent error:", err);
+            return false;
+        }
+    }
+
+
+    // Dashboard 
+
     async getActiveWorkflows(){
         try {
         const stmt = await this.pool.request()

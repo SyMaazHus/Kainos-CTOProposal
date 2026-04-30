@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="insights.css">
   <link rel="stylesheet" href="global.css">
   <script src="navbar.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
 <body>
@@ -40,13 +41,19 @@
 
     <!-- LEFT SIDE  -->
     <div class="left-panel">
-      <div class="widget grey-card grey-top"></div>
-      <div class="widget grey-card grey-bottom"></div>
-    </div>
+  <div class="widget grey-card chart-card">
+    <h2>Focus Time This Week</h2>
+    <canvas id="focusChart"></canvas>
+  </div>
 
+  <div class="widget grey-card grey-bottom chart-card">
+    <h2>Productivity Trend</h2>
+    <canvas id="productivityChart"></canvas>
+  </div>
+</div>
     <!-- RIGHT SIDE -->
     <div class="right-panel">
-      <div class="widget grey-card grey-top working-widget">
+      <div class="widget grey-card working-widget">
 
   <h2>What are you working on right now?</h2>
 
@@ -70,18 +77,33 @@
 </div>
 
       <!-- the green boxes have been moved -->
-      <div class="green-grid">
-        <div class="widget small-card green-card"></div>
-        <div class="widget small-card green-card"></div>
-        <div class="widget small-card green-card"></div>
-        <div class="widget small-card green-card"></div>
-      </div>
-    </div>
+ <div class="green-grid">
+  <div class="widget small-card green-card">
+    <h3>Total Focus</h3>
+    <p id="totalFocus"></p>
+  </div>
+
+  <div class="widget small-card green-card">
+    <h3>Sessions</h3>
+    <p id="sessionCount"></p>
+  </div>
+
+  <div class="widget small-card green-card">
+    <h3>Average Session</h3>
+    <p id="averageSession"></p>
+  </div>
+
+  <div class="widget small-card green-card">
+    <h3>Best Day</h3>
+    <p id="bestDay"></p>
+  </div>
+</div>
 
   </section>
 
     </main>
   </main>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="insights.js"></script>
 
 
