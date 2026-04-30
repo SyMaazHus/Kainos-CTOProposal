@@ -12,6 +12,8 @@ import AppDatabase from './db.js';
 import workflowHandler from './ipcHandler.js';
 import { fileURLToPath } from 'node:url';
 
+import { handleWorkflow } from './workflowExecutor.js';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -58,6 +60,18 @@ app.whenReady().then( async () => {
   workflowHandler(db);
   startPythonServer();
   createWindow();
+
+  setInterval(async () => {
+
+    console.log("Scheduler running...");
+
+    const workflows = await db.getActiveWorkflows();
+
+    for (const wf of workflows) {
+        handleWorkflow(wf, db);
+    }
+
+  }, 60000);
 
   app.on('activate', function () {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();

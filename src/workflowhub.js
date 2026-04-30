@@ -126,12 +126,22 @@ window.onclick = function(event){
 // });
 
 //form for recieve new task information
-form.addEventListener('submit',async function(event){
+form.addEventListener('submit', async function(event){
     event.preventDefault();
+
     const taskName = document.getElementById('taskName').value;
     const taskJob = document.getElementById('taskDescription').value;
 
-    await window.apiWF.addTask(taskName,taskJob);
+    const analysis = await window.apiWF.analyseTask(taskJob);
+    console.log("Workflow AI analysis:", analysis);
+
+    await window.apiWF.addTask(
+        taskName,
+        taskJob,
+        analysis.intent,
+        analysis.confidence,
+        analysis.rule || {}
+    );
 
     close();
     renderWork();

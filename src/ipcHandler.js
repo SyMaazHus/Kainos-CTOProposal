@@ -3,8 +3,8 @@ import { ipcMain } from "electron";
 export default function workflowHandler(db){
     ipcMain.handle('workflow:getAllWorkflow', async ()=>{
         return await db.getAllWorkflow();})
-    ipcMain.handle('workflow:addTask', async (_,title,description)=>{
-        return await db.addTask(title,description);
+    ipcMain.handle('workflow:addTask', async (_, title, description, intent, confidence, rule) => {
+        return await db.addTask(title, description, intent, confidence, rule || {});
     });
     ipcMain.handle('workflow:deleteTask', async (_,jobID)=>{
         return await db.deleteTask(jobID);
@@ -12,6 +12,14 @@ export default function workflowHandler(db){
     ipcMain.handle('workflow:switchStatus', async (_,jobID,status)=>{
         return await db.switchStatus(jobID,status);
     })
+    ipcMain.handle('workflow:analyseTask', async (_, description) => {
+        const response = await fetch('http://127.0.0.1:5000/analyse-workflow', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ description })
+        });
+        return await response.json();
+    });
 
 
     // setting
