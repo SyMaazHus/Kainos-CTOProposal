@@ -41,27 +41,41 @@ class AppDatabase {
         return stmt.recordset;
     }
 
-    async addTask(title,description){
-        const info = await this.pool.request()
-                    .input('title',sql.NVarChar,title)
-                    .input('des',sql.NVarChar,description)
-                    .input('status',sql.Int,1)
-                    .input('userID',sql.Int,1)
-                    .query('INSERT INTO workflow (title,des,status,userID) OUTPUT INSERTED.jobID VALUES(@title,@des,@status,@userID)');
-        return{
-            jobID: info.recordset.jobID,
-            title: title,
-            des: description,
-            status: 1,
-            userID: 1 //need refactor to assign userID
-        };
-    }
+async addTask(title, description, intent, confidence, rule){
+    const conf = Number(confidence);
+    const ruleText = JSON.stringify(rule || {});
+
+    const info = await this.pool.request()
+        .input('title', sql.NVarChar, title)
+        .input('des', sql.NVarChar, description)
+        .input('status', sql.Int, 1)
+        .input('userID', sql.Int, 1)
+        .input('intention', sql.NVarChar, intent)
+        .input('confidence', sql.Float, Number.isFinite(conf) ? conf : 0)
+        .input('workflowRule', sql.NVarChar(sql.MAX), ruleText)
+        .query(`
+            INSERT INTO workflow (title, des, status, userID, intention, confidence, workflowRule)
+            OUTPUT INSERTED.jobID
+            VALUES (@title, @des, @status, @userID, @intention, @confidence, @workflowRule)
+        `);
+
+    return {
+        jobID: info.recordset[0].jobID,
+        title,
+        des: description,
+        status: 1,
+        userID: 1,
+        intention: intent,
+        confidence: Number.isFinite(conf) ? conf : 0,
+        workflowRule: ruleText
+    };
+}
 
     async deleteTask(jobID){
         const info = await this.pool.request()
                     .input('jobID', sql.Int, jobID)
                     .query('DELETE FROM workflow WHERE jobID = @jobID');
-        return info.rowAffected > 0;
+        return info.rowsAffected[0] > 0;
     }
 
     async switchStatus(jobID,status){
@@ -69,7 +83,7 @@ class AppDatabase {
                     .input('status', sql.Int, status)
                     .input('jobID', sql.Int, jobID)
                     .query('UPDATE workflow SET status = @status WHERE jobID = @jobID');
-        return info.rowAffected > 0;
+        return info.rowsAffected[0] > 0;
     }
 
         async getSetting() {
@@ -221,6 +235,20 @@ class AppDatabase {
         if (this.pool){
             await this.pool.close();
         }
+    }
+
+    async updateWorkflowProcessedPage(jobID, pageId){
+    const result = await this.pool.request()
+        .input('jobID', sql.Int, jobID)
+        .input('pageId', sql.NVarChar, pageId)
+        .query(`
+            UPDATE workflow
+            SET lastProcessedPageId = @pageId,
+                lastRun = GETDATE()
+            WHERE jobID = @jobID
+        `);
+
+    return result.rowsAffected[0] > 0;
     }
 }
 

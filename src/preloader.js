@@ -2,9 +2,11 @@ import { contextBridge, ipcRenderer } from "electron";
 
 const apiWF = {
     getAllWorkflow: () => ipcRenderer.invoke('workflow:getAllWorkflow'),
-    addTask: (title,description) => ipcRenderer.invoke('workflow:addTask',title,description),
+    addTask: (title, description, intent, confidence, rule) =>
+    ipcRenderer.invoke('workflow:addTask', title, description, intent, confidence, rule),
     deleteTask: (jobID) => ipcRenderer.invoke('workflow:deleteTask',jobID),
-    switchStatus: (jobID,status) => ipcRenderer.invoke('workflow:switchStatus',jobID,status)
+    switchStatus: (jobID,status) => ipcRenderer.invoke('workflow:switchStatus',jobID,status),
+    analyseTask: (description) => ipcRenderer.invoke('workflow:analyseTask', description),
 }
 
 const apiST = {
