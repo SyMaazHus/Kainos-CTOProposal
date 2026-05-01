@@ -13,6 +13,7 @@ from intention_detector.classifier import detect_intent
 from intention_detector.workflow_classifier import detect_workflow_intent
 from ai_onenote.onenote_handler import get_recent_onenote_pages, create_summary_page
 from ai_files.onedrive_handler import get_root_files, move_file_to_folder
+from ai_feedback.ai_feedback import get_feedback
 from authenticator.graph_api_token import get_graph_token
 
 #Load API Key from .env
@@ -335,6 +336,15 @@ def get_calendar_events_endpoint():
         })
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
+    
+@app.route('/get_ai_brief', methods=['POST'])
+def get_ai_brief():
+    data = request.json
+    time_table = data.get('time_table', [])
+
+    brief_reply = get_feedback(time_table, client)
+
+    return jsonify({"brief": brief_reply})
 
 @app.route('/login', methods=['GET'])
 def login_auth():
@@ -343,7 +353,7 @@ def login_auth():
         return jsonify({"status": "authenticated", "token": token})
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
-
+    
 if __name__ == '__main__':
     # Flush stdout so we see prints in Electron console immediately
     print("Starting Python Server on Port 5000...")
