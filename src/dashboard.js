@@ -35,8 +35,35 @@ const renderWork = async () => {
         addToTimeTask(TimeSpentWidget, item.Task, timeToPrint);
 
     });
+    
+    // Clear to avoid any overlap
+    BriefWidget.innerHTML = "";
+    addToBrief(BriefWidget,"Getting Your Personalised Feedback...");
 
-    addToBrief(BriefWidget,"... No tasks yet");
+    // Connect to server.py backend, AI Brief function
+    try {
+        const response = await fetch('http://127.0.0.1:5000/get_ai_brief', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                time_table: times // Passing the Insights DB to server
+            })
+        });
+
+        const data = await response.json();
+        
+        // Update the UI
+        BriefWidget.innerHTML = "";
+        addToBrief(BriefWidget, data.brief);
+        
+
+    } catch (err) {
+        console.error("AI Feedback Connection Failed:", err);
+        BriefWidget.innerHTML = "";
+        addToBrief(BriefWidget, "AI Feedback Connection Failed.");
+    }
+
+
 }
 
 renderWork();

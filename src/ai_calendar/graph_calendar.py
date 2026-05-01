@@ -1,4 +1,7 @@
 import requests
+from datetime import datetime, timedelta, timezone
+import requests
+
 
 def create_event(token: str, title: str, start: str, end: str, attendees_emails=None):
     """
@@ -37,7 +40,6 @@ def delete_event(token: str, event_id: str):
     r.raise_for_status()
     return True
 
-
 def get_events(token: str):
     """
     Get all upcoming events
@@ -47,3 +49,43 @@ def get_events(token: str):
     r = requests.get(url, headers=headers)
     r.raise_for_status()
     return r.json().get("value", [])
+
+
+def get_calendar_events(access_token, mode="all"):
+    """
+    mode:
+        "all"
+        "next_week"
+    """
+
+    headers = {
+        "Authorization": f"Bearer {access_token}",
+        "Prefer": 'outlook.timezone="Europe/London"'
+    }
+
+    if mode == "next_week":
+        start = datetime.now(timezone.utc)
+        end = start + timedelta(days=7)
+
+        url = "https://graph.microsoft.com/v1.0/me/calendarView"
+        params = {
+            "startDateTime": start.strftime("%Y-%m-%dT%H:%M:%S"),
+            "endDateTime": end.strftime("%Y-%m-%dT%H:%M:%S"),
+            "$orderby": "start/dateTime",
+            "$select": "subject,start,end,location"
+        }
+
+    else: 
+        url = "https://graph.microsoft.com/v1.0/me/events"
+        params = {
+            "$orderby": "start/dateTime",
+            "$select": "subject,start,end,location",
+            "$top": 50
+        }
+
+    response = requests.get(url, headers=headers, params=params)
+
+    if response.status_code != 200:
+        raise Exception(f"Graph API error: {response.text}")
+
+    return response.json().get("value", [])
