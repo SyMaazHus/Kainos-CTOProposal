@@ -7,6 +7,10 @@
 |[Setting page](#setting-page)|
 |[Tutorial page](#tutorial-page)|
 |[WorkflowHub page](#workflowhub-page)|
+|[Azure Database Basic Integration](#azure-database-basic-integration)|
+|[Azure Settings Integration](#azure-settings-integration)|
+|[Azure Workflow Integration](#azure-workflow-integration)|
+|[Azure Dashboard Integration](#azure-dashboard-integration)|
 
 
 ## Chat page
@@ -66,7 +70,7 @@
 | DB2-01 | Update User Name | 1. Get original settings<br>2. Call updateSetting() | Name: `TestUser_[Rand]`<br>Email: `test@kainos.com` | Returns true; DB record matches new name |
 | DB2-02 | Update Avatar | 1. Call updateAvatar() | Base64: `data:image/png...` | Returns true; pfp field matches input string |
 
-## Azure Workflow Lifecycle Integration
+## Azure Workflow Integration
 
 | Test ID | Description | Steps | Test Data | Expected Result |
 | :--- | :--- | :--- | :--- | :--- |
@@ -75,7 +79,7 @@
 | DB3-03 | Switch Status | 1. Call switchStatus() | Status: `0` (Passive) | Returns true; status updated successfully |
 | DB3-04 | Delete Task | 1. Call deleteTask() | tempJobID | Returns true; task removed from database |
 
-## Azure Dashboard Data Integration
+## Azure Dashboard Integration
 
 | Test ID | Description | Steps | Test Data | Expected Result |
 | :--- | :--- | :--- | :--- | :--- |
