@@ -91,6 +91,11 @@ async function send(){
 
             addChatBubble(data.reply, 'bot');
             groqHistory.push({ role: "assistant", content: data.reply });
+            
+            // Trigger calendar refresh if meeting was created/deleted
+            if (data.reply.includes('Meeting') && (data.reply.includes('created') || data.reply.includes('deleted'))) {
+                triggerCalendarRefresh();
+            }
         } else {
             addChatBubble("Error: " + data.error, 'bot');
         }
@@ -136,5 +141,13 @@ function waitForMessage(){
     return div; 
 }
 
+// Trigger calendar refresh
+function triggerCalendarRefresh() {
+    if (typeof window.refreshCalendar === 'function') {
+        window.refreshCalendar();
+    } else {
+        localStorage.setItem('calendarNeedsRefresh', 'true');
+    }
+}
  
 
