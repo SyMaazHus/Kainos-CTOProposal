@@ -7,6 +7,10 @@ const websiteURL = 'http://127.0.0.1:3000/src/chat.html';
 // Go to the website home page before each test.
 
 test.beforeEach(async ({ page }) => {
+  await page.route('**/chat', async (route) => {
+        const json = { reply: "This is a mocked response" };
+        await route.fulfill({ json });
+    });
    await page.goto(websiteURL);
 });
 
@@ -59,6 +63,7 @@ test('Prevent sending empty messages', async ({ page }) => {
     
     // Verify still nothing happened
     await expect(page.locator('.message')).toHaveCount(0);
+    await expect(page.locator('#chatContainer')).not.toHaveClass(/active/);
   });
 
 //5
@@ -68,13 +73,20 @@ test('Send Message and expect reponse', async ({ page }) => {
     await page.fill('#chatInput', 'Hello');
     await page.click('#sendBtn'); 
 
-    const botBubble = page.locator('.message.bot').first();
-    await expect(botBubble).toBeVisible();
-    // Bot message should be one of the random replies from your array
-    // Verify message sent
     await expect(page.locator('.message.user')).toContainText('Hello');
-    await expect(page.locator('#chatInput')).toBeEmpty();
+
+    const botBubble = page.locator('.message.bot');
+    await expect(botBubble).toBeVisible();
+    await expect(botBubble).toContainText('This is a mocked response');
   });
 
+  
+test('UI should switch to active mode on send', async ({ page }) => {
+    await page.fill('#chatInput', 'Go');
+    await page.click('#sendBtn');
+    
+   
+    await expect(page.locator('#chatContainer')).toHaveClass(/active/);
+});
 
 // Future : we need navbar tests
