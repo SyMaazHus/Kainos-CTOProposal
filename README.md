@@ -69,6 +69,7 @@ Kainos CTO Project Proposal
 8. create a file called `.env` and write in following 
     ```
     GROQ_API_KEY="REMOVED"
+    CLIENT_ID="REMOVED"
     ```
 
 9. Try `npm start` again and it should run!
