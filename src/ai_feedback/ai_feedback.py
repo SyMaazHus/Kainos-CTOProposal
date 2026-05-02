@@ -1,3 +1,4 @@
+from datetime import datetime
 from authenticator.graph_api_token import get_graph_token
 from ai_email.graph_email import list_graph_emails
 from ai_calendar.graph_calendar import get_calendar_events
@@ -8,6 +9,8 @@ def get_feedback(time_table, client):
         
         recent_emails = list_graph_emails(token)
         recent_events = get_calendar_events(token, "next_week")
+
+        today_str = datetime.now().strftime("%A, %B %d, %Y at %H:%M")
 
         history = ""
         if time_table and isinstance(time_table, list):
@@ -28,7 +31,7 @@ def get_feedback(time_table, client):
         else:
              calendar_context = "Your calendar is empty for the next week." 
 
-        prompt = f""" Analyze the user's current situation using their full dashboard data:
+        prompt = f"""Today is {today_str}. Analyze the user's current situation using their full dashboard data:
 
                     RECENT DATABASE LOGS (Last 7 Tasks):
                     {history}
