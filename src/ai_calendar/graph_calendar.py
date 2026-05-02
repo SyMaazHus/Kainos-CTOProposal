@@ -1,6 +1,9 @@
 import requests
+from datetime import datetime, timedelta, timezone
+import requests
 
-def create_event(token: str, title: str, start: str, end: str, attendees_emails=None):
+
+def create_event(token: str, title: str, start: str, end: str, attendees_emails=None, timezone_str="Europe/London"):
     """
     Create meeting in personal calendar with optional attendees
     Attendees will automatically get invitation emails
@@ -12,9 +15,11 @@ def create_event(token: str, title: str, start: str, end: str, attendees_emails=
 
     payload = {
         "subject": title,
-        "start": {"dateTime": start, "timeZone": "UTC"},
-        "end": {"dateTime": end, "timeZone": "UTC"},
+        "start": {"dateTime": start, "timeZone": timezone_str},
+        "end": {"dateTime": end, "timeZone": timezone_str},
     }
+
+    print(f"[DEBUG graph_calendar] Payload: {payload}")
 
     if attendees_emails:
         payload["attendees"] = [
@@ -37,7 +42,6 @@ def delete_event(token: str, event_id: str):
     r.raise_for_status()
     return True
 
-
 def get_events(token: str):
     """
     Get all upcoming events
@@ -47,3 +51,43 @@ def get_events(token: str):
     r = requests.get(url, headers=headers)
     r.raise_for_status()
     return r.json().get("value", [])
+
+
+def get_calendar_events(access_token, mode="all"):
+    """
+    mode:
+        "all"
+        "next_week"
+    """
+
+    headers = {
+        "Authorization": f"Bearer {access_token}",
+        "Prefer": 'outlook.timezone="Europe/London"'
+    }
+
+    if mode == "next_week":
+        start = datetime.now(timezone.utc)
+        end = start + timedelta(days=7)
+
+        url = "https://graph.microsoft.com/v1.0/me/calendarView"
+        params = {
+            "startDateTime": start.strftime("%Y-%m-%dT%H:%M:%S"),
+            "endDateTime": end.strftime("%Y-%m-%dT%H:%M:%S"),
+            "$orderby": "start/dateTime",
+            "$select": "subject,start,end,location"
+        }
+
+    else: 
+        url = "https://graph.microsoft.com/v1.0/me/events"
+        params = {
+            "$orderby": "start/dateTime",
+            "$select": "subject,start,end,location",
+            "$top": 50
+        }
+
+    response = requests.get(url, headers=headers, params=params)
+
+    if response.status_code != 200:
+        raise Exception(f"Graph API error: {response.text}")
+
+    return response.json().get("value", [])

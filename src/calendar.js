@@ -1,12 +1,19 @@
 // Calendar Component
 let currentDate = new Date();
 let selectedDate = new Date();
+let calendarEvents = []; // 存储从 API 获取的真实事件
+
+const API_BASE = 'http://127.0.0.1:5000';
 
 // Initialize calendar
 function initCalendar() {
+    if (localStorage.getItem('calendarNeedsRefresh') === 'true') {
+        localStorage.removeItem('calendarNeedsRefresh');
+        calendarEvents = [];
+    }
     populateYearDropdown();
     setCurrentMonth();
-    updateCalendar();
+    loadCalendarEvents();
     setupEventListeners();
 }
 
@@ -41,12 +48,12 @@ function updateCalendar() {
     const year = parseInt(document.getElementById('yearSelect').value);
     const month = parseInt(document.getElementById('monthSelect').value);
     
-    // Update current date to selected month/year
-    currentDate = new Date(year, month, 1);
-    
-    // Get first day of month and number of days
-    const firstDay = new Date(year, month, 1).getDay();
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    // Update current date to selected month/year (use UTC)
+    currentDate = new Date(Date.UTC(year, month, 1));
+
+    // Get first day of month and number of days (use UTC)
+    const firstDay = new Date(Date.UTC(year, month, 1)).getUTCDay();
+    const daysInMonth = new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
     
     // Add empty cells for days before first day of month
     for (let i = 0; i < firstDay; i++) {
@@ -66,7 +73,7 @@ function updateCalendar() {
         dayNumber.textContent = day;
         cell.appendChild(dayNumber);
         
-        const cellDate = new Date(year, month, day);
+        const cellDate = new Date(Date.UTC(year, month, day));
         
         // Check if current day
         if (isToday(cellDate)) {
@@ -81,8 +88,8 @@ function updateCalendar() {
         // Add click event
         cell.addEventListener('click', () => selectDate(cellDate));
         
-        // Add sample events for demonstration - subtle dot indicator
-        const events = getSampleEvents(cellDate);
+        // Add events indicator
+        const events = getEventsForDate(cellDate);
         if (events.length > 0) {
             const eventIndicator = document.createElement('div');
             eventIndicator.className = 'event-indicator';
@@ -167,7 +174,7 @@ function showEvents(date) {
     modalTime.textContent = `Current time: ${now.toLocaleTimeString()}`;
     
     // Get events for this date
-    const events = getSampleEvents(date);
+    const events = getEventsForDate(date);
     
     eventsList.innerHTML = '';
     
@@ -254,3 +261,74 @@ function setupEventListeners() {
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', initCalendar);
+
+// Load calendar events from API
+async function loadCalendarEvents() {
+    try {
+        const response = await fetch(`${API_BASE}/get_calendar_events?mode=all`);
+        const data = await response.json();
+        if (data.status === 'success') {
+            calendarEvents = data.events;
+        } else {
+            console.error('Failed to load events:', data.message);
+            calendarEvents = [];
+        }
+    } catch (error) {
+        console.error('Error loading calendar events:', error);
+        calendarEvents = [];
+    }
+    updateCalendar();
+}
+
+// Get events for a specific date
+function getEventsForDate(date) {
+    if (!calendarEvents || calendarEvents.length === 0) {
+        return []; // No sample events - return empty array
+    }
+    const events = [];
+    // Use UTC date components for comparison to avoid timezone issues
+    const dateStr = `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(2, '0')}-${String(date.getUTCDate()).padStart(2, '0')}`;
+    calendarEvents.forEach(event => {
+        if (!event.start) return;
+        // Extract UTC date directly from the string (first 10 chars: YYYY-MM-DD)
+        const eventDateStr = event.start.substring(0, 10);
+        if (eventDateStr === dateStr) {
+            let timeStr;
+            if (event.isAllDay) {
+                timeStr = 'All Day';
+            } else {
+                // Extract time directly from API string (UTC time, no timezone conversion)
+                const startTime = extractTimeFromString(event.start);
+                if (event.end) {
+                    const endTime = extractTimeFromString(event.end);
+                    timeStr = `${startTime} - ${endTime}`;
+                } else {
+                    timeStr = startTime;
+                }
+            }
+            events.push({ time: timeStr, title: event.title, id: event.id });
+        }
+    });
+    return events;
+}
+
+// External refresh function
+window.refreshCalendar = function() {
+    loadCalendarEvents();
+};
+
+// Extract time from ISO string and format as HH:MM AM/PM
+function extractTimeFromString(dateTimeStr) {
+    // Extract HH:MM from "2026-05-03T01:00:00.0000000"
+    const timeMatch = dateTimeStr.match(/T(\d{2}):(\d{2})/);
+    if (!timeMatch) return '';
+    
+    let hours = parseInt(timeMatch[1], 10);
+    const minutes = timeMatch[2];
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    
+    hours = hours % 12;
+    hours = hours ? hours : 12; // 0 becomes 12
+    
+    return `${hours}:${minutes} ${ampm}`;
+}

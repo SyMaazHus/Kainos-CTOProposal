@@ -8,10 +8,12 @@ from dotenv import load_dotenv
 from ai_email.groq_email_handler import handle_email
 from ai_files.groq_files_handler import handle_files
 from ai_calendar.groq_calendar_handler import create_meeting_from_text, delete_meeting_from_text
+from ai_calendar.graph_calendar import get_calendar_events
 from intention_detector.classifier import detect_intent
 from intention_detector.workflow_classifier import detect_workflow_intent
 from ai_onenote.onenote_handler import get_recent_onenote_pages, create_summary_page
 from ai_files.onedrive_handler import get_root_files, move_file_to_folder
+from authenticator.graph_api_token import get_graph_token
 
 #Load API Key from .env
 load_dotenv()
@@ -307,6 +309,40 @@ def organize_onedrive_files():
         })
 
     return jsonify({"results": results})
+
+@app.route('/get_calendar_events', methods=['GET'])
+def get_calendar_events_endpoint():
+    try:
+        token = get_graph_token()
+        mode = request.args.get('mode', 'all')
+        events = get_calendar_events(token, mode=mode)
+
+        formatted_events = []
+        for event in events:
+            formatted_events.append({
+                "id": event.get("id"),
+                "title": event.get("subject", "No Title"),
+                "start": event.get("start", {}).get("dateTime"),
+                "end": event.get("end", {}).get("dateTime"),
+                "location": event.get("location", {}).get("displayName", ""),
+                "isAllDay": event.get("isAllDay", False)
+            })
+
+        return jsonify({
+            "status": "success",
+            "count": len(formatted_events),
+            "events": formatted_events
+        })
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
+
+@app.route('/login', methods=['GET'])
+def login_auth():
+    try:
+        token = get_graph_token()
+        return jsonify({"status": "authenticated", "token": token})
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
 
 if __name__ == '__main__':
     # Flush stdout so we see prints in Electron console immediately
