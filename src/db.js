@@ -1,8 +1,14 @@
-import {app} from 'electron';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sql from 'mssql';
 
+let app;
+try {
+    const electron = await import('electron');
+    app = electron.app;
+} catch (e) {
+    app = null;
+}
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -41,41 +47,42 @@ class AppDatabase {
         return stmt.recordset;
     }
 
-async addTask(title, description, intent, confidence, rule){
-    const conf = Number(confidence);
-    const ruleText = JSON.stringify(rule || {});
+    async addTask(title, description, intent, confidence, rule){
+        const conf = Number(confidence);
+        const ruleText = JSON.stringify(rule || {});
 
-    const info = await this.pool.request()
-        .input('title', sql.NVarChar, title)
-        .input('des', sql.NVarChar, description)
-        .input('status', sql.Int, 1)
-        .input('userID', sql.Int, 1)
-        .input('intention', sql.NVarChar, intent)
-        .input('confidence', sql.Float, Number.isFinite(conf) ? conf : 0)
-        .input('workflowRule', sql.NVarChar(sql.MAX), ruleText)
-        .query(`
-            INSERT INTO workflow (title, des, status, userID, intention, confidence, workflowRule)
-            OUTPUT INSERTED.jobID
-            VALUES (@title, @des, @status, @userID, @intention, @confidence, @workflowRule)
-        `);
+        const info = await this.pool.request()
+            .input('title', sql.NVarChar, title)
+            .input('des', sql.NVarChar, description)
+            .input('status', sql.Int, 1)
+            .input('userID', sql.Int, 1)
+            .input('intention', sql.NVarChar, intent)
+            .input('confidence', sql.Float, Number.isFinite(conf) ? conf : 0)
+            .input('workflowRule', sql.NVarChar(sql.MAX), ruleText)
+            .query(`
+                INSERT INTO workflow (title, des, status, userID, intention, confidence, workflowRule)
+                OUTPUT INSERTED.jobID
+                VALUES (@title, @des, @status, @userID, @intention, @confidence, @workflowRule)
+            `);
 
-    return {
-        jobID: info.recordset[0].jobID,
-        title,
-        des: description,
-        status: 1,
-        userID: 1,
-        intention: intent,
-        confidence: Number.isFinite(conf) ? conf : 0,
-        workflowRule: ruleText
-    };
-}
+        return {
+            jobID: info.recordset[0].jobID,
+            title,
+            des: description,
+            status: 1,
+            userID: 1,
+            intention: intent,
+            confidence: Number.isFinite(conf) ? conf : 0,
+            workflowRule: ruleText
+        };
+    }
 
     async deleteTask(jobID){
         const info = await this.pool.request()
                     .input('jobID', sql.Int, jobID)
                     .query('DELETE FROM workflow WHERE jobID = @jobID');
-        return info.rowsAffected[0] > 0;
+
+        return info.rowsAffected && info.rowsAffected[0] > 0;
     }
 
     async switchStatus(jobID,status){
@@ -83,12 +90,13 @@ async addTask(title, description, intent, confidence, rule){
                     .input('status', sql.Int, status)
                     .input('jobID', sql.Int, jobID)
                     .query('UPDATE workflow SET status = @status WHERE jobID = @jobID');
-        return info.rowsAffected[0] > 0;
+
+        console.log(`   DEBUG: Update JobID ${jobID} result:`, info.rowsAffected);
+        return info.rowsAffected && info.rowsAffected[0] > 0;
     }
 
-        async getSetting() {
+    async getSetting() {
         try {
-
             const result = await this.pool.request()
                 .input('userID', sql.Int, 1) 
                 .query(`
@@ -109,7 +117,7 @@ async addTask(title, description, intent, confidence, rule){
         }
     }
 
-        async updateSetting(displayName, email, phone, notifications) {
+    async updateSetting(displayName, email, phone, notifications) {
         try {
             const result = await this.pool.request()
                 .input('name', sql.NVarChar, displayName)
@@ -125,8 +133,6 @@ async addTask(title, description, intent, confidence, rule){
                         Notifications = @notify
                     WHERE UserID = @userID
                 `);
-
-
             return result.rowsAffected[0] > 0;
         } catch (err) {
             console.error("SQL updateSetting error:", err);
@@ -134,8 +140,7 @@ async addTask(title, description, intent, confidence, rule){
         }
     }
 
-
-        async updateAvatar(base64) {
+    async updateAvatar(base64) {
         try {
             const result = await this.pool.request()
                 .input('pfp', sql.NVarChar(sql.MAX), base64) 
@@ -145,15 +150,12 @@ async addTask(title, description, intent, confidence, rule){
                     SET PFP = @pfp
                     WHERE UserID = @userID
                 `);
-
             return result.rowsAffected[0] > 0;
         } catch (err) {
             console.error("SQL updateAvatar error:", err);
             return false;
         }
     }
-
-    // Insights Page
 
     async addTimeActivity(timeSpent, taskName, dateLogged, currentTime){
         try {
@@ -188,16 +190,11 @@ async addTask(title, description, intent, confidence, rule){
         }
     }
 
-
-    // Dashboard 
-
     async getActiveWorkflows(){
         try {
-        const stmt = await this.pool.request()
-            .query(`SELECT *
-                    FROM workflow
-                    WHERE status = 1`);
-        return stmt.recordset;
+            const stmt = await this.pool.request()
+                .query(`SELECT * FROM workflow WHERE status = 1`);
+            return stmt.recordset;
         }
         catch (err) {
             console.error("SQL get active workflows:", err);
@@ -207,11 +204,9 @@ async addTask(title, description, intent, confidence, rule){
 
     async getPassiveWorkflows(){
         try {
-        const stmt = await this.pool.request()
-            .query(`SELECT *
-                    FROM workflow 
-                    WHERE status = 0`);
-        return stmt.recordset;
+            const stmt = await this.pool.request()
+                .query(`SELECT * FROM workflow WHERE status = 0`);
+            return stmt.recordset;
         }
         catch (err) {
             console.error("SQL get passive workflows:", err);
@@ -221,9 +216,9 @@ async addTask(title, description, intent, confidence, rule){
 
     async getTimeTable(){
         try {
-        const stmt = await this.pool.request()
-            .query(`SELECT TOP 7 * FROM Insights ORDER BY TaskID DESC`);
-        return stmt.recordset;
+            const stmt = await this.pool.request()
+                .query(`SELECT TOP 7 * FROM Insights ORDER BY TaskID DESC`);
+            return stmt.recordset;
         }
         catch (err) {
             console.error("SQL get time table:", err);
@@ -238,17 +233,16 @@ async addTask(title, description, intent, confidence, rule){
     }
 
     async updateWorkflowProcessedPage(jobID, pageId){
-    const result = await this.pool.request()
-        .input('jobID', sql.Int, jobID)
-        .input('pageId', sql.NVarChar, pageId)
-        .query(`
-            UPDATE workflow
-            SET lastProcessedPageId = @pageId,
-                lastRun = GETDATE()
-            WHERE jobID = @jobID
-        `);
-
-    return result.rowsAffected[0] > 0;
+        const result = await this.pool.request()
+            .input('jobID', sql.Int, jobID)
+            .input('pageId', sql.NVarChar, pageId)
+            .query(`
+                UPDATE workflow
+                SET lastProcessedPageId = @pageId,
+                    lastRun = GETDATE()
+                WHERE jobID = @jobID
+            `);
+        return result.rowsAffected[0] > 0;
     }
 }
 
