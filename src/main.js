@@ -58,8 +58,34 @@ app.whenReady().then( async () => {
   db = new AppDatabase;
   await db.connect();
   workflowHandler(db);
+  
+  // Start the Python Server
   startPythonServer();
-  createWindow();
+  
+  // Attempt to connect to python server if ready, if not retry until success
+  const checkPythonReady = async (retries = 10) => {
+        // run attempt loops
+        for (let i = 0; i < retries; i++) {
+            try {
+                console.log(`Pinging Python server (Attempt ${i + 1}/10)...`);
+                // connect to the Login from server.py
+                const response = await fetch('http://127.0.0.1:5000/login');
+                
+                if (response.ok) {
+                    console.log("Python is awake and authenticated! Launching Dashboard...");
+                    createWindow(); // Open Window (Dashboard) when success
+                    return; 
+                }
+            } catch (err) {
+                console.log("Server not ready yet, retrying.."); // log an unsuccessful attempt
+                await new Promise(resolve => setTimeout(resolve, 1500));
+            }
+        }
+        console.error("Fatal: Could not connect to Python server."); // No success after several loops
+    };
+
+    // Run Loop
+    checkPythonReady();
 
   setInterval(async () => {
 

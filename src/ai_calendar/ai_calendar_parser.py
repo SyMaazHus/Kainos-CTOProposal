@@ -28,7 +28,7 @@ IMPORTANT TIME RULES:
 Return this exact JSON structure:
 {{
     "intent": "create_meeting" or "delete_meeting",
-    "title": "meeting title (short, required for create, optional for delete)",
+    "title": "meeting title (short, required for create, optional for delete), If the user does not provide a specific subject, set this to 'Meeting'",
     "start_datetime": "YYYY-MM-DDTHH:MM:SS (Europe/London local time, required for create, optional for delete)",
     "end_datetime": "YYYY-MM-DDTHH:MM:SS (Europe/London local time, required for create, optional for delete)",
     "attendees": ["email1@example.com", "email2@example.com"],

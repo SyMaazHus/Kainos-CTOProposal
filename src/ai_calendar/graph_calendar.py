@@ -1,6 +1,5 @@
 import requests
 from datetime import datetime, timedelta, timezone
-import requests
 
 
 def create_event(token: str, title: str, start: str, end: str, attendees_emails=None, timezone_str="Europe/London"):

@@ -20,12 +20,36 @@ const renderWork = async () => {
         addToWorkflow(WorkflowWidget,task.title );
 
     });
-    const todo = await window.apiDB.getPassiveWorkflows();
-    todo.forEach(item =>{
 
-        addToTodo(TaskWidget, item.title);
 
-    });
+    // Connect to server.py back-end through get calendar events
+    try {
+        const calResponse = await fetch('http://127.0.0.1:5000/get_calendar_events?mode=next_week');
+        const calData = await calResponse.json();
+
+        // If data has been fetched successfully
+        if (calData.status === "success") {
+            // if there is no meetings / events
+            if (calData.events.length === 0) {
+                addToTodo(TaskWidget, "No Upcoming Meetings/Tasks this week!") // Tell UI
+            } else {
+                // for each event, get the date and time
+                calData.events.forEach(event =>{
+                    let eventDate = new Date(event.start);
+                    let timeString = eventDate.toLocaleDateString([], { hour: '2-digit', minute: '2-digit' });  
+                    
+                    // Add event title, data and time to Widget
+                    addToTodo(TaskWidget, `${event.title} (${timeString})`);
+                })
+            }
+        } else {
+            console.error("Calendar fetch returned an error:", calendarData.message);
+            addToTodo(TaskWidget, "Failed to load calendar.");
+        }
+    } catch (err) {
+        console.error("Failed to connect to Calendar Endpoint:", err);
+        addToTodo(TaskWidget, "Calendar connection failed.");
+    }
 
     const times = await window.apiDB.getTimeTable();
     times.forEach(item =>{
@@ -35,8 +59,35 @@ const renderWork = async () => {
         addToTimeTask(TimeSpentWidget, item.Task, timeToPrint);
 
     });
+    
+    // Clear to avoid any overlap
+    BriefWidget.innerHTML = "";
+    addToBrief(BriefWidget,"Getting Your Personalised Feedback...");
 
-    addToBrief(BriefWidget,"... No tasks yet");
+    // Connect to server.py backend, AI Brief function
+    try {
+        const response = await fetch('http://127.0.0.1:5000/get_ai_brief', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                time_table: times // Passing the Insights DB to server
+            })
+        });
+
+        const data = await response.json();
+        
+        // Update the UI
+        BriefWidget.innerHTML = "";
+        addToBrief(BriefWidget, data.brief);
+        
+
+    } catch (err) {
+        console.error("AI Feedback Connection Failed:", err);
+        BriefWidget.innerHTML = "";
+        addToBrief(BriefWidget, "AI Feedback Connection Failed.");
+    }
+
+
 }
 
 renderWork();

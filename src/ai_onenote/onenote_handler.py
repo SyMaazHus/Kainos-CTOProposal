@@ -13,7 +13,7 @@ SCOPES = ["User.Read", "Notes.ReadWrite"]
 
 TOKEN_CACHE_FILE = "ms_token_cache.bin"
 GRAPH = "https://graph.microsoft.com/v1.0"
-
+GRAPH_BASE = "https://graph.microsoft.com/v1.0/me/onenote"
 
 def get_token():
     cache = msal.SerializableTokenCache()
@@ -191,3 +191,87 @@ def get_recent_onenote_pages(limit=20):
         })
 
     return pages
+
+def get_notebooks(token):
+    headers = {
+        "Authorization": f"Bearer {token}",
+        "Content-Type": "application/json"
+    }
+    r = requests.get(f"{GRAPH_BASE}/notebooks", headers=headers)
+    return r.json().get('value', [])
+
+def get_sections(token, notebook_id=None):
+    headers = {
+        "Authorization": f"Bearer {token}",
+        "Content-Type": "application/json"
+    }
+    if notebook_id:
+        url = f"{GRAPH_BASE}/sections?$filter=parentNotebook/id eq '{notebook_id}'"
+    else:
+        url = f"{GRAPH_BASE}/sections"
+    response = requests.get(url, headers=headers)
+    return response.json().get('value', [])
+
+def get_pages(token, section_id=None):
+    headers = {
+        "Authorization": f"Bearer {token}",
+        "Content-Type": "application/json"
+    }
+    endpoint = f"{GRAPH_BASE}/sections/{section_id}/pages" if section_id else f"{GRAPH_BASE}/pages"
+    response = requests.get(endpoint, headers=headers)
+    return response.json().get('value', [])
+
+def search_onenote_pages(token, query):
+    headers = {
+        "Authorization": f"Bearer {token}",
+        "Content-Type": "application/json",
+        "Prefer": 'outlook.body-content-type="text"'
+    }
+    url = f"{GRAPH_BASE}/pages?$orderby=lastModifiedDateTime desc&$top=50&$select=title,id,links,parentSection"
+
+    try:
+        response = requests.get(url, headers=headers)
+        response.raise_for_status()
+        
+        data = response.json()
+        pages = data.get("value", [])
+
+        query = query.lower()
+        matches = []
+        
+        for p in pages:
+            title = p.get("title", "").lower()
+            if query in title:
+                matches.append(p)
+        
+        return matches
+
+    except Exception as e:
+        print(f"DEBUG: OneNote Search Error: {e}", flush=True)
+        return []
+
+def create_notebook(token, display_name):
+    headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
+    payload = {"displayName": display_name}
+    response = requests.post(f"{GRAPH_BASE}/notebooks", headers=headers, json=payload)
+    return response.json()
+
+def create_section(token, notebook_id, display_name):
+    headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
+    payload = {"displayName": display_name}
+    response = requests.post(f"{GRAPH_BASE}/notebooks/{notebook_id}/sections", headers=headers, json=payload)
+    return response.json()
+
+def create_page(token, section_id, title, html_content):
+    headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/xhtml+xml"}
+    full_html = f"""
+    <!DOCTYPE html>
+    <html>
+      <head><title>{title}</title></head>
+      <body>
+        {html_content}
+      </body>
+    </html>
+    """
+    response = requests.post(f"{GRAPH_BASE}/sections/{section_id}/pages", headers=headers, data=full_html.encode('utf-8'))
+    return response.json()

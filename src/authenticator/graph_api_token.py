@@ -10,7 +10,7 @@ CLIENT_ID = os.getenv("CLIENT_ID")
 # Keep updating SCOPE to add the API features
 SCOPE = ["Calendars.ReadWrite", 
          "Mail.Read", "Mail.Send",
-         "Files.Read","Files.ReadWrite",
+         "Files.Read","Files.ReadWrite", "Notes.ReadWrite",
          "User.Read"] 
 
 # personal account
