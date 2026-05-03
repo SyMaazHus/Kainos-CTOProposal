@@ -15,6 +15,7 @@ from ai_onenote.onenote_handler import get_recent_onenote_pages, create_summary_
 from ai_files.onedrive_handler import get_root_files, move_file_to_folder
 from ai_feedback.ai_feedback import get_feedback
 from authenticator.graph_api_token import get_graph_token
+from ai_onenote.groq_onenote import handle_notes
 
 #Load API Key from .env
 load_dotenv()
@@ -62,7 +63,19 @@ def chat():
         email_reply = handle_email(intent, messages, user_input_text, client)
         if email_reply:
             return jsonify({"reply": email_reply})
-
+        
+    elif intent in [
+        "list_notebooks",
+        "list_sections",
+        "list_pages", 
+        "find_note", 
+        "create_notebook", 
+        "create_section",
+        "create_page"
+    ]:
+        notes_reply = handle_notes(intent, messages, user_input_text, client)
+        if notes_reply:
+            return jsonify({"reply": notes_reply})
 
     elif intent in [
         "list_files",

@@ -26,6 +26,13 @@ Possible intents:
 - upload_file
 - move_file
 - delete meeting
+- list_notebooks
+- find_note
+- take_note
+- create_notebook
+- create_section
+- list_sections
+- list_pages
 
 Return JSON only:
 {{
@@ -41,6 +48,13 @@ Rules:
 - classify as list_files if user asks to list/show/view files or documents.
 - classify as create_folder if user asks to create/make a folder/directory.
 - classify as download_file if user asks to download/get a file (usually mentions a filename).
+- classify as list_notebooks if the user wants to see their OneNote notebooks
+- list_sections: Use when user wants to see tabs/sections (e.g., "show the sections in this notebook").
+- list_pages: Use when user wants to see the individual notes/pages inside a specific section.
+- classify as find_note if the user is searching for a specific note, e.g., "Where is my note about X?" or "Search my notes for Y".
+- create_notebook: Use ONLY if the user explicitly wants to make a new notebook (e.g., "Create a notebook called Maaz").
+- create_section: Use if the user wants to add a new section/tab to a notebook.
+- create_page: User wants to create a new note or page inside a specific section.
 - otherwise normal_chat.
 
 User input:
