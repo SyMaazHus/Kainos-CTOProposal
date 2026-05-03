@@ -76,7 +76,7 @@
   word-wrap: break-word;     /* fallback */
   white-space: normal; 
 
-  font-family: "Play-Regular", Helvetica;
+  font-family: 'Silkscreen';
   font-weight: 40;
   color: #ffffff;
   font-size: 10px;
@@ -117,7 +117,6 @@
     display: flex;
       align-items: center;
       justify-content: center;
-      font-family: "Play-Regular", Helvetica;
       font-weight: 400;
       color: #ffffff;
       font-size: 20px;
@@ -136,7 +135,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: "Play-Regular", Helvetica;
       font-weight: 400;
       color: #ffffff;
       font-size: 10px;
@@ -204,7 +202,6 @@
     display: flex;
       align-items: center;
       justify-content: center;
-      font-family: "Play-Regular", Helvetica;
       font-weight: 400;
       color: #ffffff;
       font-size: 20px;
@@ -242,7 +239,6 @@
     display: flex;
       align-items: center;
       justify-content: center;
-      font-family: "Play-Regular", Helvetica;
       font-weight: 400;
       color: #ffffff;
       font-size: 20px;
@@ -281,7 +277,6 @@
     display: flex;
       align-items: center;
       justify-content: center;
-      font-family: "Play-Regular", Helvetica;
       font-weight: 400;
       color: #ffffff;
       font-size: 20px;
