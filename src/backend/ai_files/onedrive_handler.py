@@ -1,5 +1,5 @@
 import requests
-from ai_onenote.onenote_handler import get_token
+from backend.ai_onenote.onenote_handler import get_token
 
 GRAPH = "https://graph.microsoft.com/v1.0"
 

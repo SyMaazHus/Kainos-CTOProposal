@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta, timezone
 import pytz
-from authenticator.graph_api_token import get_graph_token
+from backend.authenticator.graph_api_token import get_graph_token
 from .graph_calendar import delete_event, create_event, get_events
 from .ai_calendar_parser import parse_meeting_with_ai
 

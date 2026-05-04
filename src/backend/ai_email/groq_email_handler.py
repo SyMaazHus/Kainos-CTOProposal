@@ -1,7 +1,7 @@
 import sys
 import os
 import json
-from authenticator.graph_api_token import get_graph_token
+from backend.authenticator.graph_api_token import get_graph_token
 from .graph_email import list_graph_emails, send_graph_email, search_graph_email
 
 def handle_email(intent, messages, user_input_text=None, client=None):
