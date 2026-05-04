@@ -3,41 +3,41 @@ class navbar extends HTMLElement {
     this.innerHTML = `
     <aside class="nav">
         <div class="nav-top">
-            <a href="dashboard.html" id="logo"><div class="logo">Logo</div></a>
+            <a href="/src/frontend/dashboard/dashboard.html" id="logo"><div class="logo">Logo</div></a>
         </div>
 
         <nav class="nav-mid">
             <ul>
                 <li>
-                    <button id="chat-nav" onclick="location.href='chat.html'" class="nav-icon">
+                    <button id="chat-nav" onclick="location.href='/src/frontend/chat/chat.html'" class="nav-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 40 40" fill="white" >
                             <path d="M0 40V4C0 2.9 0.391667 1.95833 1.175 1.175C1.95833 0.391667 2.9 0 4 0H36C37.1 0 38.0417 0.391667 38.825 1.175C39.6083 1.95833 40 2.9 40 4V28C40 29.1 39.6083 30.0417 38.825 30.825C38.0417 31.6083 37.1 32 36 32H8L0 40Z"/>
                         </svg>
                     </button>
                 </li>
                 <li>
-                    <button id="calendar-nav" onclick="location.href='calendar.html'" class="nav-icon">
+                    <button id="calendar-nav" onclick="location.href='/src/frontend/calendar/calendar.html'" class="nav-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="40" viewBox="0 0 36 40" fill="white">
                             <path d="M12 29C10.6 29 9.41667 28.5167 8.45 27.55C7.48333 26.5833 7 25.4 7 24C7 22.6 7.48333 21.4167 8.45 20.45C9.41667 19.4833 10.6 19 12 19C13.4 19 14.5833 19.4833 15.55 20.45C16.5167 21.4167 17 22.6 17 24C17 25.4 16.5167 26.5833 15.55 27.55C14.5833 28.5167 13.4 29 12 29ZM4 40C2.9 40 1.95833 39.6083 1.175 38.825C0.391667 38.0417 0 37.1 0 36V8C0 6.9 0.391667 5.95833 1.175 5.175C1.95833 4.39167 2.9 4 4 4H6V0H10V4H26V0H30V4H32C33.1 4 34.0417 4.39167 34.825 5.175C35.6083 5.95833 36 6.9 36 8V36C36 37.1 35.6083 38.0417 34.825 38.825C34.0417 39.6083 33.1 40 32 40H4ZM4 36H32V16H4V36Z"/>
                         </svg>
                     </button>
                 </li>
                 <li>
-                    <button id="workflow-nav" onclick="location.href='workflow.html'" class="nav-icon">
+                    <button id="workflow-nav" onclick="location.href='/src/frontend//workflow/workflow.html'" class="nav-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="white">
                             <path d="M30.6 33.4L33.4 30.6L26 23.2V14H22V24.8L30.6 33.4ZM24 44C21.2333 44 18.6333 43.475 16.2 42.425C13.7667 41.375 11.65 39.95 9.85 38.15C8.05 36.35 6.625 34.2333 5.575 31.8C4.525 29.3667 4 26.7667 4 24C4 21.2333 4.525 18.6333 5.575 16.2C6.625 13.7667 8.05 11.65 9.85 9.85C11.65 8.05 13.7667 6.625 16.2 5.575C18.6333 4.525 21.2333 4 24 4C26.7667 4 29.3667 4.525 31.8 5.575C34.2333 6.625 36.35 8.05 38.15 9.85C39.95 11.65 41.375 13.7667 42.425 16.2C43.475 18.6333 44 21.2333 44 24C44 26.7667 43.475 29.3667 42.425 31.8C41.375 34.2333 39.95 36.35 38.15 38.15C36.35 39.95 34.2333 41.375 31.8 42.425C29.3667 43.475 26.7667 44 24 44ZM24 40C28.4333 40 32.2083 38.4417 35.325 35.325C38.4417 32.2083 40 28.4333 40 24C40 19.5667 38.4417 15.7917 35.325 12.675C32.2083 9.55833 28.4333 8 24 8C19.5667 8 15.7917 9.55833 12.675 12.675C9.55833 15.7917 8 19.5667 8 24C8 28.4333 9.55833 32.2083 12.675 35.325C15.7917 38.4417 19.5667 40 24 40Z"/>
                         </svg>
                     </button>
                 </li>
                 <li>
-                    <button id="insights-nav" onclick="location.href='insights.html'" class="nav-icon">
+                    <button id="insights-nav" onclick="location.href='/src/frontend/insights/insights.html'" class="nav-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="white">
                             <path d="M16 36L24 29.9L32 36L29 26.1L37 20.4H27.2L24 10L20.8 20.4H11L19 26.1L16 36ZM24 44C21.2333 44 18.6333 43.475 16.2 42.425C13.7667 41.375 11.65 39.95 9.85 38.15C8.05 36.35 6.625 34.2333 5.575 31.8C4.525 29.3667 4 26.7667 4 24C4 21.2333 4.525 18.6333 5.575 16.2C6.625 13.7667 8.05 11.65 9.85 9.85C11.65 8.05 13.7667 6.625 16.2 5.575C18.6333 4.525 21.2333 4 24 4C26.7667 4 29.3667 4.525 31.8 5.575C34.2333 6.625 36.35 8.05 38.15 9.85C39.95 11.65 41.375 13.7667 42.425 16.2C43.475 18.6333 44 21.2333 44 24C44 26.7667 43.475 29.3667 42.425 31.8C41.375 34.2333 39.95 36.35 38.15 38.15C36.35 39.95 34.2333 41.375 31.8 42.425C29.3667 43.475 26.7667 44 24 44ZM24 40C28.4667 40 32.25 38.45 35.35 35.35C38.45 32.25 40 28.4667 40 24C40 19.5333 38.45 15.75 35.35 12.65C32.25 9.55 28.4667 8 24 8C19.5333 8 15.75 9.55 12.65 12.65C9.55 15.75 8 19.5333 8 24C8 28.4667 9.55 32.25 12.65 35.35C15.75 38.45 19.5333 40 24 40Z" />
                         </svg>
                     </button>
                 </li>
                 <li>
-                    <button onclick="location.href='tutorial.html'" class="nav-icon">
+                    <button onclick="location.href='/src/frontend/tutorial/tutorial.html'" class="nav-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
                             <path d="M24 4V12M24 36V44M9.86 9.86L15.52 15.52M32.48 32.48L38.14 38.14M4 24H12M36 24H44M9.86 38.14L15.52 32.48M32.48 15.52L38.14 9.86" stroke="#F5FAF9" stroke-opacity="0.7" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -47,7 +47,7 @@ class navbar extends HTMLElement {
         </nav>
 
         <div class="nav-bottom">
-            <button onclick="location.href='setting.html'" class="nav-icon" aria-label="Settings">
+            <button onclick="location.href='/src/frontend/settings/setting.html'" class="nav-icon" aria-label="Settings">
                 <svg ... > ... </svg>
             </button>
         </div>
