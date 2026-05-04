@@ -22,17 +22,15 @@ Possible intents:
 - normal_chat
 - list_files
 - create_folder
-- download_file
-- upload_file
 - move_file
 - delete meeting
 - list_notebooks
 - find_note
-- take_note
 - create_notebook
 - create_section
 - list_sections
 - list_pages
+- create_page
 
 Return JSON only:
 {{
@@ -47,7 +45,7 @@ Rules:
 - classify as search_email ONLY if the user provides a specific keyword, person, or category to find (e.g., "Find emails from Nottingham", "Search for meeting notes").
 - classify as list_files if user asks to list/show/view files or documents.
 - classify as create_folder if user asks to create/make a folder/directory.
-- classify as download_file if user asks to download/get a file (usually mentions a filename).
+- "move_file": "User wants to move a file from one location to another or into a specific folder",
 - classify as list_notebooks if the user wants to see their OneNote notebooks
 - list_sections: Use when user wants to see tabs/sections (e.g., "show the sections in this notebook").
 - list_pages: Use when user wants to see the individual notes/pages inside a specific section.
