@@ -1,3 +1,4 @@
+/*the scetion for workflow from database*/
 .workflow-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -7,11 +8,13 @@
     overflow: auto;
 }
 
+/*actucal card for workflow*/
 .workflow-card {
     padding: 5px;
     border-radius: 12px;
 }
 
+/*inner-box in workflow card displaying task description*/
 .inner-box { 
     display: flex;
     flex-direction: column;
@@ -21,6 +24,7 @@
     background-color: #477776;
 }
 
+/*header of workflow card*/
 .card-header {
     display: flex;
     justify-content: space-between;
@@ -28,12 +32,14 @@
     margin-bottom: 10px;
 }
 
+/*title of workflow card*/
 .card-title {
     font-size: 1.2em;
     font-weight: bold;
     color: white;
 }
 
+/*descripton box for workflow card*/
 .card-description-box {
     flex-grow: 1;
     padding: 10px;
@@ -45,6 +51,7 @@
     resize: none;
 }
 
+/*footer part of workflow card*/
 .card-footer {
     display: flex;
     justify-content: flex-end;
@@ -52,6 +59,7 @@
     color: white;
 }
 
+/*pop-up card when delete card is clicked*/
 .delete-clicked {
     width: 20px;
     height: 20px;
@@ -64,10 +72,12 @@
     cursor: pointer;
 }
 
+/*text status of workflow*/
 .card-status {
     font-size: 1em;
 }
 
+/*color of workflow's status*/
 .status-color {
     width: 15px;
     height: 15px;
@@ -76,21 +86,19 @@
     border-radius: 50%;
     cursor: pointer;
 }
-
 .status-active .status-color {
     background-color: #a7d0b3; 
 }
-
 .status-inactive .status-color {
     background-color: red; 
 }
 
+/*new workflow functionality*/
 .new-workflow {
     position: absolute;
     bottom: 20px;
     right: 40px;
 }
-
 .new-workflow-btn {
     display: flex;
     align-items: center;
@@ -103,12 +111,10 @@
     background-color: #fff;
     cursor: pointer;
 }
-
 .plus {
     font-size: 1.5em;
     color: #86ab93; 
 }
-
 .pop-up {
     display: none; 
     position: fixed; 
@@ -123,6 +129,8 @@
 .new-card h2{
     color: #86ab93; 
 }
+
+/*confirmation of deleteion*/
 .delete-question {  
     width: 300px;
     margin: 15% auto; 
@@ -133,13 +141,11 @@
     text-align: center;
     background-color: #e8ede4; 
 }
-
 .button-label {
     display: flex;
     justify-content: space-around;
     margin-top: 20px;
 }
-
 .cancel-button {
     padding: 8px 16px;
     border: 1px solid #86AB93;
@@ -148,7 +154,6 @@
     color: #1D1B20;
     cursor: pointer;
 }
-
 .delete-button {
     padding: 8px 16px;
     border: none;
@@ -158,6 +163,7 @@
     cursor: pointer;
 }
 
+/*new workflow form*/
 .new-card {
     position: relative;
     width: 80%; 
@@ -169,7 +175,6 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     background-color: #e8ede4; 
 }
-
 .close-button{
     position: absolute;
     float: right;
@@ -180,11 +185,9 @@
     color: #aaa;
     cursor: pointer;
 }
-
 .input-section{
     margin-bottom: 20px;
 }
-
 .input-section label{
     display:block;
     margin-bottom: 8px;
@@ -203,7 +206,6 @@
     justify-content: flex-end;
     margin-top: 20px;
 }
-
 .name-label, .description-label{
     width: 100%; 
     box-sizing: border-box; 

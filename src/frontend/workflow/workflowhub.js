@@ -14,7 +14,7 @@ const delCon = document.getElementById('deleteConfirm');
 
 let delCard;
 let delId;
-
+//render the workflow routine from database
 const renderWork = async () => {
     mainWrapper.innerHTML = '';
     const tasks = await window.apiWF.getAllWorkflow();
@@ -114,16 +114,6 @@ window.onclick = function(event){
         closeDelete(delBlock);
     }
 }
-
-// delBut.forEach( button =>{
-//     button.onclick = function(event){  
-//         delCard = button.closest('.workflow-card');
-//         const head = button.closest('.card-header');
-//         const title = head.querySelector('.card-title').innerText;
-//         fillName.innerText = title ;
-//         delBlock.style.display = 'block';
-//     }
-// });
 
 //form for recieve new task information
 form.addEventListener('submit', async function(event){
