@@ -4,6 +4,7 @@ body {
     margin: 0;
     background-color: #fff;
     overflow: hidden; 
+    font-family: 'Silkscreen';
 }
 
 .app-layout {
@@ -11,6 +12,7 @@ body {
     height: 100vh;
     background-color: #86AB93; 
     overflow: hidden;
+    font-family: 'Silkscreen';
 }
 
 /* The following code is the global information for the navigation bar. 
@@ -130,6 +132,7 @@ body {
     color: #4CAF50; 
     font-size: 1.5em;
     font-weight: 600;
+    font-family: inherit;
 }
 
 .header-right {
@@ -151,4 +154,8 @@ body {
     border-radius: 50%;
     background-color: none; 
     cursor: pointer;
+}
+
+.p {
+    font-size: 1.5em;
 }

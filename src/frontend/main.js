@@ -12,7 +12,7 @@ import AppDatabase from './db.js';
 import workflowHandler from './ipcHandler.js';
 import { fileURLToPath } from 'node:url';
 
-import { handleWorkflow } from './workflowExecutor.js';
+import { handleWorkflow } from '../frontend/workflow/workflowExecutor.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -36,11 +36,11 @@ function createWindow () {
     }
   });
 
-  mainWindow.loadFile(path.join(__dirname, 'dashboard.html'));
+  mainWindow.loadFile(path.join(__dirname, './dashboard/dashboard.html'));
 }
 
 function startPythonServer() {
-    const scriptPath = path.join(__dirname, 'server.py');
+    const scriptPath = path.join(__dirname, '../server.py');
     console.log("Starting Python server at:", scriptPath);
     pythonProcess = spawn('python', [scriptPath]); //Creates the process from getting server.py file (like running py on terminal)
 

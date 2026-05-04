@@ -2,7 +2,7 @@ import sys
 import os
 import re
 import json
-from authenticator.graph_api_token import get_graph_token
+from backend.authenticator.graph_api_token import get_graph_token
 from .onenote_handler import (
     get_notebooks, get_sections, get_pages, 
     create_notebook, create_section, create_page,

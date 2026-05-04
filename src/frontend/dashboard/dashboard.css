@@ -76,7 +76,7 @@
   word-wrap: break-word;     /* fallback */
   white-space: normal; 
 
-  font-family: "Play-Regular", Helvetica;
+  font-family: 'Silkscreen';
   font-weight: 40;
   color: #ffffff;
   font-size: 10px;
@@ -111,24 +111,23 @@
   border-width: 1px;
   border-color: #000;
   color: #000;
-
-
-  #Title {
-    display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: "Play-Regular", Helvetica;
-      font-weight: 400;
-      color: #ffffff;
-      font-size: 20px;
-      text-align: center;
-      letter-spacing: 0;
-      line-height: 27px;
-      white-space: nowrap;
-  }
-
 }
 /* This is the outline circle for the task item */
+#Title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 30px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 27px;
+    white-space: nowrap;
+    padding-top: 5px;
+    padding-bottom: 10px;
+  }
+
 
 #ContentText {
       height: auto;
@@ -136,10 +135,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: "Play-Regular", Helvetica;
       font-weight: 400;
       color: #ffffff;
-      font-size: 10px;
+      font-size: 14px;
       text-align: center;
       letter-spacing: 0;
 
@@ -158,6 +156,7 @@
     height: auto;
     min-height: 20px;
     margin: 5px;
+    padding: 5px;
     background-color: #604d59;
     border-radius: 35px;
     grid-template-columns: 1fr;
@@ -170,6 +169,7 @@
     overflow: hidden;
     height: auto;
     min-height: 20px;
+    padding: 5px;
     margin: 5px;
     background-color: #604d59;
     border-radius: 35px;
@@ -198,22 +198,6 @@
   border-width: 1px;
   border-color: #000;
   color: #000;
-
-
-  #Title {
-    display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: "Play-Regular", Helvetica;
-      font-weight: 400;
-      color: #ffffff;
-      font-size: 20px;
-      text-align: center;
-      letter-spacing: 0;
-      line-height: 27px;
-      white-space: nowrap;
-  }
-
 }
 
 /* The daily brief box will use the following CSS;
@@ -236,22 +220,19 @@
   border-color: #000;
   color: #000;
 
+  #OneInfoItem {
 
-  /* This is the text for the Upcoming tasks part of the */
-  #Title {
-    display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: "Play-Regular", Helvetica;
-      font-weight: 400;
-      color: #ffffff;
-      font-size: 20px;
-      text-align: center;
-      letter-spacing: 0;
-      line-height: 27px;
-      white-space: nowrap;
-  }
-
+    display: grid;
+    overflow: hidden;
+    height: auto;
+    min-height: 20px;
+    margin: 0px;
+    padding: 15px;
+    background-color: #604d59;
+    border-radius: 35px;
+    grid-template-columns: 1fr;
+    flex-direction: column !important;
+}
 }
 
 
@@ -274,21 +255,4 @@
   border-width: 1px;
   border-color: #000;
   color: #000;
-
-
-  /* This is the text for the Upcoming tasks part of the */
-  #Title {
-    display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: "Play-Regular", Helvetica;
-      font-weight: 400;
-      color: #ffffff;
-      font-size: 20px;
-      text-align: center;
-      letter-spacing: 0;
-      line-height: 27px;
-      white-space: nowrap;
-  }
-
 }

@@ -1,34 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="dashboard.css" />
-    <link rel="stylesheet" href="global.css" />
-
-    <script src="dashboard.js" defer type="module"></script>
-    <script src="navbar.js"></script>
-
+    <title>Workflow Hub</title>
+    <link rel="stylesheet" href="../globals/global.css" />
+    <link rel="stylesheet" href="workflowStyle.css" />
+    <script src="workflowhub.js" defer type="module"></script>
+    <script src="../globals/navbar.js"></script>
   </head>
-  
-  
   <body>
+    <main class="app-layout">
+        
+        <global-nav></global-nav>
 
-    
-    <!-- We utilise app layout to represent the overall window and therefore layout the whole window-->
-  <main class="app-layout"> 
-    <!-- This script here is the navigation bar - it just is being used to make the code look neater-->
-    <global-nav></global-nav>
-
-
-
-
-  <!--Main content is the main section of the webpage with all the widgets and details on it.-->
-  <div class="main-content">
-      <header class="header">
-                <h1 class="page-title">Your Dashboard</h1>
+        <div class="main-content">
+            <header class="header">
+                <h1 class="page-title">Workflow Hub</h1>
                 <div class="header-right">
-                    <img class="kainos-logo" src="assets/image-Kainos.png" alt="kainos" class="kainos-logo">
+                    <img class="kainos-logo" src="../assets/image-Kainos.png" alt="kainos" class="kainos-logo">
                     <button class="header-icon" aria-label="Notifications">
                         <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 58 58" fill="none">
                             <path d="M9.66699 45.9163V41.083H14.5003V24.1663C14.5003 20.8233 15.5073 17.8629 17.5212 15.2851C19.535 12.667 22.1531 10.9552 25.3753 10.1497V8.45801C25.3753 7.45106 25.7177 6.60523 26.4024 5.9205C27.1274 5.19551 27.9934 4.83301 29.0003 4.83301C30.0073 4.83301 30.8531 5.19551 31.5378 5.9205C32.2628 6.60523 32.6253 7.45106 32.6253 8.45801V10.1497C35.8475 10.9552 38.4656 12.667 40.4795 15.2851C42.4934 17.8629 43.5003 20.8233 43.5003 24.1663V41.083H48.3337V45.9163H9.66699ZM29.0003 53.1663C27.6712 53.1663 26.5232 52.7031 25.5566 51.7768C24.6302 50.8101 24.167 49.6622 24.167 48.333H33.8337C33.8337 49.6622 33.3503 50.8101 32.3837 51.7768C31.4573 52.7031 30.3295 53.1663 29.0003 53.1663ZM19.3337 41.083H38.667V24.1663C38.667 21.508 37.7205 19.2323 35.8274 17.3393C33.9344 15.4462 31.6587 14.4997 29.0003 14.4997C26.342 14.4997 24.0663 15.4462 22.1732 17.3393C20.2802 19.2323 19.3337 21.508 19.3337 24.1663V41.083Z" fill="#1D1B20"/>
@@ -40,51 +30,48 @@
                         </svg>
                     </button>
                 </div>
-      </header>
-
-
-<!-- This is where the floating suggestions will be found as designated in the figma design-->
-    <div id="FloatingSpace" class="FloatingSpace">
-
-    </div>
-
-<!-- This is where the chat box icon and linking button is going to be -->
-      <div class="ChatButton">
-        <a href="chat.html">
-          <!-- This image needs to be brought in-->
-            <img src="assets/Speech-Button.svg" alt="Chat Icon">
-        </a>
-      </div>
-  <div class="WidgetContainer">
- 
-<!-- This is the upcoming task box, with the title included-->
-      <div class="TaskBox" id="TaskBox">
-        <div class="Title" id="Title">Upcoming Tasks:</div>
-        
-      </div>
-
-<!-- This is the time spent box, with the insights image and the timed tags-->
-      <div class="TimeSpentBox" id="TimeSpentBox">
-        <div id="Title">Recent hours spent:</div>
-        
-      </div>
-<!-- This is the workflow box, with the information and links to the different workflows that have been developed-->
-      <div id="WorkflowBox" class="WorkflowBox">
-        <div id="Title">Current Workflows:</div>
-        
-      </div>
-
-<!-- This is the daily brief box, with the information about how many tasks are yet to complete or such -->
-      <div class="DailyBriefBox",id="DailyBriefBox">
-        <div id="Title">Daily Tasks:</div>
-      </div>
-      
-    
-    </div>
-
-
-      
-    </div>
-  </main>
-  </body>
+            </header>
+            <!-- div element contain workflow cards -->
+            <div class="workflow-cards">
+            </div>
+            <div class="new-workflow">
+                <button class="new-workflow-btn" id="addButton">
+                    <span class="plus">+</span>
+                    New workflow
+                </button>
+            </div>
+            <!-- pop up form for new task -->
+            <div class="pop-up" id="newCardForm">
+                <div class="new-card">
+                    <span class="close-button" id="closeBtn">&times;</span>
+                    <h2 class="card-title">Create new workflow</h2>
+                    <form class="new-workflow-form" id="newForm">
+                        <div class="input-section">
+                            <label for="task-name">Task name</label>
+                            <input type="text" class="name-label"id="taskName" required>
+                        </div>
+                        <div class="input-section">
+                            <label for="task-description">Task description</label>
+                           <textarea class="description-label"id="taskDescription" required></textarea>
+                        </div>
+                        <div class="new-card-button">
+                            <button type="submit" class="submit-button" id="submitNew">Add workflow</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- pop up for delete task -->
+            <div class="pop-up" id="deleteBlock">
+                <div class="delete-question">
+                    <h3>Delete Workflow?</h3>
+                    <p>Are you sure you want to delete <span id="fillTaskName"></span> workflow?</p>
+                    <div class="button-label">
+                        <button class="cancel-button" id="deleteCancel">Cancel</button>
+                        <button class="delete-button" id="deleteConfirm">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
 </html>

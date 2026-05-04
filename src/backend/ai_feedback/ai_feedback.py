@@ -1,7 +1,7 @@
 from datetime import datetime
-from authenticator.graph_api_token import get_graph_token
-from ai_email.graph_email import list_graph_emails
-from ai_calendar.graph_calendar import get_calendar_events
+from backend.authenticator.graph_api_token import get_graph_token
+from backend.ai_email.graph_email import list_graph_emails
+from backend.ai_calendar.graph_calendar import get_calendar_events
 
 def get_feedback(time_table, client):
     try:

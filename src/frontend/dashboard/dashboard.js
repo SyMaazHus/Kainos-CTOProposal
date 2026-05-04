@@ -166,6 +166,9 @@ function addToBrief(BriefBox, information){
 
     text.innerHTML = information;
 
+    item.style.backgroundColor = ColourCollections[Math.floor(Math.random() * 3)];
+
+
     item.appendChild(text);
     BriefBox.appendChild(item);
 

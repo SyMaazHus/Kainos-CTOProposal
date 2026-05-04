@@ -5,17 +5,17 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from groq import Groq
 from dotenv import load_dotenv
-from ai_email.groq_email_handler import handle_email
-from ai_files.groq_files_handler import handle_files
-from ai_calendar.groq_calendar_handler import create_meeting_from_text, delete_meeting_from_text
-from ai_calendar.graph_calendar import get_calendar_events
-from intention_detector.classifier import detect_intent
-from intention_detector.workflow_classifier import detect_workflow_intent
-from ai_onenote.onenote_handler import get_recent_onenote_pages, create_summary_page
-from ai_files.onedrive_handler import get_root_files, move_file_to_folder
-from ai_feedback.ai_feedback import get_feedback
-from authenticator.graph_api_token import get_graph_token
-from ai_onenote.groq_onenote import handle_notes
+from backend.ai_email.groq_email_handler import handle_email
+from backend.ai_files.groq_files_handler import handle_files
+from backend.ai_calendar.groq_calendar_handler import create_meeting_from_text, delete_meeting_from_text
+from backend.ai_calendar.graph_calendar import get_calendar_events
+from backend.intention_detector.classifier import detect_intent
+from backend.intention_detector.workflow_classifier import detect_workflow_intent
+from backend.ai_onenote.onenote_handler import get_recent_onenote_pages, create_summary_page
+from backend.ai_files.onedrive_handler import get_root_files, move_file_to_folder
+from backend.ai_feedback.ai_feedback import get_feedback
+from backend.authenticator.graph_api_token import get_graph_token
+from backend.ai_onenote.groq_onenote import handle_notes
 
 #Load API Key from .env
 load_dotenv()
