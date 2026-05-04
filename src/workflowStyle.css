@@ -191,7 +191,7 @@
     color:#86ab93; 
 }
 .input-section textarea{
-    width: 90%;
+    width: 100%;
     padding: 10px;
     border: 1px;
     border-radius: 5px;
@@ -203,6 +203,29 @@
     justify-content: flex-end;
     margin-top: 20px;
 }
+
+.name-label, .description-label{
+    width: 100%; 
+    box-sizing: border-box; 
+    padding: 12px 15px; 
+    background-color: #ffffff;
+    border: 1px solid #e8ede4; 
+    border-radius: 8px; 
+    color: #2c4a45;
+    font-size: 1rem;
+}
+.name-label{
+    min-height: 75px;
+}
+.description-label{
+    min-height: 100px;
+}
 .submit-button{
+    padding: 10px 24px;
     border: none;
+    border-radius: 5px;
+    background-color: #477776;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
 }
