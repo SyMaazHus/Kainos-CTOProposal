@@ -12,7 +12,7 @@ const TotalFocus = document.getElementById("totalFocus");
 const timerDisplay = document.getElementById("timer");
 const AverageSession = document.getElementById("averageSession");
 const SessionCount = document.getElementById("sessionCount");
-const BestDat = document.getElementById("bestDay");
+const BestDay = document.getElementById("bestDay");
 
 function formatTime(seconds) {
   const hrs = String(Math.floor(seconds / 3600)).padStart(2, "0");
@@ -216,10 +216,14 @@ getTotalTimeSpentOnWeek = async function(weekAgo){
 
 }
 
+//renders the visuals of the insights page to the user
 const renderWork = async () => {
+    //Constants used through the graphs and calculations
     const weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
     const dayIndices = [1, 2, 3, 4, 5, 6, 0]; // Mon-Sun
     const dataPoints = await Promise.all(dayIndices.map(day => getTotalTimeSpentOnDay(day))); // This is all days from the previous week not the current week to today
+    
+    // The bar chart of total time spent each day of the week passed, including today's date
     if (focusChart) {
     
       new Chart(focusChart, {
@@ -246,21 +250,21 @@ const renderWork = async () => {
 
     };
 
+    // The following awaits and sets are used to represent the data for the 4 green squares for the general data
     let maximum = Math.max(...dataPoints);
     let dayindex = dataPoints.indexOf(maximum);
 
-
-    BestDat.innerText = weekdays[dayindex];
+    BestDay.innerText = weekdays[dayindex];
 
     TotalFocus.innerText = await getTotalTimeSpentToday();
 
     SessionCount.innerText = await getTotalSessionsToday();
 
-    // AverageSession.innerText = await getAverageSessionTimeToday();
-
+    // Constants required for the line graph to function and show accurate data and axis
     const weekIndices = [4,3,2,1];
     const weekdataPoints = await Promise.all(weekIndices.map(week => getTotalTimeSpentOnWeek(week))); // This is all days from the previous week not the current week to today
 
+    // The line graph of the total time spent doing task each week with week 4 being the most recent
     if (productivityChart) {
     new Chart(productivityChart, {
       type: "line",
