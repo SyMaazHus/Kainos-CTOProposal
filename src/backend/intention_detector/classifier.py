@@ -50,7 +50,7 @@ Rules:
 - list_sections: Use when user wants to see tabs/sections (e.g., "show the sections in this notebook").
 - list_pages: Use when user wants to see the individual notes/pages inside a specific section.
 - classify as find_note if the user is searching for a specific note, e.g., "Where is my note about X?" or "Search my notes for Y".
-- create_notebook: Use ONLY if the user explicitly wants to make a new notebook (e.g., "Create a notebook called Maaz").
+- create_notebook: Use ONLY if the user explicitly wants to make a new notebook (e.g., "Create a notebook called Test").
 - create_section: Use if the user wants to add a new section/tab to a notebook.
 - create_page: User wants to create a new note or page inside a specific section.
 - otherwise normal_chat.
