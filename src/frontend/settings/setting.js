@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
         console.error("Critical Error: Save button NOT found in DOM!");
     }
-
+    //function displaying user's information from setting database
     const loadSettings = async () => {
         const data = await window.apiST.getSetting();
         if (data) {
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
     };
     loadSettings();
 
-
+    //function for save button, when click, system will update the database attributes by new value input
     saveBtn.onclick = async function() {
 
         const displayName = document.getElementById("display-name").value;

@@ -146,7 +146,7 @@ getTotalTimeSpentOnDay = async function(weekDay){
   });
   return totalTime;
 }
-
+//calculate total time spent today
 getTotalTimeSpentToday = async function(){
   const today = new Date();
 
@@ -161,7 +161,7 @@ getTotalTimeSpentToday = async function(){
   return returnVal;
 
 }
-
+//calculate total session today using getTimeSpentFromDate(today)
 getTotalSessionsToday = async function(){
   const today = new Date();
   const dateSearch = formatDateDB(today);
@@ -174,7 +174,7 @@ getTotalSessionsToday = async function(){
   const returnVal = totalSessions;
   return returnVal;
 }
-
+// calculate averge time spent per session from database using getTimeSpentFromDate(today)
 getAverageSessionTimeToday = async function(){
   const today = new Date();
 
@@ -189,7 +189,7 @@ getAverageSessionTimeToday = async function(){
   return returnVal;
 
 }
-
+//calculate total session today using getTimeSpentFromDate(this week)
 getTotalTimeSpentOnWeek = async function(weekAgo){
 
   const today = new Date();
@@ -289,51 +289,3 @@ const renderWork = async () => {
 }
 
 renderWork();
-
-// if (focusChart) {
-//   new Chart(focusChart, {
-//     type: "bar",
-//     data: {
-//       labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-//       datasets: [{
-//         label: "Hours",
-//         data: [getTotalTimeSpentOnDay(1),getTotalTimeSpentOnDay(2),getTotalTimeSpentOnDay(3), getTotalTimeSpentOnDay(4),getTotalTimeSpentOnDay(5),getTotalTimeSpentOnDay(6), getTotalTimeSpentOnDay(0) ],
-//         backgroundColor: "#4C7C78",
-//         borderRadius: 8
-//       }]
-//     },
-//     options: {
-//       responsive: true,
-//       plugins: {
-//         legend: {
-//           display: false
-//         }
-//       }
-//     }
-//   });
-// }
-
-// if (productivityChart) {
-//   new Chart(productivityChart, {
-//     type: "line",
-//     data: {
-//       labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
-//       datasets: [{
-//         label: "Productivity",
-//         data: [40, 55, 48, 70],
-//         borderColor: "#4C7C78",
-//         backgroundColor: "rgba(76, 124, 120, 0.2)",
-//         fill: true,
-//         tension: 0.4
-//       }]
-//     },
-//     options: {
-//       responsive: true,
-//       plugins: {
-//         legend: {
-//           display: false
-//         }
-//       }
-//     }
-//   });
-// }
