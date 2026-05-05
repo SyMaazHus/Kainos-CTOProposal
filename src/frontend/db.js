@@ -41,12 +41,13 @@ class AppDatabase {
             console.log("Failed to connect to Azure:", err);
         }
     }
-
+    //query getting all data from workflow table
     async getAllWorkflow(){
         const stmt = await this.pool.request().query('SELECT * FROM workflow');
         return stmt.recordset;
     }
-
+    //query for adding new data into workflow table from workflowhub page
+    //title:task title, description: task description, intent: intention of task, confidence: confidence score for AI, rule: condition of task
     async addTask(title, description, intent, confidence, rule){
         const conf = Number(confidence);
         const ruleText = JSON.stringify(rule || {});
@@ -76,7 +77,7 @@ class AppDatabase {
             workflowRule: ruleText
         };
     }
-
+    //query deleting task by jobID
     async deleteTask(jobID){
         const info = await this.pool.request()
                     .input('jobID', sql.Int, jobID)
@@ -84,7 +85,8 @@ class AppDatabase {
 
         return info.rowsAffected && info.rowsAffected[0] > 0;
     }
-
+    //query switch the current status
+    //jobID: task ID, status: task status
     async switchStatus(jobID,status){
         const info = await this.pool.request()
                     .input('status', sql.Int, status)
@@ -94,7 +96,7 @@ class AppDatabase {
         console.log(`   DEBUG: Update JobID ${jobID} result:`, info.rowsAffected);
         return info.rowsAffected && info.rowsAffected[0] > 0;
     }
-
+    //query fetching user's information from setting table
     async getSetting() {
         try {
             const result = await this.pool.request()
@@ -116,7 +118,8 @@ class AppDatabase {
             throw err;
         }
     }
-
+    //query updating user's information 
+    //displayName: username, email: user's email, phone: user's phone number, notifications: 
     async updateSetting(displayName, email, phone, notifications) {
         try {
             const result = await this.pool.request()
@@ -140,6 +143,7 @@ class AppDatabase {
         }
     }
 
+    //query updating user's personal profile
     async updateAvatar(base64) {
         try {
             const result = await this.pool.request()
@@ -156,7 +160,8 @@ class AppDatabase {
             return false;
         }
     }
-
+    //query record activity time spent 
+    //timeSpent: total time spent on task, taskName: task name, dateLogged: date of task addition(DDMMYYYY), currentTime: task complete time
     async addTimeActivity(timeSpent, taskName, dateLogged, currentTime){
         try {
             const result = await this.pool.request()
@@ -175,7 +180,8 @@ class AppDatabase {
             return false;
         }
     }
-    
+    //query fetching time spent data by dateLogged
+    //dateLogged: date of task addition(DDMMYYYY)
     async getTimeSpentFromDate(dateLogged){
         try{
             const result = await this.pool.request()
@@ -190,6 +196,7 @@ class AppDatabase {
         }
     }
 
+    //query fetching all active task in workflow table
     async getActiveWorkflows(){
         try {
             const stmt = await this.pool.request()
@@ -201,7 +208,7 @@ class AppDatabase {
             return false;
         }
     }
-
+     //query fetching all inactive task in workflow table
     async getPassiveWorkflows(){
         try {
             const stmt = await this.pool.request()
@@ -213,7 +220,7 @@ class AppDatabase {
             return false;
         }
     }
-
+     //query fetching top most recent task from dashboard table
     async getTimeTable(){
         try {
             const stmt = await this.pool.request()
@@ -231,7 +238,7 @@ class AppDatabase {
             await this.pool.close();
         }
     }
-
+    //query updating latest sumarised note
     async updateWorkflowProcessedPage(jobID, pageId){
         const result = await this.pool.request()
             .input('jobID', sql.Int, jobID)

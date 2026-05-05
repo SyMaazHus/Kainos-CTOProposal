@@ -2,8 +2,8 @@ import {app,BrowserWindow} from 'electron';
 import path from 'node:path';
 import {spawn} from 'node:child_process';
 
-import AppDatabase from './db.js';
-import workflowHandler from './ipcHandler.js';
+import appDatabase from './db.js';
+import databaseHandler from './ipcHandler.js';
 import { fileURLToPath } from 'node:url';
 
 import { handleWorkflow } from '../frontend/workflow/workflowExecutor.js';
@@ -33,6 +33,7 @@ function createWindow () {
   mainWindow.loadFile(path.join(__dirname, './dashboard/dashboard.html'));
 }
 
+
 function startPythonServer() {
     const scriptPath = path.join(__dirname, '../server.py');
     console.log("Starting Python server at:", scriptPath);
@@ -49,9 +50,9 @@ function startPythonServer() {
 
 
 app.whenReady().then( async () => {
-  db = new AppDatabase;
+  db = new appDatabase;
   await db.connect();
-  workflowHandler(db);
+  databaseHandler(db);
   
   // Start the Python Server
   startPythonServer();

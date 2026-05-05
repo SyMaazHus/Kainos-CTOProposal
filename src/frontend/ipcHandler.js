@@ -1,7 +1,8 @@
 import { ipcMain } from "electron";
 
-//workflow table
-export default function workflowHandler(db){
+
+export default function databaseHandler(db){
+    //workflow table
     //function in db.js for get all tasks
     ipcMain.handle('workflow:getAllWorkflow', async ()=>{
         return await db.getAllWorkflow();})
@@ -29,7 +30,6 @@ export default function workflowHandler(db){
 
 
     // setting
-
     ipcMain.handle('settings:getSetting', async () => {
         return await db.getSetting();
     });
