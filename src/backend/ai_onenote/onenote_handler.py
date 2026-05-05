@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 from datetime import datetime, timezone, timedelta
 
+# the basic configuration need to be loaded before call the AI and Azure
 load_dotenv()
 
 CLIENT_ID = os.getenv("MS_CLIENT_ID")
@@ -15,6 +16,7 @@ TOKEN_CACHE_FILE = "ms_token_cache.bin"
 GRAPH = "https://graph.microsoft.com/v1.0"
 GRAPH_BASE = "https://graph.microsoft.com/v1.0/me/onenote"
 
+# get the token for the whole application need to call Azure
 def get_token():
     cache = msal.SerializableTokenCache()
 
@@ -31,9 +33,11 @@ def get_token():
     accounts = app.get_accounts()
     result = None
 
+    # the account to access the Azure
     if accounts:
         result = app.acquire_token_silent(SCOPES, account=accounts[0])
 
+    # get the error message
     if not result:
         flow = app.initiate_device_flow(scopes=SCOPES)
 
@@ -53,7 +57,7 @@ def get_token():
 
     return result["access_token"]
 
-
+# uniform interface for get
 def graph_get(url):
     token = get_token()
     res = requests.get(
@@ -63,7 +67,7 @@ def graph_get(url):
     res.raise_for_status()
     return res
 
-
+# uniform interface for post
 def graph_post_html(url, html):
     token = get_token()
     res = requests.post(
@@ -77,30 +81,35 @@ def graph_post_html(url, html):
     res.raise_for_status()
     return res.json()
 
-
+# get the latest onenote page
 def get_latest_onenote_page():
     url = f"{GRAPH}/me/onenote/pages?$orderby=lastModifiedDateTime desc&$top=50"
     data = graph_get(url).json()
 
+    # record all the pages
     pages = data.get("value", [])
     if not pages:
         return None
 
     target_page = None
 
+    # extract each page
     for page in pages:
         title = page.get("title", "").lower().strip()
 
+        # skip summarised note 
         if title.startswith("ai summary"):
             continue
 
         if "summary" in title:
             continue
 
+        # skip if the note has not finished yet
         if not is_page_stable(page, minutes=5):
             print("Skipping unstable page:", page.get("title"), flush=True)
             continue
 
+        # skip that is not meeting page
         if not is_meeting_title(title):
             print("Skipping non-meeting page:", page.get("title"), flush=True)
             continue
@@ -117,13 +126,14 @@ def get_latest_onenote_page():
     soup = BeautifulSoup(html, "html.parser")
     text = soup.get_text("\n", strip=True)
 
+    # return the page
     return {
         "id": target_page["id"],
         "title": target_page.get("title", "Untitled"),
         "text": text
     }
 
-
+# create another summary page
 def create_summary_page(source_title, summary):
     html = f"""
     <html>
@@ -140,6 +150,7 @@ def create_summary_page(source_title, summary):
     url = f"{GRAPH}/me/onenote/pages"
     return graph_post_html(url, html)
 
+# check whether the note is finished throw renew in time
 def is_page_stable(page, minutes=5):
     last_modified = page.get("lastModifiedDateTime")
     if not last_modified:
@@ -151,6 +162,7 @@ def is_page_stable(page, minutes=5):
 
     return datetime.now(timezone.utc) - last_dt > timedelta(minutes=minutes)
 
+# check the title of meeting 
 def is_meeting_title(title):
     title = title.lower()
 
@@ -162,6 +174,7 @@ def is_meeting_title(title):
 
     return any(keyword in title for keyword in keywords)
 
+# get recent pages
 def get_recent_onenote_pages(limit=20):
     url = f"{GRAPH}/me/onenote/pages?$orderby=lastModifiedDateTime desc&$top={limit}"
     data = graph_get(url).json()
@@ -171,9 +184,11 @@ def get_recent_onenote_pages(limit=20):
     for page in data.get("value", []):
         title = page.get("title", "").lower().strip()
 
+        # skip AI summarisedn notes
         if title.startswith("ai summary") or "summary" in title:
             continue
 
+        # skip not finished note
         if not is_page_stable(page, minutes=5):
             print("Skipping unstable page:", page.get("title"), flush=True)
             continue
@@ -192,6 +207,7 @@ def get_recent_onenote_pages(limit=20):
 
     return pages
 
+# get notebook
 def get_notebooks(token):
     headers = {
         "Authorization": f"Bearer {token}",
@@ -200,11 +216,13 @@ def get_notebooks(token):
     r = requests.get(f"{GRAPH_BASE}/notebooks", headers=headers)
     return r.json().get('value', [])
 
+# get the section in onenote
 def get_sections(token, notebook_id=None):
     headers = {
         "Authorization": f"Bearer {token}",
         "Content-Type": "application/json"
     }
+    # a filter to select the target notebook
     if notebook_id:
         url = f"{GRAPH_BASE}/sections?$filter=parentNotebook/id eq '{notebook_id}'"
     else:
@@ -212,6 +230,7 @@ def get_sections(token, notebook_id=None):
     response = requests.get(url, headers=headers)
     return response.json().get('value', [])
 
+# get the pages
 def get_pages(token, section_id=None):
     headers = {
         "Authorization": f"Bearer {token}",
@@ -221,6 +240,7 @@ def get_pages(token, section_id=None):
     response = requests.get(endpoint, headers=headers)
     return response.json().get('value', [])
 
+# search for onenote pages
 def search_onenote_pages(token, query):
     headers = {
         "Authorization": f"Bearer {token}",
@@ -229,6 +249,7 @@ def search_onenote_pages(token, query):
     }
     url = f"{GRAPH_BASE}/pages?$orderby=lastModifiedDateTime desc&$top=50&$select=title,id,links,parentSection"
 
+    # try to find matched pages among all pages
     try:
         response = requests.get(url, headers=headers)
         response.raise_for_status()
@@ -250,18 +271,21 @@ def search_onenote_pages(token, query):
         print(f"DEBUG: OneNote Search Error: {e}", flush=True)
         return []
 
+# create a new notebook
 def create_notebook(token, display_name):
     headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
     payload = {"displayName": display_name}
     response = requests.post(f"{GRAPH_BASE}/notebooks", headers=headers, json=payload)
     return response.json()
 
+# create a new section
 def create_section(token, notebook_id, display_name):
     headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
     payload = {"displayName": display_name}
     response = requests.post(f"{GRAPH_BASE}/notebooks/{notebook_id}/sections", headers=headers, json=payload)
     return response.json()
 
+# create a new page
 def create_page(token, section_id, title, html_content):
     headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/xhtml+xml"}
     full_html = f"""

@@ -1,17 +1,19 @@
 import requests
 from datetime import datetime, timedelta, timezone
 
-
+# this functions aims to create a meeting in the Microsoft calendar
 def create_event(token: str, title: str, start: str, end: str, attendees_emails=None, timezone_str="Europe/London"):
     """
     Create meeting in personal calendar with optional attendees
     Attendees will automatically get invitation emails
     """
+    # Prepare HTTP headers with authentication token
     headers = {
         "Authorization": f"Bearer {token}",
         "Content-Type": "application/json"
     }
 
+    # Construct request payload for event creation
     payload = {
         "subject": title,
         "start": {"dateTime": start, "timeZone": timezone_str},
@@ -20,17 +22,21 @@ def create_event(token: str, title: str, start: str, end: str, attendees_emails=
 
     print(f"[DEBUG graph_calendar] Payload: {payload}")
 
+    # Add attendees if provided
     if attendees_emails:
         payload["attendees"] = [
             {"emailAddress": {"address": email}, "type": "required"}
             for email in attendees_emails
         ]
 
+    # Send POST request to Microsoft Graph API to create event
     r = requests.post("https://graph.microsoft.com/v1.0/me/events", headers=headers, json=payload)
+
+    # Raise exception if request failed
     r.raise_for_status()
     return r.json()
 
-
+# this function aims to help delete an existing event in the Microsoft calendar
 def delete_event(token: str, event_id: str):
     """
     Delete meeting in personal calendar
@@ -41,6 +47,7 @@ def delete_event(token: str, event_id: str):
     r.raise_for_status()
     return True
 
+# this function aims to get the top 50 events near in the calendar 
 def get_events(token: str):
     """
     Get all upcoming events
@@ -52,7 +59,9 @@ def get_events(token: str):
     return r.json().get("value", [])
 
 
+# this function aims to get the event for all or for next weeek 
 def get_calendar_events(access_token, mode="all"):
+    # two mode that user could choose
     """
     mode:
         "all"
@@ -64,6 +73,7 @@ def get_calendar_events(access_token, mode="all"):
         "Prefer": 'outlook.timezone="Europe/London"'
     }
 
+    # next week mode only get next week events
     if mode == "next_week":
         start = datetime.now(timezone.utc)
         end = start + timedelta(days=7)
@@ -76,6 +86,7 @@ def get_calendar_events(access_token, mode="all"):
             "$select": "subject,start,end,location"
         }
 
+    # get all the upcoming events in the calendar
     else: 
         url = "https://graph.microsoft.com/v1.0/me/events"
         params = {
