@@ -1,9 +1,3 @@
-// src/main.js
-
-// const { app, BrowserWindow } = require('electron');
-// const path = require('path'); 
-// const { spawn } = require('child_process');
-
 import {app,BrowserWindow} from 'electron';
 import path from 'node:path';
 import {spawn} from 'node:child_process';
@@ -29,13 +23,13 @@ function createWindow () {
     width: 800,
     height: 600,
     webPreferences: {
-      preload: path.join(__dirname,'preloader.js'),
+      preload: path.join(__dirname,'preloader.js'), //preload file bridge database API
       nodeIntegration: false,
       contextIsolation: true,
       sandbox: false
     }
   });
-
+  //display dashboard page as a deafault page
   mainWindow.loadFile(path.join(__dirname, './dashboard/dashboard.html'));
 }
 
@@ -90,7 +84,7 @@ app.whenReady().then( async () => {
   setInterval(async () => {
 
     console.log("Scheduler running...");
-
+    //wait for database connection
     const workflows = await db.getActiveWorkflows();
 
     for (const wf of workflows) {

@@ -1,17 +1,23 @@
 import { ipcMain } from "electron";
 
+//workflow table
 export default function workflowHandler(db){
+    //function in db.js for get all tasks
     ipcMain.handle('workflow:getAllWorkflow', async ()=>{
         return await db.getAllWorkflow();})
+    //function in db.js for add new automation task in cloumn { title, description, intent, confidence, rule(optional)}
     ipcMain.handle('workflow:addTask', async (_, title, description, intent, confidence, rule) => {
         return await db.addTask(title, description, intent, confidence, rule || {});
     });
+    //function in db.js for task deletion by parameter jobID 
     ipcMain.handle('workflow:deleteTask', async (_,jobID)=>{
         return await db.deleteTask(jobID);
     });
+    //function in db.js for activate/inactivate task automation by parameter jobID,status
     ipcMain.handle('workflow:switchStatus', async (_,jobID,status)=>{
         return await db.switchStatus(jobID,status);
     })
+    //function in db.js for connection between server.py-workflowhub page
     ipcMain.handle('workflow:analyseTask', async (_, description) => {
         const response = await fetch('http://127.0.0.1:5000/analyse-workflow', {
             method: 'POST',
