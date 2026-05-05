@@ -43,6 +43,7 @@ logs/
 # Cache
 .cache/
 electron-builder.yml
+ms_token_cache.bin
 
 # Playwright
 node_modules/
