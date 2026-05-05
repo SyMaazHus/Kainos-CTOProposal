@@ -1,6 +1,5 @@
 from backend.authenticator.graph_api_token import get_graph_token
 from .graph_files import list_files, create_folder, move_file
-# from .graph_files import download_file, upload_file
 from .ai_file_parser import parse_file_action_with_ai 
 import os
 
@@ -13,14 +12,17 @@ def handle_files(intent: str, user_input: str):
         # Parse once at the top for all intents that need params
         data = parse_file_action_with_ai(user_input)
 
+        # deal with intent of list_files
         if intent == "list_files":
 
             folder_name = (data.get("folder_name") or "").strip() 
 
+            # try to extract folder name
             if folder_name:
                 all_files = list_files(token, recursive=False)
                 folder_item = next((f for f in all_files if f.get("name", "").lower() == folder_name.lower() and "folder" in f), None)
 
+                # get the files in the folder
                 if folder_item:
                     folder_id = folder_item["id"]
                     files = list_files(token, folder_id=folder_id, recursive=False)
@@ -28,12 +30,15 @@ def handle_files(intent: str, user_input: str):
                 else:
                     return f"Could not find {folder_name}\n\n"
             else:
+                # list all the files
                 files = list_files(token, recursive=False)
                 file_context = "User Files\n\n"
 
+                # condition for not found a file
                 if not files:
                     return "Your OneDrive is empty."
-                
+            
+            # label each file found in the folder
             for f in files:
                 name = f.get("name", "Unknown")
                 label = "[Folder]" if "folder" in f else "[File]"
@@ -41,6 +46,7 @@ def handle_files(intent: str, user_input: str):
 
             return file_context
 
+        # create a folder
         elif intent == "create_folder":
             folder_name = data.get("folder_name", "").strip() 
             if not folder_name:
@@ -48,34 +54,19 @@ def handle_files(intent: str, user_input: str):
             create_folder(token, folder_name)
             return f"✅ Folder created: {folder_name}"
 
-        # elif intent == "download_file":
-        #     file_name = data.get("file_name", "").strip()  
-        #     if not file_name:
-        #         return "❌ Couldn't detect file name."
-        #     files = list_files(token, recursive=True)
-        #     file_id = next((f["id"] for f in files if f.get("name","").lower() == file_name.lower()), None)
-        #     if not file_id:
-        #         return f"❌ File '{file_name}' not found."
-        #     os.makedirs("./downloads", exist_ok=True)
-        #     download_file(token, file_id, f"./downloads/{file_name}")
-        #     return f"✅ Downloaded to ./downloads/{file_name}"
-
-        # elif intent == "upload_file":
-        #     local_path = data.get("local_path", "").strip()  
-        #     remote_name = data.get("remote_name", local_path).strip()
-        #     if not local_path or not os.path.exists(local_path):
-        #         return f"❌ Local file not found: {local_path}"
-        #     upload_file(token, local_path, remote_name)
-        #     return f"✅ Uploaded as {remote_name}"
-
+        # move file
         elif intent == "move_file":
-            file_name = data.get("file_name", "").strip()     
+            # get file
+            file_name = data.get("file_name", "").strip() 
+
+            # get the folder name    
             target_folder = data.get("target_folder", "").strip()
 
             root_items = list_files(token, recursive=False)
             search_items = list_files(token, recursive=True)
             all_items = root_items + search_items
 
+            # get the information of move to file
             file_item = next((f for f in all_items if f.get("name", "").lower() == file_name.lower() and "folder" not in f), None)
             folder_item = next((f for f in all_items if f.get("name", "").lower() == target_folder.lower() and "folder" in f), None)
 
