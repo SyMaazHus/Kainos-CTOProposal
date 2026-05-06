@@ -57,9 +57,9 @@ The primary goal of the system is to reduce context switching between different 
     npm install electron --save-dev
     ```
 
-6. Type `pip install flask groq python-dotenv flask-cors` in the VScode terminal
+6. Type `pip install -r requirements.txt` in the VScode terminal
     ```
-    pip install flask groq python-dotenv flask-cors
+    pip install -r requirements.txt
     ```
 
 7. Type the installation for the azure packages in the VScode terminal
