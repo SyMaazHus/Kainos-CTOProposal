@@ -1,0 +1,233 @@
+/*the scetion for workflow from database*/
+.workflow-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    flex-grow: 1;
+    gap: 30px;
+    padding-bottom: 100px; 
+    overflow: auto;
+}
+
+/*actucal card for workflow*/
+.workflow-card {
+    padding: 5px;
+    border-radius: 12px;
+}
+
+/*inner-box in workflow card displaying task description*/
+.inner-box { 
+    display: flex;
+    flex-direction: column;
+    min-height: 200px;
+    padding: 15px;
+    border-radius: 12px;
+    background-color: #477776;
+}
+
+/*header of workflow card*/
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+/*title of workflow card*/
+.card-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: white;
+}
+
+/*descripton box for workflow card*/
+.card-description-box {
+    flex-grow: 1;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    font-size: 1em;
+    background-color: #86ab93; 
+    color: #2c4a45;
+    resize: none;
+}
+
+/*footer part of workflow card*/
+.card-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: white;
+}
+
+/*pop-up card when delete card is clicked*/
+.delete-clicked {
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 1em;
+    background: transparent;
+    cursor: pointer;
+}
+
+/*text status of workflow*/
+.card-status {
+    font-size: 1em;
+}
+
+/*color of workflow's status*/
+.status-color {
+    width: 15px;
+    height: 15px;
+    margin-left: 5px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.status-active .status-color {
+    background-color: #a7d0b3; 
+}
+.status-inactive .status-color {
+    background-color: red; 
+}
+
+/*new workflow functionality*/
+.new-workflow {
+    position: absolute;
+    bottom: 20px;
+    right: 40px;
+}
+.new-workflow-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    border: 1px solid #86ab93; 
+    color: #86ab93; 
+    background-color: #fff;
+    cursor: pointer;
+}
+.plus {
+    font-size: 1.5em;
+    color: #86ab93; 
+}
+.pop-up {
+    display: none; 
+    position: fixed; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(0, 0, 0, 0.2); 
+    backdrop-filter: blur(5px); 
+    overflow: auto; 
+}
+.new-card h2{
+    color: #86ab93; 
+}
+
+/*confirmation of deleteion*/
+.delete-question {  
+    width: 300px;
+    margin: 15% auto; 
+    padding: 20px;
+    border: 1px solid #86AB93;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    text-align: center;
+    background-color: #e8ede4; 
+}
+.button-label {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+.cancel-button {
+    padding: 8px 16px;
+    border: 1px solid #86AB93;
+    border-radius: 5px;
+    background-color: transparent;
+    color: #1D1B20;
+    cursor: pointer;
+}
+.delete-button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #d9534f;
+    color: white;
+    cursor: pointer;
+}
+
+/*new workflow form*/
+.new-card {
+    position: relative;
+    width: 80%; 
+    max-width: 500px;
+    padding: 30px;
+    margin: 15% auto; 
+    border: 1px solid #86AB93;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #e8ede4; 
+}
+.close-button{
+    position: absolute;
+    float: right;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+}
+.input-section{
+    margin-bottom: 20px;
+}
+.input-section label{
+    display:block;
+    margin-bottom: 8px;
+    color:#86ab93; 
+}
+.input-section textarea{
+    width: 100%;
+    padding: 10px;
+    border: 1px;
+    border-radius: 5px;
+    resize: none ;
+}
+.new-card-button{
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+.name-label, .description-label{
+    width: 100%; 
+    box-sizing: border-box; 
+    padding: 12px 15px; 
+    background-color: #ffffff;
+    border: 1px solid #e8ede4; 
+    border-radius: 8px; 
+    color: #2c4a45;
+    font-size: 1rem;
+}
+.name-label{
+    min-height: 75px;
+}
+.description-label{
+    min-height: 100px;
+}
+.submit-button{
+    padding: 10px 24px;
+    border: none;
+    border-radius: 5px;
+    background-color: #477776;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}

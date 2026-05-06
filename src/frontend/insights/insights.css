@@ -1,0 +1,102 @@
+.widget {
+    background: #FFFFFF;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+  }
+
+/* use your Rectangle images as chart backgrounds */
+.chart1 { background-image: url("assets/Rectangle 42.png"); }
+.chart2 { background-image: url("assets/Rectangle 82.png"); }
+.chart3 { background-image: url("assets/Rectangle 83.png"); }
+.chart4 { background-image: url("assets/Rectangle 84.png"); }
+
+/* ✅ New overall layout under the header */
+.insights-body{
+  flex: 1;
+  display: grid;
+  grid-template-columns: 2.2fr 1fr; /* big left, small right */
+  gap: 18px;
+  margin-top: 14px;
+
+}
+
+/* LEFT: two big grey rectangles stacked */
+.left-panel{
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 18px;
+}
+
+/* RIGHT: top grey card + 4 small green boxes */
+.right-panel{
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 18px;
+}
+
+/* 2x2 green boxes */
+.green-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 14px;
+}
+
+/* Base widget look (keep yours if you already have it) */
+.widget{
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #4C7C78;
+  background: #fff;
+
+} 
+
+
+/* Grey rectangle style */
+.grey-card{
+  background-color: #D9DDD7; /* soft grey like Figma */
+}
+
+/* Green smaller boxes style */
+.widget.green-card{
+  background-color: #4C7C78;
+}
+
+.chart-card {
+  padding: 24px;
+}
+
+.chart-card h2 {
+  margin: 0 0 16px;
+  color: #1D1B20;
+}
+
+.chart-card canvas {
+  width: 100% !important;
+  max-height: 250px;
+}
+
+.green-card {
+  color: white;
+  padding: 20px;
+}
+
+.green-card h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.green-card p {
+  margin: 18px 0 0;
+  font-size: 30px;
+  font-weight: bold;
+}

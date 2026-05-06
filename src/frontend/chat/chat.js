@@ -1,3 +1,4 @@
+// Author: Basil Biji Chirathilattu 
 var replyContainer = document.getElementById("replyContainer");
 var chatInput = document.getElementById("chatInput");
 var replyContainer = document.getElementById("replyContainer");
@@ -7,6 +8,10 @@ const sendBtn = document.getElementById("sendBtn");
 const introBlock = document.getElementById("introBlock");
 const chatHistory = document.getElementById("chatHistory");
 const chatContainer = document.getElementById("chatContainer");
+
+let groqHistory = [
+    {role: "system", content: "Hello AI."}
+]
 
 replyContainer.addEventListener("click", function (e) {
 
@@ -51,7 +56,7 @@ chatInput.addEventListener("keydown", (e) => {
     }
 }); //logic for shift+enter making a new line. 
 
-function send(){
+async function send(){
     const text = chatInput.value.trim();
 
     if(!text){
@@ -66,20 +71,40 @@ function send(){
     chatInput.value = "";
     chatInput.style.height = "auto"
 
+    groqHistory.push({role: "user", content: text});
+    const loadingBubble = waitForMessage(); 
 
-    setTimeout(() => {
-        // this needs to be replaced with the AI logic. 
-        const botReplies = [
-            "That doesn't sound that productive",
-            "Well Done!",
-            "For. sure.",
-            "Would you like to search for that?"
-        ];
-        const randomReply = botReplies[Math.floor(Math.random() * botReplies.length)];
-        
-        addChatBubble(randomReply, 'bot');
-    }, 1500); 
 
+    try {
+        //talk to Python (port 5000)
+        const response = await fetch('http://127.0.0.1:5000/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ messages: groqHistory })
+        });
+
+        const data = await response.json();
+
+
+        if (data.reply) {
+            if(loadingBubble)loadingBubble.remove(); // removes the bubble 
+
+            addChatBubble(data.reply, 'bot');
+            groqHistory.push({ role: "assistant", content: data.reply });
+            
+            // Trigger calendar refresh if meeting was created/deleted
+            if (data.reply.includes('Meeting') && (data.reply.includes('created') || data.reply.includes('deleted'))) {
+                triggerCalendarRefresh();
+            }
+        } else {
+            addChatBubble("Error: " + data.error, 'bot');
+        }
+
+    } catch (error) {
+        document.getElementById(loadingId)?.remove();
+        addChatBubble("Could not connect to AI server.", 'bot');
+        console.error(error);
+    }
 
     //function to add the message onto screen 
 
@@ -97,5 +122,32 @@ function send(){
 
 }
 
+function waitForMessage(){
+    const div = document.createElement("div");
+
+    div.classList.add("message","bot");
+    //creates the three dots 
+    div.innerHTML = `
+        <div class="typing-indicator">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    `;
+
+    chatHistory.appendChild(div);
+    chatHistory.scrollTop = chatHistory.scrollHeight; //ensures that the scrollHeight is maintained 
+
+    return div; 
+}
+
+// Trigger calendar refresh
+function triggerCalendarRefresh() {
+    if (typeof window.refreshCalendar === 'function') {
+        window.refreshCalendar();
+    } else {
+        localStorage.setItem('calendarNeedsRefresh', 'true');
+    }
+}
  
 

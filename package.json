@@ -2,7 +2,8 @@
   "name": "team21_project",
   "version": "1.0.0",
   "description": "### Group member  - **name:** Basil Chirathilattu **email:** psybc14@nottingham.ac.uk - **name:** Hiu Yeung **email:** psyhy7@nottingham.ac.uk - **name:** Kanisorn Pojanavaraphan **email:** psykp4@nottingham.ac.uk - **name:** Lara Baker **email:** psylb11@nottingham.ac.uk - **name:** Rahma Suleiman **email:** psyrs21@nottingham.ac.uk - **name:** Shiyi Chen **email:** scysc8@nottingham.ac.uk - **name:** Syed Maaz Hussain **email:** psysh17@nottingham.ac.uk - **name:** Xuefei Wu **email:** scyxw12@nottingham.ac.uk - **name:** Xutong Zhai **email:** scyxz11@nottingham.ac.uk",
-  "main": "src/main.js",
+  "main": "src/frontend/main.js",
+  "type": "module",
   "directories": {
     "doc": "docs"
   },
@@ -10,7 +11,7 @@
     "start": "electron .",
     "dev": "electron .",
     "build": "electron-builder",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "repository": {
     "type": "git",
@@ -20,7 +21,15 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^39.2.0",
-    "electron-reloader": "^1.2.3"
+    "@electron/rebuild": "^4.0.3",
+    "@playwright/test": "^1.57.0",
+    "@types/node": "^24.10.1",
+    "electron": "^39.7.0",
+    "electron-reloader": "^1.2.3",
+    "jest": "^30.3.0"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.6.2",
+    "mssql": "^12.2.1"
   }
 }

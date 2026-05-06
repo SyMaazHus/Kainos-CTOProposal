@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta charset="utf-8" />
+        <title>Workflow Hub</title>
+        <link rel="stylesheet" href="../globals/global.css" />
+        <link rel="stylesheet" href="../workflow/workflowStyle.css" />
+        <link rel="stylesheet" href="calendar.css" />
+        <script src="../workflow/workflowhub.js" defer type="module"></script>
+        <script src="../globals/navbar.js"></script>
+
+    </head>
+    <body>
+    <div class="app-layout">
+        
+        <global-nav></global-nav>
+
+        <div class="main-content">
+            <header class="header">
+                <h1 class="page-title">Calendar Page</h1>
+                <div class="header-right">
+                    <img class="kainos-logo" src="../assets/image-Kainos.png" alt="kainos" class="kainos-logo">
+                    <button class="header-icon" aria-label="Notifications">
+                        <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 58 58" fill="none">
+                            <path d="M9.66699 45.9163V41.083H14.5003V24.1663C14.5003 20.8233 15.5073 17.8629 17.5212 15.2851C19.535 12.667 22.1531 10.9552 25.3753 10.1497V8.45801C25.3753 7.45106 25.7177 6.60523 26.4024 5.9205C27.1274 5.19551 27.9934 4.83301 29.0003 4.83301C30.0073 4.83301 30.8531 5.19551 31.5378 5.9205C32.2628 6.60523 32.6253 7.45106 32.6253 8.45801V10.1497C35.8475 10.9552 38.4656 12.667 40.4795 15.2851C42.4934 17.8629 43.5003 20.8233 43.5003 24.1663V41.083H48.3337V45.9163H9.66699ZM29.0003 53.1663C27.6712 53.1663 26.5232 52.7031 25.5566 51.7768C24.6302 50.8101 24.167 49.6622 24.167 48.333H33.8337C33.8337 49.6622 33.3503 50.8101 32.3837 51.7768C31.4573 52.7031 30.3295 53.1663 29.0003 53.1663ZM19.3337 41.083H38.667V24.1663C38.667 21.508 37.7205 19.2323 35.8274 17.3393C33.9344 15.4462 31.6587 14.4997 29.0003 14.4997C26.342 14.4997 24.0663 15.4462 22.1732 17.3393C20.2802 19.2323 19.3337 21.508 19.3337 24.1663V41.083Z" fill="#1D1B20"/>
+                        </svg>
+                    </button>
+                    <button class="header-icon" aria-label="User Account" >
+                        <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 67 67" fill="none">
+                            <path d="M16.3309 47.7372C18.7038 45.9226 21.3559 44.4919 24.2872 43.445C27.2184 42.3981 30.2893 41.8747 33.4997 41.8747C36.7101 41.8747 39.7809 42.3981 42.7122 43.445C45.6434 44.4919 48.2955 45.9226 50.6684 47.7372C52.2969 45.8295 53.5648 43.666 54.4721 41.2465C55.3794 38.8271 55.833 36.2448 55.833 33.4997C55.833 27.3115 53.6578 22.0422 49.3075 17.6919C44.9571 13.3415 39.6879 11.1663 33.4997 11.1663C27.3115 11.1663 22.0422 13.3415 17.6919 17.6919C13.3415 22.0422 11.1663 27.3115 11.1663 33.4997C11.1663 36.2448 11.62 38.8271 12.5273 41.2465C13.4346 43.666 14.7025 45.8295 16.3309 47.7372ZM33.4997 36.2913C30.7545 36.2913 28.4398 35.3492 26.5554 33.4648C24.671 31.5804 23.7288 29.2656 23.7288 26.5205C23.7288 23.7754 24.671 21.4606 26.5554 19.5762C28.4398 17.6919 30.7545 16.7497 33.4997 16.7497C36.2448 16.7497 38.5596 17.6919 40.4439 19.5762C42.3283 21.4606 43.2705 23.7754 43.2705 26.5205C43.2705 29.2656 42.3283 31.5804 40.4439 33.4648C38.5596 35.3492 36.2448 36.2913 33.4997 36.2913ZM33.4997 61.4163C29.6379 61.4163 26.0087 60.6835 22.6122 59.2179C19.2156 57.7523 16.2611 55.7632 13.7486 53.2507C11.2361 50.7382 9.24707 47.7837 7.78145 44.3872C6.31582 40.9906 5.58301 37.3615 5.58301 33.4997C5.58301 29.6379 6.31582 26.0087 7.78145 22.6122C9.24707 19.2156 11.2361 16.2611 13.7486 13.7486C16.2611 11.2361 19.2156 9.24707 22.6122 7.78145C26.0087 6.31582 29.6379 5.58301 33.4997 5.58301C37.3615 5.58301 40.9906 6.31582 44.3872 7.78145C47.7837 9.24707 50.7382 11.2361 53.2507 13.7486C55.7632 16.2611 57.7523 19.2156 59.2179 22.6122C60.6835 26.0087 61.4163 29.6379 61.4163 33.4997C Dani.4163 37.3615 60.6835 40.9906 59.2179 44.3872C57.7523 47.7837 55.7632 50.7382 53.2507 53.2507C50.7382 55.7632 47.7837 57.7523 44.3872 59.2179C40.9906 60.6835 37.3615 61.4163 33.4997 61.4163Z" fill="#1D1B20"/>
+                        </svg>
+                    </button>
+                </div>
+            </header>
+            
+            <!-- Calendar Container -->
+            <div class="calendar-container">
+                <!-- Navigation Header -->
+                <div class="calendar-header">
+                    <button class="nav-btn" onclick="changeMonth(-1)">←</button>
+                    <div class="month-display">
+                        <select id="yearSelect" class="date-select" onchange="updateCalendar()"></select>
+                        <select id="monthSelect" class="date-select" onchange="updateCalendar()">
+                            <option value="0">January</option>
+                            <option value="1">February</option>
+                            <option value="2">March</option>
+                            <option value="3">April</option>
+                            <option value="4">May</option>
+                            <option value="5">June</option>
+                            <option value="6">July</option>
+                            <option value="7">August</option>
+                            <option value="8">September</option>
+                            <option value="9">October</option>
+                            <option value="10">November</option>
+                            <option value="11">December</option>
+                        </select>
+                    </div>
+                    <button class="nav-btn" onclick="changeMonth(1)">→</button>
+                    <button class="today-btn" onclick="goToToday()">Today</button>
+                </div>
+
+                <!-- Weekday Headers -->
+                <div class="weekdays">
+                    <div>Sun</div>
+                    <div>Mon</div>
+                    <div>Tue</div>
+                    <div>Wed</div>
+                    <div>Thu</div>
+                    <div>Fri</div>
+                    <div>Sat</div>
+                </div>
+
+                <!-- Calendar Grid -->
+                <div class="calendar-grid" id="calendarGrid"></div>
+
+                <!-- Event Modal -->
+                <div class="modal" id="eventModal" style="display: none;">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeModal()">&times;</span>
+                        <h3 id="modalDate">Date</h3>
+                        <div class="events-list" id="eventsList">
+                            <p class="no-events">No events scheduled</p>
+                        </div>
+                        <div class="modal-time-display" id="modalTime"></div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+    <script src="calendar.js"></script>
+</body>
+</html>

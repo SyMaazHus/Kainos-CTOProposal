@@ -1,0 +1,161 @@
+/* This is the base code for the body and the general layout of the entire screen's container. */
+
+body {
+    margin: 0;
+    background-color: #fff;
+    overflow: hidden; 
+    font-family: 'Silkscreen';
+}
+
+.app-layout {
+    display: flex;
+    height: 100vh;
+    background-color: #86AB93; 
+    overflow: hidden;
+    font-family: 'Silkscreen';
+}
+
+/* The following code is the global information for the navigation bar. 
+    - This identifies the side icon
+    - The logo anchored at the top of the nav bar
+    - The settings icon anchored at the bottom of the bar
+*/
+
+.nav {
+    display: flex;
+    max-height: 100vh;
+    height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    width: 80px;
+
+    color: white;
+    background-color: #86AB93; 
+}
+
+.nav-top{
+    height: 5%;
+}
+
+.logo {
+    padding: 20px;
+    float: center;
+    color: white; 
+    font-weight: bold;
+    @media screen and (height: 550px){
+        margin-bottom: 15px;
+    }
+}
+
+
+
+.nav-mid {
+    flex-grow: 1; 
+    height: 80%;
+    @media screen and (height: 550px){
+        height: 300px;
+    }
+}
+
+
+.nav-mid ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 40px;
+}
+
+.nav-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    /* margin: 50px; */
+    
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    margin-left: 50px;
+    margin-right: 50px;
+
+    border: none;
+    border-radius: 5px;
+    background: transparent;
+    fill: white;
+    fill-opacity: 0.7;
+    cursor: pointer;
+}
+
+.nav-icon svg {
+    fill: white; 
+    fill-opacity: 0.7;
+}
+
+
+
+.nav-bottom {
+    flex-grow: 1;
+    max-height: 15%;
+    margin-top: 0px;
+    bottom: 5px;
+}
+
+
+/* This main content includes all of the area of which the whole of the application will be inlcuded 
+    - This should contain everything in the HTML
+*/
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 20px 40px;
+    border-top-left-radius: 103px;
+    background-color: #e8ede4; 
+}
+
+/* In the top of the main content box this is the information at the top.
+    - The interactable profile icon
+    - The notifiation bell
+    - The Kainos logo
+    - The page title
+*/
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+.page-title {
+    color: #4CAF50; 
+    font-size: 1.5em;
+    font-weight: 600;
+    font-family: inherit;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.kainos-logo {
+    width: 180px;
+    height: 120px;
+    margin: 0;
+}
+
+.header-icon {
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 50%;
+    background-color: none; 
+    cursor: pointer;
+}
+
+.p {
+    font-size: 1.5em;
+}

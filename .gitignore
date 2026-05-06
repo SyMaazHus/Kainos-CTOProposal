@@ -8,6 +8,15 @@ package-lock.json
 yarn.lock
 pnpm-lock.yaml
 
+# python
+__pycache__/
+**/__pycache__/
+*.pyc
+
+# Folder
+instance/
+
+
 # Builds
 dist/
 dist_electron/
@@ -34,3 +43,24 @@ logs/
 # Cache
 .cache/
 electron-builder.yml
+ms_token_cache.bin
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+# Playwright
+/playwright/.auth/
+
+/instance
+
+
+.venv/
+__pycache__/
+*.pyc
+.venv/
+__pycache__/
+*.pyc
