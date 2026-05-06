@@ -7,8 +7,8 @@
 - [About](#about)
 - [Project member](#team)
 - [Install & Setup](#install)
-- [Software Design V0.1]("docs/SoftwareDesignV1.md")
-- [Software Design V1.0]("docs/SoftwareDesignV2.md")
+- [Software Design V0.1](docs/SoftwareDesignV1.md)
+- [Software Design V1.0](docs/SoftwareDesignV2.md)
 
 ---
 <a id="about"></a>
