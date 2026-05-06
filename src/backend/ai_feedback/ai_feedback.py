@@ -7,9 +7,11 @@ def get_feedback(time_table, client):
     try:
         token = get_graph_token()
         
+        # get the event and email for feedback
         recent_emails = list_graph_emails(token)
         recent_events = get_calendar_events(token, "next_week")
-
+     
+     # the time of feedback
         today_str = datetime.now().strftime("%A, %B %d, %Y at %H:%M")
 
         history = ""
@@ -21,16 +23,19 @@ def get_feedback(time_table, client):
         else:
             history = "No recent activity recorded in the database."
 
+          # check the recent email to use it, if no recent email then just say no email
         if recent_emails:
              email_context = "\n".join([f"- {e['subject']} from {e['from']['emailAddress']['name']}" for e in recent_emails])
         else:
              email_context = "Your inbox is clear! No recent emails."
 
+          # check the recent events to use it, if no recent event then just say no event
         if recent_events:
              calendar_context = "\n".join([f"- {c['subject']} at {c['start']['dateTime']}" for c in recent_events])
         else:
              calendar_context = "Your calendar is empty for the next week." 
-
+          
+          # the basic rule for AI
         prompt = f"""Today is {today_str}. Analyze the user's current situation using their full dashboard data:
 
                     RECENT DATABASE LOGS (Last 7 Tasks):
@@ -52,6 +57,7 @@ def get_feedback(time_table, client):
                         - Do not use filler words, 
                 """
 
+          # the ai feedback output
         chat_completion = client.chat.completions.create(
             messages=[{"role": "system", "content": "You are a context-aware productivity assistant."},
                       {"role": "user", "content": prompt}],

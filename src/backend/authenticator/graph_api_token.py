@@ -19,6 +19,7 @@ app = PublicClientApplication(
     authority="https://login.microsoftonline.com/common"
 )
 
+# get the token to call Azure functions
 def get_graph_token():
     """
     get token for log in.

@@ -12,7 +12,7 @@ const TotalFocus = document.getElementById("totalFocus");
 const timerDisplay = document.getElementById("timer");
 const AverageSession = document.getElementById("averageSession");
 const SessionCount = document.getElementById("sessionCount");
-const BestDat = document.getElementById("bestDay");
+const BestDay = document.getElementById("bestDay");
 
 function formatTime(seconds) {
   const hrs = String(Math.floor(seconds / 3600)).padStart(2, "0");
@@ -146,7 +146,7 @@ getTotalTimeSpentOnDay = async function(weekDay){
   });
   return totalTime;
 }
-
+//calculate total time spent today
 getTotalTimeSpentToday = async function(){
   const today = new Date();
 
@@ -161,7 +161,7 @@ getTotalTimeSpentToday = async function(){
   return returnVal;
 
 }
-
+//calculate total session today using getTimeSpentFromDate(today)
 getTotalSessionsToday = async function(){
   const today = new Date();
   const dateSearch = formatDateDB(today);
@@ -174,7 +174,7 @@ getTotalSessionsToday = async function(){
   const returnVal = totalSessions;
   return returnVal;
 }
-
+// calculate averge time spent per session from database using getTimeSpentFromDate(today)
 getAverageSessionTimeToday = async function(){
   const today = new Date();
 
@@ -189,7 +189,7 @@ getAverageSessionTimeToday = async function(){
   return returnVal;
 
 }
-
+//calculate total session today using getTimeSpentFromDate(this week)
 getTotalTimeSpentOnWeek = async function(weekAgo){
 
   const today = new Date();
@@ -216,10 +216,14 @@ getTotalTimeSpentOnWeek = async function(weekAgo){
 
 }
 
+//renders the visuals of the insights page to the user
 const renderWork = async () => {
+    //Constants used through the graphs and calculations
     const weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
     const dayIndices = [1, 2, 3, 4, 5, 6, 0]; // Mon-Sun
     const dataPoints = await Promise.all(dayIndices.map(day => getTotalTimeSpentOnDay(day))); // This is all days from the previous week not the current week to today
+    
+    // The bar chart of total time spent each day of the week passed, including today's date
     if (focusChart) {
     
       new Chart(focusChart, {
@@ -246,21 +250,21 @@ const renderWork = async () => {
 
     };
 
+    // The following awaits and sets are used to represent the data for the 4 green squares for the general data
     let maximum = Math.max(...dataPoints);
     let dayindex = dataPoints.indexOf(maximum);
 
-
-    BestDat.innerText = weekdays[dayindex];
+    BestDay.innerText = weekdays[dayindex];
 
     TotalFocus.innerText = await getTotalTimeSpentToday();
 
     SessionCount.innerText = await getTotalSessionsToday();
 
-    // AverageSession.innerText = await getAverageSessionTimeToday();
-
+    // Constants required for the line graph to function and show accurate data and axis
     const weekIndices = [4,3,2,1];
     const weekdataPoints = await Promise.all(weekIndices.map(week => getTotalTimeSpentOnWeek(week))); // This is all days from the previous week not the current week to today
 
+    // The line graph of the total time spent doing task each week with week 4 being the most recent
     if (productivityChart) {
     new Chart(productivityChart, {
       type: "line",
@@ -289,51 +293,3 @@ const renderWork = async () => {
 }
 
 renderWork();
-
-// if (focusChart) {
-//   new Chart(focusChart, {
-//     type: "bar",
-//     data: {
-//       labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-//       datasets: [{
-//         label: "Hours",
-//         data: [getTotalTimeSpentOnDay(1),getTotalTimeSpentOnDay(2),getTotalTimeSpentOnDay(3), getTotalTimeSpentOnDay(4),getTotalTimeSpentOnDay(5),getTotalTimeSpentOnDay(6), getTotalTimeSpentOnDay(0) ],
-//         backgroundColor: "#4C7C78",
-//         borderRadius: 8
-//       }]
-//     },
-//     options: {
-//       responsive: true,
-//       plugins: {
-//         legend: {
-//           display: false
-//         }
-//       }
-//     }
-//   });
-// }
-
-// if (productivityChart) {
-//   new Chart(productivityChart, {
-//     type: "line",
-//     data: {
-//       labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
-//       datasets: [{
-//         label: "Productivity",
-//         data: [40, 55, 48, 70],
-//         borderColor: "#4C7C78",
-//         backgroundColor: "rgba(76, 124, 120, 0.2)",
-//         fill: true,
-//         tension: 0.4
-//       }]
-//     },
-//     options: {
-//       responsive: true,
-//       plugins: {
-//         legend: {
-//           display: false
-//         }
-//       }
-//     }
-//   });
-// }

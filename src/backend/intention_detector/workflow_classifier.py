@@ -3,7 +3,9 @@ from groq import Groq
 import os
 from dotenv import load_dotenv
 
+#Load API Key from .env
 load_dotenv()
+#Setup Groq Client
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
 def detect_workflow_intent(user_input: str):
@@ -54,6 +56,7 @@ User input:
         intent = data.get("intent", "unknown")
         confidence = float(data.get("confidence", 0))
 
+        # check the intent if not clear then label unknown
         if intent not in ["summarize_note", "organize_files", "unknown"]:
             intent = "unknown"
 

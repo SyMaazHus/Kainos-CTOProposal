@@ -4,24 +4,26 @@ from backend.authenticator.graph_api_token import get_graph_token
 from .graph_calendar import delete_event, create_event, get_events
 from .ai_calendar_parser import parse_meeting_with_ai
 
-LONDON_TZ = pytz.timezone('Europe/London')
+LONDON_TZ = pytz.timezone('Europe/London') # use London time zone 
 
 def create_meeting_from_text(user_input: str):
 
     try:
         data = parse_meeting_with_ai(user_input)
 
-        title = data.get("title", "Meeting")
-        attendees = data.get("attendees", [])
-        start_datetime = data.get("start_datetime")
-        end_datetime = data.get("end_datetime")
+        title = data.get("title", "Meeting")# meeting title
+        attendees = data.get("attendees", []) # meeting attendees  
+        start_datetime = data.get("start_datetime") # meeting start time
+        end_datetime = data.get("end_datetime") # meeting end time
 
+        # check if no start time then stop creating the meeting
         if not start_datetime:
             return "I understood you want a meeting, but I couldn't detect the time."
 
         print(f"[DEBUG] AI returned start_datetime: {start_datetime}")
         print(f"[DEBUG] AI returned end_datetime: {end_datetime}")
 
+        # check the time of the computer to create the meeting
         start_local = datetime.fromisoformat(start_datetime)
         if end_datetime:
             end_local = datetime.fromisoformat(end_datetime)
@@ -31,6 +33,7 @@ def create_meeting_from_text(user_input: str):
         print(f"[DEBUG] Parsed start_local: {start_local}, type: {type(start_local)}")
         print(f"[DEBUG] Parsed end_local: {end_local}, type: {type(end_local)}")
 
+        # token to call Azure 
         token = get_graph_token()
 
         start_str = start_local.strftime("%Y-%m-%dT%H:%M:%S")
@@ -40,6 +43,7 @@ def create_meeting_from_text(user_input: str):
         print(f"[DEBUG] Formatted end_str: {end_str}")
         print(f"[DEBUG] Calling create_event with tz=Europe/London")
 
+        # create the meeting use the above paarsed variables
         result = create_event(token, title, start_str, end_str, attendees, timezone_str="Europe/London")
 
         print(f"[DEBUG] API response start: {result.get('start', {})}")
@@ -110,6 +114,7 @@ def delete_meeting_from_text(user_input: str):
                 if abs((start_dt - target_dt_utc).total_seconds()) > 300:
                     continue
 
+            # check if this event is not match then check next event 
             event_subject = event.get("subject") or ""
             if title and title.lower() not in event_subject.lower():
                 continue
@@ -124,6 +129,7 @@ def delete_meeting_from_text(user_input: str):
 
             matching_events.append(event)
 
+        # the conditions to look for the events in the calendar that is match with user's input
         if len(matching_events) == 0:
             if target_dt_utc is None:
                 return f"No meeting found with title containing '{title}'."

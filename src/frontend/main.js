@@ -1,15 +1,9 @@
-// src/main.js
-
-// const { app, BrowserWindow } = require('electron');
-// const path = require('path'); 
-// const { spawn } = require('child_process');
-
 import {app,BrowserWindow} from 'electron';
 import path from 'node:path';
 import {spawn} from 'node:child_process';
 
-import AppDatabase from './db.js';
-import workflowHandler from './ipcHandler.js';
+import appDatabase from './db.js';
+import databaseHandler from './ipcHandler.js';
 import { fileURLToPath } from 'node:url';
 
 import { handleWorkflow } from '../frontend/workflow/workflowExecutor.js';
@@ -29,15 +23,16 @@ function createWindow () {
     width: 800,
     height: 600,
     webPreferences: {
-      preload: path.join(__dirname,'preloader.js'),
+      preload: path.join(__dirname,'preloader.js'), //preload file bridge database API
       nodeIntegration: false,
       contextIsolation: true,
       sandbox: false
     }
   });
-
+  //display dashboard page as a deafault page
   mainWindow.loadFile(path.join(__dirname, './dashboard/dashboard.html'));
 }
+
 
 function startPythonServer() {
     const scriptPath = path.join(__dirname, '../server.py');
@@ -55,9 +50,9 @@ function startPythonServer() {
 
 
 app.whenReady().then( async () => {
-  db = new AppDatabase;
+  db = new appDatabase;
   await db.connect();
-  workflowHandler(db);
+  databaseHandler(db);
   
   // Start the Python Server
   startPythonServer();
@@ -90,7 +85,7 @@ app.whenReady().then( async () => {
   setInterval(async () => {
 
     console.log("Scheduler running...");
-
+    //wait for database connection
     const workflows = await db.getActiveWorkflows();
 
     for (const wf of workflows) {

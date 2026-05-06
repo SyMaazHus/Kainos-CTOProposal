@@ -3,7 +3,7 @@ import os
 import json
 import re
 
-client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+client = Groq(api_key=os.getenv("GROQ_API_KEY")) #fetch the Azure client ID
 
 def parse_meeting_with_ai(user_input: str):
     """
@@ -43,15 +43,18 @@ Examples (Europe/London local time):
 User request:
 {user_input}
 """
-
+    # Send request to Groq LLM for intent + information extraction
     response = client.chat.completions.create(
         model="llama-3.3-70b-versatile",
         messages=[{"role": "user", "content": prompt}],
         temperature=0
     )
 
+    # Extract raw text response from model
     content = response.choices[0].message.content.strip()
 
+    # Clean markdown formatting
     content = re.sub(r"```json|```", "", content).strip()
 
+    # Convert JSON string into Python dictionary
     return json.loads(content)

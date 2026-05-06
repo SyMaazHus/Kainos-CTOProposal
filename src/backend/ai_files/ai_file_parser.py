@@ -3,7 +3,10 @@ import os, json, re
 
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
+# this function aims to apply AI to parse the user's input about files
 def parse_file_action_with_ai(user_input: str):
+
+    # the basic rule for AI about files
     prompt = f"""Extract file operation information from the following request.
 Return JSON only.
 

@@ -12,7 +12,8 @@
 <a id="about"></a>
 ## 📋 About
 
-Kainos CTO Project Proposal
+The Kainos Smart Assistant is a desktop-based productivity application that integrates artificial intelligence with Microsoft services to assist users in managing tasks, time, and workflows. The system combines natural language interaction with backend automation to provide a unified interface for accessing emails, calendar events, files, and user-generated productivity data.
+The primary goal of the system is to reduce context switching between different tools by centralising functionality into a single application. This is achieved through the integration of a large language model (LLM), Microsoft Graph API, and a cloud-based database.
 
 ---
 <a id="team"></a>
